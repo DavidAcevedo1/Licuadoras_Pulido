@@ -35,10 +35,12 @@ def accesorio(request):
 
 def producto(request):
     titulo_pagina='Productos'
-    elementos = Elemento.objects.all()
+    subcategorias= Tipos_Elemento.objects.filter(categoria="Productos")
+    elementos = Elemento.objects.filter(tipo_elemento__categoria="Productos")
     context={
         "titulo_pagina": titulo_pagina,
         "elementos":elementos,
+        "subcategorias":subcategorias,
     }
     return render(request, "usuarios/productos.html", context)
 
