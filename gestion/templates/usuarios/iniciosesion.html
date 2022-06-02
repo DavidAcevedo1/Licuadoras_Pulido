@@ -1,0 +1,76 @@
+{% extends 'partials/user-footer.html' %}
+{% load static %}
+{% block contenido %}
+    <div class="ContInicioSesion">
+        <div class="cont">
+            <div class="centrado"><img class="imgLogo" src="img/Logo Proyecto.png" alt=""></div>
+            <div class="centrado">
+                <form action="">
+                    <label class="centrado" for="usuario">Usuario:</label>
+                    <input type="text" name="usuario" id="">
+                    <label class="centrado" for="contraseña">Contraseña:</label>
+                    <input type="password" name="contraseña" id="">
+                    <nav class="centrado">
+                        <div class="anuncio">   <!-- Boton Modal -->
+                            <nav>
+                                <nul>
+                                    <li>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">¿Olvidaste tu contraseña?</a>
+                                    </li>
+                                </nul>
+                            </nav>
+                        </div>
+                    </nav>
+                </form> 
+            </div>
+                                <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-header">
+                            <div class="centrado"><img class="imgLogo" src="img/Logo Proyecto.png" alt=""></div> 
+                        </div>
+                        <div class="modal-body centrado"><h3>Recuperación Contraseña</h3></div> 
+                        <div>
+                            <form action="">
+                                <label class="centrado" for="correo">Ingrese correo previamente registrado:</label>
+                                <div class="centrado"><input type="email" name="correo" id=""></div><br>
+                            </form>
+                        </div>
+                        <div class="centrado">
+                            <a href="Inicio Sesión.html" class="boton">Cancelar</a>
+                            <div class="anuncio">   <!-- Boton modal 2 -->
+                                <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal1">Continuar</a>
+                                                    <!-- Modal 2 -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-header">
+                                                <div class="centrado"><img class="imgLogo" src="img/Logo Proyecto.png" alt=""></div>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3 class="centrado"> Hemos enviado a tu correo <br> un enlace. </h3>
+                                                <h5 class="centrado">1. Ingresa a tu  correo. <br> 2. Clik en el enlace. </h5>
+                                            </div>
+                                            <div class=" centrado">
+                                                <div class="modal-footer"><a href="Inicio Sesión.html" class="boton">Finalizar</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+            <li class="centrado"><a href="">Registrarse</a></li>
+            </nul>  
+        </div>
+        <div class="centrado">
+            <a href="index.html" class="boton"><i class="bi bi-house-fill"> Cancelar</a></i>
+            <a href="#" class="boton"><i class="bi bi-box-arrow-in-right"> Iniciar Sesión</a></i>
+        </div>
+    </div>
+{% endblock contenido %}    

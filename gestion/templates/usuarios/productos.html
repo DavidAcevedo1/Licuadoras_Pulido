@@ -1,0 +1,316 @@
+{% extends 'partials/user-body.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+<section class="contenido-cuerpo borde">
+    <div class="container-fluid ">
+        <div>
+            <h1 class="text-center title-size">Productos</h1>
+        </div>
+        <div class="slide-producto">
+            <div class="glider-contain">
+                <div class="glider-cat-1 glider ">
+                    {% for elemento in elementos %}
+                    {% include "cards/card_elemento.html" %}
+                    {% endfor %}
+                </div>
+                <button aria-label="Previous" class="glider-prev-btn glider-prev-cat-1">«</button>
+                <button aria-label="Next" class="glider-next-btn glider-next-cat-1">»</button>
+            </div>
+        </div>
+        <hr>
+        <hr>
+        <div class="productos">
+            <div>
+                <h2 class="text-center ">Hornos Microondas</h2>
+                <hr>
+                <div class="slide-producto ">
+                    <div class="glider-contain ">
+                        <div class="glider-cat-2">
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img2.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img " src="img/img8.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img3.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img4.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img5.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img6.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img7.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img8.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                            <div class="producto-box m-3 bg-light p-4 d-flex flex-column justify-content-between">
+                                <div class="producto-img">
+                                    <div class="producto">
+                                        <div class="flip-box">
+                                            <div class="flip-box-inner">
+                                                <div class="flip-box-front">
+                                                    <img class="producto-img" src="img/img9.jpg" alt="">
+                                                </div>
+                                                <div class="flip-box-back">
+                                                    <p>What an amazing city gfjhdhhge</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>Empaque licuadora</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3>R 230</h3>
+                                </div>
+                                <div class="text-center">
+                                    <h3 class="text-danger">$6.000</h3>
+                                </div>
+                                <div class="item-7f "><a href="#" class="myButton">Agregar!</a></div>
+                            </div>
+                        </div>
+                        <button aria-label="Previous" class="glider-prev-btn glider-prev-cat-2">«</button>
+                        <button aria-label="Next" class="glider-next-btn glider-next-cat-2">»</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+</section>
+<div>
+    <a href="http//www.whatsapp.com"><img src="img/Whatsapp_37229.png" alt="" class="contacto"></a>
+</div>
+<div class="anuncio">
+    <!-- Button trigger modal -->
+    <button type="button" class="contacto2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <img src="img/help-outline_119052.png" alt="" class="contacto2">
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="centrar">
+                        <h5 class="modal-title" id="exampleModalLabel">Manual de ayuda al cliente
+                        </h5>
+                    </div>
+                    <div> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body  ">
+                    <b>1¿Cómo puedo hacer una compra?</b>
+                    <br> Esta pagina no esta diseñada para realizar compras, ya que el objetivo de esta es brindar
+                    información y permitir a los clientes realizar sus cotizaciones de nuestros productos y servicios.
+                    <br>
+                    <b>2¿Que servicios ofrece la Central de Licuadoras Pulido?</b>
+                    <br>Nosotros ofrecemos el servicio de venta, mantenimiento y reparación de electrodomésticos.
+                    <br>
+                    <b>3¿Que garantía tienen los productos y servicios que ofrece este establecimientos?</b>
+                    <br>
+                    <br>
+                    <b>4¿Como puedo contactarme con un técnico?</b>
+                    <br>En la parte inferior de nuestra pagina encontrara información de medios de comunicación como
+                    nuestras redes sociales y encontrara nuestra línea telefónica (3124661810).
+                    <br>
+                    <b>5¿En donde puedo encontrar nuestro establecimiento?</b>
+                    <br>Nuestro establecimiento se encuentra ubicado en "Bogotá Carrera 10#19-69 Edificio Camacol".
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contenido %}
