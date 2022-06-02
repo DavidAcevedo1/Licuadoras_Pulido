@@ -21,7 +21,7 @@
     <script type="text/javascript" src="{% static 'js/select2/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     
-    <link rel="shortcut icon" href="{% static 'img/Logo Proyecto.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'img/Logooo.png' %}" type="image/x-icon">
     <title> Licuadoras - {{titulo_pagina}}</title>
 </head>
 <body>
@@ -33,11 +33,11 @@
     
     {% endblock contenido %}
     
-    {% comment %} {% if messages %}
+    {% if messages %}
     {% for message in messages %}
     <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script>
     {% endfor %}
-    {% endif %} {% endcomment %}
+    {% endif %} 
     
     {% include "partials/user-footer.html" %}
     
@@ -45,11 +45,26 @@
     <script src="{% static 'js/carousel-code.js' %}"></script>
     <script src="{% static 'js/toast-code.js' %}"></script>
     <script src="{% static 'js/select2/select2.js' %}"></script>
-    
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    
     <script src="{% static 'js/glider.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/tabla-proyecto.js' %}"></script>
+
+    {% comment %} Scripts Datatables {% endcomment %}
+    <script type="text/javascript" src="{% static 'js/datatable/DataTables-1.12.1/js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/DataTables-1.12.1/js/dataTables.bootstrap5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/dataTables.buttons.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.bootstrap5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.colVis.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.html5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.print.min.js' %}"></script>
+
+
+    {% comment %} Scripts Accesibilidad {% endcomment %}
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+
+
+    
     
 </body>
 </html>
