@@ -24,7 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name="inicio"),
     path('inicio-ad/', inicioadmin, name="inicioadmin"),
-
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
     # Logueo
