@@ -11,11 +11,12 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 <nav>
+                    {% include "user-recuperacion/contraseña-correo.html" %}
                     <div class="anuncio">    <!-- Boton Modal -->
                         <a type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">¿Olvidaste tu contraseña?</a>
                     </div>
                 </nav>
-                                                <!-- Modal -->
+                                                <!-- Modal
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -33,7 +34,7 @@
                                     <input type="submit" class="btn btn-secondary" value="Cancelar"></button></a>ㅤㅤㅤㅤㅤㅤㅤ
                                                     <!-- Boton modal 2 -->
                                 <a data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                    <input type="submit" class="btn btn-success" value="Continuar"></button></a></div>
+                                    <input type="submit" class="btn btn-success" value="Continuar"></button></a></div> -->
                                                        <!-- Modal 2 -->
                                 <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModal1Label" aria-hidden="true">
                                     <div class="modal-dialog">
