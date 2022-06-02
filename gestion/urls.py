@@ -15,15 +15,20 @@ Including another URLconf
 """
 from django.urls import path, include
 from gestion.views import inicio, login
+from administrador.views import inicioadmin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name="inicio"),
+    path('', inicioadmin, name="inicioadmin"),
     path('', login, name="login"),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
-    
+    # Logueo
+    path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='usuario-logout'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

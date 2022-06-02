@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from administrador.views import tipoelemento
@@ -14,8 +13,14 @@ def inicio(request):
         "titulo_pagina": titulo_pagina,
         "elementos":elementos,
     }
-     
     return render(request, "index.html", context)
+
+def restablecercontraseña(request):
+    titulo_pagina='Restablecer Contraseña'
+    context={
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "usuarios/restablecercontraseña.html", context)
 
 def accesorio(request):
     titulo_pagina='Accesorios'
