@@ -22,7 +22,7 @@ def usuario(request):
             messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
         else:
             messages.error(request,f'Error al registrar el usuario ¡Por favor verificar los datos!  ')    
-            return redirect('administrador-usuario')
+            
     else:
         form= UsuarioForm()
     context={
