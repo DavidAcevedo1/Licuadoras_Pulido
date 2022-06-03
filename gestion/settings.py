@@ -46,8 +46,8 @@ INSTALLED_APPS = [
                             # pip install crispy_bootstrap5
                             # pip install pymysql
                             # pip install mysqlclient
-                            #pip install django-phonenumber-field[phonenumbers]
-                            #pip install django-phonenumber-field[phonenumbers]
+                            # pip install pillow
+                            # pip install django-phonenumber-field[phonenumbers]
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
