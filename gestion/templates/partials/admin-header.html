@@ -33,10 +33,6 @@
                                 src="{% static 'img/icons/eye-fill.svg' %}" width="30" alt="" srcset="">
                             Restaurar</button></li>
                 </ul>
-
-                <div class="salir">
-                    <a title="Salir" href="{% url 'usuarios-inicio'%}"><img src="{% static 'img/salir.png' %}"alt=""></i></a>
-
                 <div class="dropdown salir">
                     <a title="Salir" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{% static 'img/salir.png' %}" width="30" height="30" class="rounded-circle">
@@ -49,7 +45,6 @@
                         <li><a class="dropdown-item" href="{% url 'usuario-logout' %}">Cerrar Sesión</a></li>
                         {% endif %}
                     </ul>
-
                 </div>
             </div>
         </div>
