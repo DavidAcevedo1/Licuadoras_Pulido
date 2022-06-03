@@ -53,7 +53,7 @@ header{
 
 
 .pt1 img{
-    width: 430px;
+    width: 320px;
 }
 
 .pt2 p{
@@ -107,8 +107,6 @@ header{
 
 nav{
     background-color: #e6571f;
-    /* font-size: larger;
-    font-weight: bolder; */
     border: 1px solid #000;
 }
 
@@ -116,8 +114,6 @@ nav{
     background-color:#fff;
     color:#000;
 }
-
-
 
 .v-line{
     border-left: thick solid #000;
@@ -146,7 +142,7 @@ nav{
 
 @media only screen and (min-width: 1917px) {
     #item{
-        padding: 6px 88px 6px 88px;
+        padding: 6px 78px 6px 70px;
     }
 }
 
@@ -265,9 +261,9 @@ nav{
 
 footer{
     background-color: #0b318a;
-    /* position: absolute;
+    position: relative;
     bottom: 0;
-    width: 100%; */
+    width: 100%;
 }
 
 .dark-mode footer{
@@ -295,11 +291,17 @@ footer{
 }
 
 .sublogo{ 
-    position: relative;
+    width: 50px;
+    position: absolute;
+    border-radius: 50%;
+    padding: 5px;
     top: -30px;
+    left: 48%;
 }
 
 .sublogo img{
     width: 80px;
 }
+
+
 
