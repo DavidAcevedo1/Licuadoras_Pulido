@@ -1,0 +1,10 @@
+<h1>Solicitaste Restablecimiento de contraseña.</h1>
+<h2>Click en elsiguiente link para crear una nueva contraseña</h2>
+
+{% block reset_link %}
+  
+{{ protocol }}://{{ domain }}{% url 'contraseña-confirmar' uidb64=uid token=token %}
+
+{% endblock  %}
+
+Tu nombre de usuario es: {{ user.get_username }}
