@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from administrador.views import tipoelemento
@@ -14,8 +13,14 @@ def inicio(request):
         "titulo_pagina": titulo_pagina,
         "elementos":elementos,
     }
-     
     return render(request, "index.html", context)
+
+def restablecercontraseña(request):
+    titulo_pagina='Restablecer Contraseña'
+    context={
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "usuarios/restablecercontraseña.html", context)
 
 def accesorio(request):
     titulo_pagina='Accesorios'
@@ -30,10 +35,12 @@ def accesorio(request):
 
 def producto(request):
     titulo_pagina='Productos'
-    elementos = Elemento.objects.all()
+    subcategorias= Tipos_Elemento.objects.filter(categoria="Productos")
+    elementos = Elemento.objects.filter(tipo_elemento__categoria="Productos")
     context={
         "titulo_pagina": titulo_pagina,
         "elementos":elementos,
+        "subcategorias":subcategorias,
     }
     return render(request, "usuarios/productos.html", context)
 

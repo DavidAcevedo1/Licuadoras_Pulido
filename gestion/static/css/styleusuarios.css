@@ -73,30 +73,24 @@ nav  li a
 }
 
 /* -------------------------------CONTENEDOR INICIO SESIÓN------------------------------------------------ */
-.ContInicioSesion
-{
-    background-color: rgba(255, 255, 255, 0.466);
-	font-size:20px;
-    margin: 10% 25%;
+.contenidoinicio{
+    background-color: white;
+    width:35%; 
+    margin-top:4%; 
+    margin-bottom:111px;
+    border: 1px solid hsl(0, 2%, 78%);
+    border-radius: 2%;
 }
-.imgLogo
-{
-    margin: 5%;
-    width: 40%;
-    box-shadow: 0 4px 8px 0 white, 0 5px 15px 0 rgb(0,0,0,15);
+.imgLogo{
+    background-color: hsl(0, 0%, 90%);
+    margin-bottom: 6px;
+    width: 30%;
+    box-shadow: 0 2px 6px 0 white, 0 2px 5px 0 rgb(0,0,0,15);
 }
-.cont
-{
-    width: 60%;
-    margin: auto;
-    padding: 2%;
-}
-/* -------------------------------------------------------------------------------------------------------- */
-
 /* -----------------------------------Botones Inicio Sesión------------------------------------------------ */
-.boton
-{
-	box-shadow: 3px 4px 3px 0px #899599;
+.boton{
+	padding-bottom: 4%;
+	/* box-shadow: 3px 4px 3px 0px #899599;
 	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
 	background-color:#ededed;
 	border-radius:15px;
@@ -109,22 +103,16 @@ nav  li a
 	padding:5px 27px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #e1e2ed;
-    margin: 3%;
+    margin: 3%;*/
 }
-.boton:hover
-{
+/*.boton:hover{
 	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
 	background-color:#bab1ba;
 }
-.boton:active 
-{
+.boton:active {
 	position:relative;
 	top:1px;
-}
-/* ------------------------------------------------------------------------------------------------------------ */
-
-
-/*--------------------------------------------------Estilos index----------------------------------------------- */
+} */
 /*--------------------------------------------------Estilos header----------------------------------------------- */
 *{
     margin: 0;

@@ -41,10 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'administrador',
     'usuarios',
-    'crispy_forms',
-    'crispy_bootstrap5',
-    #pip install django-phonenumber-field[phonenumbers]
-    #Pillow
+    'crispy_forms',         # pip install django-crispy-forms
+    'crispy_bootstrap5',    # pip install django-bootstrap5
+                            # pip install crispy_bootstrap5
+                            # pip install pymysql
+                            # pip install mysqlclient
+                            #pip install django-phonenumber-field[phonenumbers]
+                            #pip install django-phonenumber-field[phonenumbers]
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -145,8 +148,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # gestion de logueo
 LOGOUT_REDIRECT_URL = 'inicio'
-LOGIN_REDIRECT_URL = 'inicio'
+LOGIN_REDIRECT_URL = 'inicioadmin'
 LOGIN_URL="usuario-login"
+
+#Emails
+# if DEBUG:
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#     EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+# else:
+#     #aqui configurar un email real para producción
+#     pass    
+
 # para lo del email documentacion django
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"

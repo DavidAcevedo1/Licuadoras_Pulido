@@ -14,4 +14,4 @@ def login(request):
     context={
         "titulo_pagina": titulo_pagina,
     }
-    return render(request, "login.html", context)    
+    return render(request, "user/login.html", context)    

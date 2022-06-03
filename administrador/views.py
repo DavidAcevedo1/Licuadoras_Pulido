@@ -2,7 +2,11 @@ from dataclasses import field
 from django.shortcuts import render, redirect
 from administrador.forms import  ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, UsuarioEditarForm, UsuarioForm, ElementoForm, ElementoEditarForm, FacturaEditarForm, FacturaForm, MarcaForm, ServicioForm
 from administrador.models import Electrodomestico,Elemento, Factura, Marca, Servicio, Tipos_Elemento, Usuario
+from django.contrib.auth.decorators import login_required
+from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
+
+@login_required(login_url="usuario-login")
 
 def inicioadmin(request):
     titulo_pagina='Inicio Administrador'
@@ -22,7 +26,7 @@ def usuario(request):
             messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
         else:
             messages.error(request,f'Error al registrar el usuario ¡Por favor verificar los datos!  ')    
-            return redirect('administrador-usuario')
+            
     else:
         form= UsuarioForm()
     context={

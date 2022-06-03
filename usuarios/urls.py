@@ -10,9 +10,6 @@ urlpatterns = [
     path('nosotros/', nosotros, name='usuarios-nosotros'),
     path('carrito/', carrito, name='usuarios-carrito'),
     path('politicas/', politicasprivacidad, name='usuarios-politicas'),
-    # Logueo
-    path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='usuario-logout'),
     #carrito
     path('agregar/<int:elemento_id>/', agregar_elemento, name="agregar"),
     path('eliminar/<int:elemento_id>/', eliminar_elemento, name="eliminar"),
