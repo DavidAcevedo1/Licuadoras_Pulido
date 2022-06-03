@@ -23,8 +23,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name="inicio"),
-    path('', inicioadmin, name="inicioadmin"),
-    path('', login, name="login"),
+    path('inicio-ad/', inicioadmin, name="inicioadmin"),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
     # Logueo
