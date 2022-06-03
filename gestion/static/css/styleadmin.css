@@ -63,9 +63,9 @@ header{
 }
 
 .salir{
-    width: 37px;
-    height: 37px;
-    background: #fff;
+    background-color: #fff;
+    margin-left: 30px;
+    padding: 4px;
     border-radius: 50px;
 }
 
