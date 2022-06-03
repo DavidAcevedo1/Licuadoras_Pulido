@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     #pip install django-phonenumber-field[phonenumbers]
+    #Pillow
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
