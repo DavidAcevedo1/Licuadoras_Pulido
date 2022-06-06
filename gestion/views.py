@@ -8,10 +8,30 @@ def inicio(request):
     }
     return render(request, "index.html", context)
 
+# def login(request):
+#     titulo_pagina='Inicio Sesión'
+#     context={
+#         "titulo_pagina": titulo_pagina,
+#     }
+#     return render(request, "user/login.html", context)    
 
-def login(request):
+def password_reset(request):
     titulo_pagina='Inicio Sesión'
     context={
         "titulo_pagina": titulo_pagina,
     }
-    return render(request, "user/login.html", context)    
+    return render(request, "password_reset", context)    
+
+def password_reset_confirm(request):
+    titulo_pagina='Inicio Sesión'
+    context={
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "recuperacion/password_reset_confirm.html", context)    
+
+def password_reset_form(request):
+    titulo_pagina='xd'
+    context={
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "recuperacion/password_reset_form.html", context) 

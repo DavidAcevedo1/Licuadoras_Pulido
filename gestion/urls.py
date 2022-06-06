@@ -14,8 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from gestion.views import inicio, login
-#, password_reset, contraseña_email, contraseña_correo, contraseña_confirmar
+from gestion.views import inicio, password_reset, password_reset_confirm, password_reset_form
 from administrador.views import inicioadmin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -31,14 +30,19 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
     path('logout/', auth_views.LogoutView.as_view(), name='usuario-logout'),
     # Recuperación
-    # path('reset/password_reset', password_reset, {'template_name':'recuperacion/contraseña-correo.html',
-    #     'email_template':'recuperacion/contraseña-email.html'},
-    #     name='password_reset'),
-    # path('reset/contraseña-correo', contraseña_correo, {'template_name':'recuperacion/contraseña-correo.html',},
-    #     name='contraseña-correo'),
-    # path('reset/(?P<uidb64>[0-9A-z_\-]+)/(?P<token>.+)/$', contraseña_confirmar, {'template_name':'recuperacion/contraseña-confirmar.html',},
-    #     name='contraseña-confirmar'),
-    # path('reset/done', contraseña_confirmar, {'template_name':'recuperacion/contraseña-correo.html',},
-    #     name='contraseña-correo'),
+    path('password_reset/', 
+        auth_views.PasswordResetView.as_view(template_name='recuperacion/password_reset.html'),
+        name='password_reset'),
+    path('password_reset_sent/',
+        auth_views.PasswordResetDoneView.as_view(template_name='recuperacion/password_reset_sent.html'),
+        name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', 
+        auth_views.PasswordResetConfirmView.as_view(),
+        name='password_reset_confirm'),
+    path('password_reset_complete/',
+        auth_views.PasswordResetCompleteView.as_view(),
+        name='password_reset_complete'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#, email_template_name='recuperacion/password_reset_email.html'
+#template_name='recuperacion/password_reset_confirm.html'
