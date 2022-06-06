@@ -4,6 +4,7 @@ $(document).ready(function () {
         rowReorder: {
             selector: 'td:nth-child(2)'
         },
+        
         responsive: true,
 
         buttons:[ 
@@ -25,7 +26,8 @@ $(document).ready(function () {
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info'
 			},
-		],	        
+		],	
+
         "bDestroy": true,
         "language": {
 
