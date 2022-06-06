@@ -24,3 +24,4 @@ gliders.forEach((glide) => {
 //       next: '.glider-next'
 //     }
 //   });
+

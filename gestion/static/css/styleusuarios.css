@@ -264,12 +264,16 @@ nav  li a
     height: 100%;
     background-color: #ffffffd5;
     border: 2px solid #000;
-    
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-
+.contenido-carrito {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .dark-mode .contenido-cuerpo{
     background: #0c111bda;
 }
