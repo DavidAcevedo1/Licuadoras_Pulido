@@ -1,4 +1,3 @@
-
  .f0 {
     font-size: 0.8rem;
   }
@@ -14,146 +13,114 @@
   .f4 {
     font-size: 1.2rem;
   } 
-
-
 body{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
 }
-
 .borde{
     width: 80%;              
     margin: 0 auto;
 }
-
-
 /*-------------------------------navbar-----------------------------*/
-
 header{
     background: #0b318a;
     margin: 0 auto;
 }
-
 .dark-mode header{
     background-color:#0D1821;
     color:#fff;
 }
-
 .navbar{
     height: auto; 
 }
-
 .contenido-navbar{
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
-
-
 .pt1 img{
     width: 320px;
 }
-
 .pt2 p{
     color: #fff;
     font-size: 15px;
     padding-top: 22px;
 }
-
 .salir{
     background-color: #fff;
     margin-left: 30px;
     padding: 6px;
     border-radius: 50px;
 }
-
 .salir a{  
     color: #000;
 }
-
 .salir img{
     width: 30px;
 }
-
 /*-----------------------------Accesibilidad------------------------------*/
-
 .btn {
     margin-left: 35px;
     color: #212529;
     padding: 3px 3px 3px 3px;
     font-size: 1rem;
 }
-
-
 /*-----------------------Menú de navegación-----------------------------*/
-
 .nav-menu{
     background-color: rgb(55, 211, 198);
     color: #fff;
 }
-
 .dark-mode .nav-menu {
     background-color:#2d3c5e9f;
     color:#fff;
 }
-
 .navbar-center {
     position: absolute;
     left: 50%;
     transform: translatex(-50%);
-  }
-
+}
 nav{
     background-color: #e6571f;
     border: 1px solid #000;
 }
-
 .dark-mode nav{
     background-color:#fff;
     color:#000;
 }
-
 .v-line{
     border-left: thick solid #000;
     height:100%;
     left: 50%;
     border-width:1px;
 }
-
 @media only screen and (min-width: 992px) {
     #item{
         padding: 6px 25px 6px 25px;
     }
 }
-
 @media only screen and (min-width: 1250px) {
     #item{
         padding: 6px 40px 6px 40px;
     }
 }
-
 @media only screen and (min-width: 1602px) {
     #item{
         padding: 6px 60px 6px 60px;
     }
 }
-
 @media only screen and (min-width: 1917px) {
     #item{
         padding: 6px 78px 6px 70px;
     }
 }
-
 @media only screen and (min-width: 2400px) {
     #item{
         padding: 6px 120px 6px 120px;
     }
 }
-
 /*----------------------------------Cuerpo-------------------------------*/
-
 .cuerpo-admin{
     background: url('/img/Fondo\ electrodomesticos.webp');
     background-repeat: no-repeat;
@@ -188,13 +155,10 @@ nav{
     justify-content: center;
     flex-direction: column; */
 }
-
 .dark-mode .contenido-cuerpo {
     background: #0c111bda;
 }
-
-.part 
-{
+.part {
     color: #fff;
     display: flex;
     align-items: center;
@@ -203,39 +167,29 @@ nav{
     width: 100%;
     margin-bottom: 15px;
 }
-
 .colortab{
     background: #0c389e;
 }
-
 .colortab th{
     color: #fff;
 
 }
-
 .tablas{
     background: #fff;
 }
-
-
 .dark-mode .tablas{
     background-color: #0D1821;
     color:#fff;
 }
-
-
 /*---------------------------Botones Inicio----------------------------*/
-
 .botones{
     padding: 15px;
     display: flex;
     justify-content: center;    
 }
-
 .margen{
     margin-bottom: 21px;
 }
-
 .bt a{ 
     display: block;
     text-align: center;
@@ -247,50 +201,40 @@ nav{
     font-weight: bolder; */
     background-color: #e6571f;     
 }
-
 .formulario{
     overflow: scroll;
 }
-
 .dark-mode .dataTables_filter label{
     color: #fff;
 }
-
 .dark-mode .dataTables_info{
     color: #fff;
 }
-
 .dark-mode .color-dark{
     color: #fff;
 }
-
 #item {
     color: #fff;
 }
-
 .dark-mode #item{
     color: #000;
 }
-/*---------------------------------Footer--------------------------------*/
-
+/*--------------------------------Footer--------------------------------*/
 footer{
     background-color: #0b318a;
     position: relative;
     bottom: 0;
     width: 100%;
 }
-
 .dark-mode footer{
     background-color:#0D1821;
     color:#fff;
 }
-
  .caja{
     color: #fff;
     display: flex;
     justify-content: center;
 }
-
  .caja2 a{  
     padding: 6px;
     display: flex;
@@ -298,12 +242,10 @@ footer{
     color: #fff;
     text-decoration: none;
 }
-
 .caja1 a{
     color: #fff;
     text-decoration: none;
 }
-
 .sublogo{ 
     width: 50px;
     position: absolute;
@@ -312,10 +254,6 @@ footer{
     top: -30px;
     left: 48%;
 }
-
 .sublogo img{
     width: 80px;
 }
-
-
-
