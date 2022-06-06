@@ -4,7 +4,7 @@ $(document).ready(function () {
         rowReorder: {
             selector: 'td:nth-child(2)'
         },
-        
+
         responsive: true,
 
         buttons:[ 
@@ -22,7 +22,7 @@ $(document).ready(function () {
 			},
 			{
 				extend:    'print',
-				text:      '<i class="fa fa-print"></i> ',
+				text:      '<i class="fa fa-print">Imprimir</i> ',
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info'
 			},
