@@ -14,18 +14,18 @@
             <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
         </div>
         
-        
+        <p class="borde" style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
             
             <div class="glider-contain" id="glider-{{subcategoria.id}}">
-                <div class="glider-cat-1 glider">
+                <div class="glider-cat-1 glider mx-4">
                     {% for elemento in elementos %}
                         {% if subcategoria.id == elemento.tipo_elemento_id %}
                             {% include "cards/card_elemento.html" %}
                         {% endif %}
                     {% endfor %}                   
                 </div>
-                <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
-                <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>                 
+                <button class="glider-prev"><i class="fas fa-chevron-circle-left ms-4"></i></button>
+                <button class="glider-next"><i class="fas fa-chevron-circle-right me-4"></i></button>                 
             </div>
       
         {% endfor %}

@@ -72,6 +72,17 @@ nav  li a
     color: #fff;
 }
 
+.dark-mode h1{
+    color: #fff;
+}
+
+.dark-mode h2{
+    color: #fff;
+}
+
+.dark-mode h3{
+    color: #fff;
+}
 /* -------------------------------CONTENEDOR INICIO SESIÓN------------------------------------------------ */
 .contenidoinicio{
     background-color: white;
@@ -274,9 +285,6 @@ nav  li a
     background: #0c111bda;
 }
 
-.dark-mode .contenido-cuerpo h2{
-    color: #fff;
-}
 
 
 .texto-cuerpo {
