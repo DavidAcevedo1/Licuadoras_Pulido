@@ -134,7 +134,7 @@
         </div>
 </div>
 </section> -->
-<div class="container-fluid contenido-cuerpo " style="align-content: center;" style="width: 80% !important; margin: 0 auto;" >
+<div class="container-fluid contenido-cuerpo " style="width: 80% !important; margin: 0 auto;" >
     <div class="row">
         <div class="col-xl-8 border  d-flex flex-wrap"style="justify-content: center;">
             {% if request.session.carrito.items %}
@@ -160,9 +160,9 @@
 
             {% endif %}
         </div>
-        <div class="col-xl-4">
+        <div class="col-xl-4 ">
             <div class="bg-white  w-100">
-                <table class="table">
+                <table class="table-responsive bg-white table-bordered results  w-100">
                     <thead class="bg-info">
                         <tr class="text-white">
                             <th scope="col">Nombre</th>
