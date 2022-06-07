@@ -136,8 +136,7 @@
 </section> -->
 <div class="container-fluid contenido-cuerpo " style="align-content: center;" style="width: 80% !important; margin: 0 auto;" >
     <div class="row">
-        <div class="col-xl-8 border  d-flex flex-wrap"style="
-        justify-content: center;">
+        <div class="col-xl-8 border  d-flex flex-wrap"style="justify-content: center;">
             {% if request.session.carrito.items %}
             {% for key, value in request.session.carrito.items %}
                 <div class="card mx-1 my-2 justify-content-center" style="width: 18rem;">
@@ -161,7 +160,7 @@
 
             {% endif %}
         </div>
-        <div class="col-xl-4 " >
+        <div class="col-xl-4">
             <div class="bg-white  w-100">
                 <table class="table">
                     <thead class="bg-info">
@@ -200,7 +199,7 @@
                     </tbody>
                 </table>
                 <hr>
-                <div class="row text-center ">
+                <div class="row text-center">
                     <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger mb-2">Limpiar</a></div>
                     <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal"
                             data-bs-target="#cotizar">Cotización</a></div>
