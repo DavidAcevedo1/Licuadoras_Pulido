@@ -22,6 +22,9 @@ body
     background-attachment: fixed;
     margin: 0;
 }
+h1, h2, h3, h4 {
+    TEXT-ALIGN: center !important;
+}
 
 nav  li
 {
@@ -272,15 +275,11 @@ nav  li a
     position: absolute !important;
 } */
 
-.h2, h2 {
-    TEXT-ALIGN: center !important;
-}
 .contenido-cuerpo 
 {       
     height: 100%;
     background-color: #ffffffd5;
-    border: 2px solid #000;
-    
+    border: 2px solid #000; 
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -302,6 +301,10 @@ nav  li a
     width: 70%;
     height: 50px;
     margin: 50px;
+}
+
+.dark-mode .container1{
+    background-color: #0c111b!important;
 }
 /*------------------------------------------------------------------------------------------------------------ */
 .form1 {
@@ -521,20 +524,7 @@ img
     width: 3.7%;
     height: 5.5%;
 }
-.color-fondo {
-    background-color: #ffffffd5;
-}
 
-.dark-mode .color-fondo {
-    background: #0c111bda;
-    color: #fff;
-}
-
-.title-size
-{
-    font-size: 5rem;
-    
-}
 /*################SLIDER PRODUCTO################*/
 .producto-box
 {
@@ -660,12 +650,13 @@ h2
     font-family: serif;
 }
 .pr-des-contactos {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-block-end: 50px;
     background-color: white;
 }
+
 .liness{
     width: 30%;
     min-width: 300px;

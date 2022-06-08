@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,28 +16,68 @@
     <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/toastr.css' %}">
     <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
-    <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script> 
-    <script type="text/javascript" src="{% static 'js/toastr-options.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/toastr-options.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/select2/select2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    
+
     <link rel="shortcut icon" href="{% static 'img/Logooo.png' %}" type="image/x-icon">
     <title> Licuadoras - {{titulo_pagina}}</title>
 </head>
+
 <body>
     {% include "partials/user-header.html" %}
 
     {% block contenido %}
 
     <h1>{{titulo_pagina}}</h1>
-    
+
     {% endblock contenido %}
-    
+
     {% if messages %}
     {% for message in messages %}
-    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script>
-    {% endfor %}
+    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}"); </script> 
+    {% endfor %} 
     {% endif %} 
+    <div>
+        <a href="http//www.whatsapp.com"><img src="{% static 'img/Whatsapp_37229.png' %}" alt="" class="contacto"></a>
+    </div>  
+    <div class="anuncio">
+        <!-- Button trigger modal -->
+        <button type="button" class="contacto2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <img src="{% static 'img/help-outline_119052.png' %}" alt="" class="contacto2">
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="centrar">
+                            <h5 class="modal-title" id="exampleModalLabel">Manual de ayuda al cliente</h5>
+                        </div>
+                        <div> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    </div>
+                    <div class="modal-body">
+                        <b>1¿Cómo puedo hacer una compra?</b> 
+                        <br> Esta pagina no esta diseñada para realizar compras, ya que el objetivo de esta es brindar información y permitir a los clientes realizar sus cotizaciones de nuestros productos y servicios.
+                        <br>
+                        <b>2¿Que servicios ofrece la Central de Licuadoras Pulido?</b> 
+                        <br>Nosotros ofrecemos el servicio de venta, mantenimiento y reparación de electrodomésticos.
+                        <br>
+                        <b>3¿Que garantía tienen los productos y servicios que ofrece este establecimientos?</b> 
+                        <br>
+                        <br>
+                        <b>4¿Como puedo contactarme con un técnico?</b> 
+                        <br>En la parte inferior de nuestra pagina encontrara información de medios de comunicación como nuestras redes sociales y encontrara nuestra línea telefónica (3124661810).
+                        <br>
+                        <b>5¿En donde puedo encontrar nuestro establecimiento?</b> 
+                        <br>Nuestro establecimiento se encuentra ubicado en "Bogotá Carrera 10#19-69 Edificio Camacol".
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     {% include "partials/user-footer.html" %}
     
@@ -51,10 +92,14 @@
 
 
     {% comment %} Scripts Datatables {% endcomment %}
-    <script type="text/javascript" src="{% static 'js/datatable/DataTables-1.12.1/js/jquery.dataTables.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/datatable/DataTables-1.12.1/js/dataTables.bootstrap5.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/dataTables.buttons.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.bootstrap5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datatable/DataTables-1.12.1/js/jquery.dataTables.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'js/datatable/DataTables-1.12.1/js/dataTables.bootstrap5.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/dataTables.buttons.min.js' %}">
+    </script>
+    <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.bootstrap5.min.js' %}">
+    </script>
     <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.colVis.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.html5.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/datatable/Buttons-2.2.3/js/buttons.print.min.js' %}"></script>
@@ -65,5 +110,5 @@
 
 
 </body>
-</html>
 
+</html>

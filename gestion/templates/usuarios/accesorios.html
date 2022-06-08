@@ -5,13 +5,13 @@
     <section class="contenido-cuerpo borde">
         <div class=" color-fondo">
             <div>
-                <h1 class="text-center ">Accesorios</h1>
+                <h1 class="">Accesorios</h1>
             </div>
             {% for subcategoria in subcategorias %}
             
             <div>
                 
-                <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
+                <h1 class="">{{subcategoria.subcategoria}}</h1>
             </div>
 
             <p class="borde" style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
@@ -30,46 +30,4 @@
           
             {% endfor %}
     </section>
-</body>
-<div>
-    <a href="http//www.whatsapp.com"><img src="{% static 'img/Whatsapp_37229.png' %}" alt="" class="contacto"></a>
-</div>  
-<div class="anuncio">
-    <!-- Button trigger modal -->
-    <button type="button" class="contacto2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <img src="{% static 'img/help-outline_119052.png' %}" alt="" class="contacto2">
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="centrar">
-                        <h5 class="modal-title" id="exampleModalLabel">Manual de ayuda al cliente
-                        </h5>
-                    </div>
-                    <div> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                </div>
-                <div class="modal-body">
-                    <b>1¿Cómo puedo hacer una compra?</b> 
-                    <br> Esta pagina no esta diseñada para realizar compras, ya que el objetivo de esta es brindar información y permitir a los clientes realizar sus cotizaciones de nuestros productos y servicios.
-                    <br>
-                    <b>2¿Que servicios ofrece la Central de Licuadoras Pulido?</b> 
-                    <br>Nosotros ofrecemos el servicio de venta, mantenimiento y reparación de electrodomésticos.
-                    <br>
-                    <b>3¿Que garantía tienen los productos y servicios que ofrece este establecimientos?</b> 
-                    <br>
-                    <br>
-                    <b>4¿Como puedo contactarme con un técnico?</b> 
-                    <br>En la parte inferior de nuestra pagina encontrara información de medios de comunicación como nuestras redes sociales y encontrara nuestra línea telefónica (3124661810).
-                    <br>
-                    <b>5¿En donde puedo encontrar nuestro establecimiento?</b> 
-                    <br>Nuestro establecimiento se encuentra ubicado en "Bogotá Carrera 10#19-69 Edificio Camacol".
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</html>
 {% endblock contenido %}

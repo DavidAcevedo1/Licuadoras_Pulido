@@ -70,7 +70,7 @@
                     <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger mb-2">Limpiar</a></div>
                     <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#cotizar">Cotización</a></div>
                     <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <div class="centrar">
@@ -83,7 +83,8 @@
                                 <div class="modal-body">
                                     <div class="color-dark d-flex justify-content-end">
                                         <script>
-                                            date = new Date().toLocaleDateString();
+                                            var options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
+                                            date = new Date().toLocaleDateString(undefined, options);
                                             document.write(date);
                                         </script>
                                     </div>
@@ -117,10 +118,6 @@
                                             </table>
                                         </form>
                                     </div>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <!-- <input type="submit" class="btn btn-success" value="imprimir"></button> -->
-                                    </form>
                                 </div>
                             </div>
                         </div>
