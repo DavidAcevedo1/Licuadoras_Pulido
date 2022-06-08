@@ -7,8 +7,8 @@
         <section class="opheader">
             <div class="part fecha1">
                 <script>
-                    var options =
-                    date = new Date().toLocaleDateString(undefined,options);
+                    var options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
+                    date = new Date().toLocaleDateString(undefined, options);
                     document.write(date);
                 </script>
             </div>
