@@ -204,8 +204,12 @@ nav  li a{
 .contenido-cuerpo {       
     height: 100%;
     background-color: #ffffffd5;
-    border: 2px solid #000;
-    
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.contenido-carrito {
+    height: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -362,33 +366,7 @@ footer{
     object-fit: cover;
     width: 100%;
 }
-.myButton {
-    margin-top: 20px;
-    min-width: 100px;
-    line-height: 20px;
-    width: 30%;
-    font-weight: 600;
-    box-shadow: rgb(2 62 138) 0px 0px 0px 0px;
-    background-color: rgb(0, 119, 182);
-    display: flex;
-    cursor: pointer;
-    position: relative !important;
-    margin: 0 auto;
-    bottom: -100%;
-    color: rgb(255, 255, 255);
-    font-family: sans-serif;
-    font-size: 17px;
-    padding: 10px 9px;
-    text-decoration: none;
-    border-top-width: thick;
-    text-shadow: rgb(47 102 39) 0px 1px 0px
-}
-.myButton:hover {
-    background-color: #00B4D8;
-}
-.myButton:active {
-    top: 1px;
-}
+
 a{
     text-decoration: none;
 }
@@ -430,15 +408,15 @@ img {
 }
 /*################SLIDER PRODUCTO################*/
 .producto-box{
-    box-shadow: 7px 7px 17px 0px rgba(0,0,0,0.68);
+    box-shadow: 7px 7px 17px 0px rgb(0 0 0 / 68%);
     width: 8% !important;
-    min-width: 260px !important;
-    height: 380px !important;
+    min-width: 290px !important;
+    height: 430px !important;
     align-items: center;
 }
 .producto-img{
-    width: 220px !important;
-    height:170px !important;   
+    width: 240px !important;
+    height: 180px !important;  
 }
 .producto-img img{
     object-fit: scale-down;
@@ -532,11 +510,11 @@ h2{
     font-family: serif;
 }
 .pr-des-contactos {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin-block-end: 50px;
-    background-color: white;
+    
+    
 }
 .liness{
     width: 30%;

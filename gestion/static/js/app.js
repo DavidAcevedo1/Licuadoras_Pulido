@@ -7,7 +7,7 @@ gliders.forEach((glide) => {
   const gliderDots = document.querySelector(`#${glide.id} .dots`);
 
     new Glider(glider, {
-        slidesToShow: 3,
+        slidesToShow: 4,
         draggable: true,
         dots: gliderDots,
         arrows: {
@@ -24,3 +24,4 @@ gliders.forEach((glide) => {
 //       next: '.glider-next'
 //     }
 //   });
+

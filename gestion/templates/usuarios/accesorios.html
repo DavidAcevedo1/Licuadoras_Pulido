@@ -4,9 +4,12 @@
 {% block contenido %}
     <section class="contenido-cuerpo borde">
         <div class=" color-fondo">
-            <div>
-                <h1 class="text-center ">Accesorios</h1>
-            </div>
+            
+                
+            <span class="border border-light">
+                <h1 class="text-center border">Accesorios</h1>
+            </span>
+            
             {% for subcategoria in subcategorias %}
             
             <div>
@@ -16,7 +19,10 @@
             
             
                 
-                <div class="glider-contain" id="glider-{{subcategoria.id}}">
+                <div class="glider-contain col-xl-10 " id="glider-{{subcategoria.id}}">
+                    <div style="width: 100%;">
+                        <p style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
+                    </div>
                     <div class="glider-cat-1 glider">
                         {% for elemento in elementos %}
                             {% if subcategoria.id == elemento.tipo_elemento_id %}
