@@ -18,6 +18,7 @@ body{
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
+
 }
 nav  li{
     list-style: none;
@@ -217,7 +218,7 @@ nav  li a{
 .dark-mode .contenido-cuerpo{
     background: #0c111bda;
 }
-.dark-mode .contenido-cuerpo h2{
+.dark-mode .contenido-cuerpo h2 {
     color: #fff;
 }
 .texto-cuerpo {
@@ -513,7 +514,7 @@ h2{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    
+    background-color: rgba(255, 255, 255, 0.329);
     
 }
 .liness{
@@ -536,6 +537,7 @@ h2{
 .ser{
     display: flex;
     margin: 0 auto;
+    
 }
 .guiones{
     font-weight: bolder;
