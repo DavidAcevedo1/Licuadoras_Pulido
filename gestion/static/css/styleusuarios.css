@@ -510,11 +510,11 @@ h2{
     font-family: serif;
 }
 .pr-des-contactos {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin-block-end: 50px;
-    background-color: white;
+    
+    
 }
 .liness{
     width: 30%;
