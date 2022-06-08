@@ -29,11 +29,6 @@ nav  li a{
     text-decoration: none;
     color: #0b318a; 
 }
-.centrado{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .bordeAlerta{
     align-items: center;
     /* width: 80%; */
@@ -74,11 +69,12 @@ nav  li a{
     margin-bottom: 6px;
     width: 30%;
     box-shadow: 0 2px 6px 0 white, 0 2px 5px 0 rgb(0,0,0,15);
+}   
+.centrado{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
-/* -----------------------------------Botones Inicio Sesión------------------------------------------------ */
-.boton{
-	padding-bottom: 4%;
-}    
 /*--------------------------------------------------Estilos header----------------------------------------------- */
 *{
     margin: 0;
@@ -353,10 +349,6 @@ footer{
     grid-area: boton;
     position: relative;
     width: 100%; 
-}
-.centrado {
-    line-height: 50px;
-    text-align: center;
 }
 .foto {
     object-fit: cover;
