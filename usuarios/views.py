@@ -72,6 +72,15 @@ def politicasprivacidad(request):
         "elementos":elementos,
     }
     return render(request, "usuarios/politicasprivacidad.html", context) 
+
+def detalles(request):
+    titulo_pagina='Detalles'
+    elementos = Elemento.objects.all()
+    context={
+        "titulo_pagina": titulo_pagina,
+        "elementos":elementos,
+    }
+    return render(request, "usuarios/detalles.html", context)
     
 def carrito(request):
     titulo_pagina='Carrito'

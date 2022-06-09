@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from usuarios.views import agregar_elemento, carrito, eliminar_elemento,inicio, accesorio, limpiar_carrito, politicasprivacidad, producto, restar_elemento, serviciocliente, nosotros
+from usuarios.views import agregar_elemento, carrito, detalles, eliminar_elemento,inicio, accesorio, limpiar_carrito, politicasprivacidad, producto, restar_elemento, serviciocliente, nosotros
 
 urlpatterns = [
     path('inicio/', inicio, name='usuarios-inicio'),
@@ -10,6 +10,7 @@ urlpatterns = [
     path('nosotros/', nosotros, name='usuarios-nosotros'),
     path('carrito/', carrito, name='usuarios-carrito'),
     path('politicas/', politicasprivacidad, name='usuarios-politicas'),
+    path('detalles/', detalles, name='usuarios-detalles'),
     #carrito
     path('agregar/<int:elemento_id>/', agregar_elemento, name="agregar"),
     path('eliminar/<int:elemento_id>/', eliminar_elemento, name="eliminar"),
