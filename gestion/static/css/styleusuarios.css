@@ -13,11 +13,20 @@
   .f4 {
     font-size: 1.2rem;
   } 
+html{
+    height: 100%;
+}  
 body{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
 }
 nav  li{
     list-style: none;
@@ -31,7 +40,6 @@ nav  li a{
 }
 .bordeAlerta{
     align-items: center;
-    /* width: 80%; */
 	border-radius: 15%;
 	border:4px solid #CF2A27;
 	display:inline-block;
@@ -56,13 +64,27 @@ nav  li a{
     color: #fff;
 }
 /* -------------------------------CONTENEDOR INICIO SESIÓN------------------------------------------------ */
-.contenidoinicio{
+#contenidoinicio{
     background-color: white;
-    width:35%; 
     margin-top:4%; 
     margin-bottom:111px;
     border: 1px solid hsl(0, 2%, 78%);
     border-radius: 2%;
+}
+@media only screen and (min-width: 1312px) and (max-width: 2000px) {
+    #contenidoinicio{
+        width:35%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1312px) {
+    #contenidoinicio{
+        width:50%;
+    }
+}
+@media only screen and (min-width: 500px) and (max-width: 768px) {
+    #contenidoinicio{
+        width:70%;
+    }
 }
 .imgLogo{
     background-color: hsl(0, 0%, 90%);
