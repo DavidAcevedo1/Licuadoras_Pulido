@@ -44,7 +44,7 @@ def tipoelemento_editar(request,pk):
     titulo_pagina='Categorias'
     categorias= Tipos_Elemento.objects.all()
     categoria= Tipos_Elemento.objects.get(id=pk)
-    documento=f"{categoria.nombre} con el ID {pk}"
+    documento=f"{categoria.subcategoria} con el ID {pk}"
     url_editar="/categoria"
     if request.method == 'POST':
         form= TipoElementoEditarForm(request.POST, instance=categoria)

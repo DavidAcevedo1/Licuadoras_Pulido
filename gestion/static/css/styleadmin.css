@@ -145,15 +145,30 @@ nav{
     height: auto;
     margin: 0 auto;
 }
+.contenido-principal2{
+    
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .contenido-cuerpo{
     background-color: #ffffffd5;
-    height: 100%;
+    width: 81%;
+    flex-direction: column;
+    padding: 3% 10px;
+    text-align: center;
+    
+    
+   
+    /* height: 100%;
     padding: 3% 10px;
     border: 1px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: column; */
 }
 .dark-mode .contenido-cuerpo {
     background: #0c111bda;
