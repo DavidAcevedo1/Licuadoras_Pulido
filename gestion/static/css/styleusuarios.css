@@ -208,9 +208,6 @@ nav  li a{
     height: 30px;
 }
 /* ---------------------------------------------Boton Accesibilidad------------------------------------------- */
-.acces {
-    margin-right: 10px;
-}
 .acces img{
     width: 30px;
     margin: -2px -2px 0px -2px;
@@ -243,7 +240,6 @@ nav  li a{
     height: 50px;
     margin: 50px;
 }
-/*------------------------------------------------------------------------------------------------------------ */
 .form1 {
     background-color:#020a1d;
     color:#fff;
@@ -287,36 +283,6 @@ footer{
     text-decoration: none;
 }
 /*--------------------------------------------------------------------------------------------------------------- */
-.grid-1 {
-    display: grid;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 100px 200px 80px;
-    gap: 20px;
-    grid-template-areas: "header header header" "main   main   sidebar" "footer footer footer";
-}
-.item-1 {
-    background-color: coral;
-    grid-area: header;
-}
-.item-2 {
-    background-color: cornflowerblue;
-    grid-area: main;
-}
-.item-3 {
-    background-color: darkseagreen;
-    grid-area: sidebar;
-}
-.item-4 {
-    background-color: mediumpurple;
-    grid-area: footer;
-}
-.tachado {
-    text-decoration: line-through;
-    color: gray;
-}
 .flex-1 {
     display: flex;
     flex-wrap: wrap;
@@ -326,51 +292,6 @@ footer{
     margin: 0 10%;
     justify-content: left;
     border-radius: 0 0px 0 0px
-}
-.grid-2:hover {
-    transform: scale(1.1);
-    transition: 0.2s ease-in-out;
-}
-.grid-2 {
-    background-color: #f8f9fa;
-    display: inline-block;
-    border: 1px solid #000;
-    padding: 20px;
-    width: 300px;
-    max-width: 33%;
-    min-width: 240px;
-    margin: auto;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px;
-    height: 525px;
-    box-shadow: 14px 14px 22px -7px rgb(0 0 0 / 66%);
-    grid-template-areas: "foto foto" "titulo titulo" "precio descuento" "descripcion descripcion" "vacio fecha"  
-}
-.item-1f{
-    background-color: coral;
-    grid-area: foto;
-}
-.item-2f {
-    grid-area: titulo;
-}
-.item-3f {
-    font-weight: 600;
-    grid-area: precio;
-}
-.item-4f {
-    color: red;
-    grid-area: descuento;
-}
-.item-5f {
-    grid-area: descripcion;
-}
-.item-6f {
-    grid-area: fecha;
-}
-.item-7f {
-    grid-area: boton;
-    position: relative;
-    width: 100%; 
 }
 .foto {
     object-fit: cover;
@@ -519,9 +440,6 @@ h2{
     padding: 30px;
     align-items: center;
 }
-.centrar {
-    text-align: center;
-}
 .margenes {
     margin: 0 !important;
 }
@@ -575,16 +493,6 @@ h2{
 }
 .guiones{
     font-weight: bolder;
-}
-/* --------------------------------Nosotros X:Lina---------------------------------------------- */
-.pr-des-texto-nosotros {
-    background-color: rgb(255, 255, 255);
-    max-width: 90%;
-    padding: 2%;
-    border: white;
-    border-radius: 11px;
-    font-size: 90% !important;
-    font-family: serif;
 }
 /* ----------------------------------Detalles X:Lina-------------------------------------------- */
 .contenedor-Detalles {
