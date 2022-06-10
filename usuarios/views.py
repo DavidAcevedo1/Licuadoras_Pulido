@@ -17,10 +17,8 @@ def inicio(request):
 
 def restablecercontraseña(request):
     titulo_pagina='Restablecer Contraseña'
-    elementos = Elemento.objects.all()
     context={
         "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
     }
     return render(request, "usuarios/restablecercontraseña.html", context)
 
@@ -48,37 +46,29 @@ def producto(request):
 
 def serviciocliente(request):
     titulo_pagina='Servicios Cliente'
-    elementos = Elemento.objects.all()
     context={
         "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
     }
     return render(request, "usuarios/servicioscliente.html", context)
 
 def nosotros(request):
     titulo_pagina='Nosotros'
-    elementos = Elemento.objects.all()
     context={
         "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
     }
     return render(request, "usuarios/nosotros.html", context)
 
 def politicasprivacidad(request):
     titulo_pagina='Politicas de Privacidad'
-    elementos = Elemento.objects.all()
     context={
         "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
     }
     return render(request, "usuarios/politicasprivacidad.html", context) 
     
 def carrito(request):
     titulo_pagina='Carrito'
-    elementos = Elemento.objects.all()
     context={
         "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
     }
     return render(request, "usuarios/carrito.html", context)
 

@@ -6,7 +6,7 @@ urlpatterns = [
     
     path('usuario/', usuario, name='administrador-usuario'),
     path('usuario/u/<int:pk>/', usuario_editar, name='administrador-usuario-editar'),
- 
+    path('usuario/d/<int:pk>/', usuario_eliminar, name='administrador-usuario-eliminar'),
     
     path('categoria/', tipoelemento, name='administrador-categoria'),
     path('categoria/u/<int:pk>/', tipoelemento_editar, name='administrador-categoria-editar'),
