@@ -1,5 +1,8 @@
 from dataclasses import field
+from datetime import datetime
 from django.shortcuts import render, redirect
+from administrador.forms import  ElectrodomesticoEditarForm,StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, UsuarioEditarForm, UsuarioForm, ElementoForm, ElementoEditarForm, FacturaEditarForm, FacturaForm, MarcaForm, ServicioForm
+from administrador.models import Electrodomestico,Elemento, Factura, Marca, Servicio, Stock, Tipos_Elemento, Usuario
 from administrador.forms import  ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
 from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Tipos_Elemento
 from django.contrib.auth.decorators import login_required
@@ -463,3 +466,38 @@ def copiaseguridad(request):
         "titulo_pagina": titulo_pagina,
     }
     return render(request, "administrador/copiaseguridad.html", context)
+
+
+def stock(request,pk):
+    titulo_pagina="Stock"
+    elemento= Elemento.objects.get(id=pk)
+    stocks= Stock.objects.filter(elemento=pk)
+    if request.method == 'POST':
+        form= StockForm(request.POST)
+        if form.is_valid():
+            stock= Stock.objects.create(
+                fecha=  datetime.now().strftime("%Y-%m-%d"),
+                elemento= elemento,
+                stock_agregada = form.cleaned_data.get('stock_stock'),
+                stock_stock = elemento.stock_elemento + form.cleaned_data.get('stock_stock'),
+                
+            )
+            Elemento.objects.filter(id=pk).update(
+                stock_elemento= stock.stock_stock
+            )
+            stockck_id= form.cleaned_data.get('id')
+            messages.success(request,f'El stock con el id {stockck_id} se agregó correctamente!')
+        return redirect('elemento-stock', pk)
+    else:
+
+        form = StockForm()
+    context={
+        "titulo_pagina": titulo_pagina,
+        "stocks": stocks,
+        "form":form,
+        "elemento":elemento
+    }
+    return render(request, "administrador/elemento/elemento-stock.html", context)
+
+
+
