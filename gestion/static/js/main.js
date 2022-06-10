@@ -15,7 +15,9 @@ document.getElementById('reducir').addEventListener('click', ()=>{
     changeClass(previousClass, classIndex);
 });
 document.getElementById('restaurar').addEventListener('click', ()=>{
-    location.reload();
+    let previousClass = classIndex;
+    html.classList.toggle('dark-mode');
+    changeClass(previousClass, 2);
 });
 
 let changeClass = (previous, next)=>{

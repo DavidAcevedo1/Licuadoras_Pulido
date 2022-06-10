@@ -3,20 +3,20 @@
 {% load crispy_forms_tags %}
 {% block contenido %}
 <div class="centrado">
-    <div class="contenidoinicio">
+    <div id="contenidoinicio">
         <div class="p-3">
             <img class="imgLogo rounded-circle" src="{% static 'img/Logooo.png' %}">
             <h4>Inicio de Sesión</h4>
-            <form method="POST">
+            <form class="p-3" method="POST">
                 {% csrf_token %}
-                {{ form|crispy }}  
-                <!-- Boton Modal -->
-                <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
-                <div class="centrado" style="padding: 5px;">
-                    <a data-bs-dismiss="modal" href="{% url 'usuarios-inicio' %}">
-                    <input type="submit" class="btn btn-secondary" value="ㅤCancelarㅤ"></button></a>ㅤㅤㅤㅤㅤㅤㅤ
-                    <a data-bs-dismiss="modal" href="{% url 'usuario-login' %}">
-                    <input type="submit" class="btn btn-success" value="Iniciar Sesión"></button></a>
+                {{ form|crispy }}
+                <div>
+                    <a class="text-decoration-none" href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+                </div>
+                <div>
+                    <a href="{% url 'usuarios-inicio' %}" class="btn btn-secondary m-4"> Cancelar </a>
+                    <a href="{% url 'usuario-login' %}">
+                    <input type="submit" class="btn btn-success m-4" value="Iniciar Sesión"></a>
                 </div>
             </form>
         </div>

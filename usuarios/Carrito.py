@@ -15,7 +15,7 @@ class Carrito:
                 "nombre": elemento.nombre,
                 "precio": str(elemento.precio),
                 "cantidad": 1,
-                "foto": elemento.foto.url
+                # "imagen": elemento.imagen.url
             }
         else:
             for key, value in self.carrito.items():
@@ -43,7 +43,8 @@ class Carrito:
                 if value["cantidad"]<1:
                     self.eliminar(elemento)
                 break
-        self.guardar_carrito() 
+        self.guardar_carrito()
+                    
             
     def limpiar (self):
         self.session["carrito"] = {}

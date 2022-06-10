@@ -1,18 +1,14 @@
 from dataclasses import field
 from django import forms
 from administrador.models import Electrodomestico,Elemento, Factura, Marca, Servicio, Tipos_Elemento, Usuario,Stock
-
+from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Tipos_Elemento
+from usuarios.models import Usuario
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
-        model= Usuario
-        fields= ['documento','tipodoc','rol','nombre','apellido','telefono','direccion', 'correo','especializacion','ciudad']
-
-class UsuarioEditarForm(forms.ModelForm):
-    class Meta:
-        model= Usuario
-        fields= ['tipodoc','rol','nombre','apellido','telefono','direccion', 'correo','especializacion','ciudad']
-        
+        model = Usuario
+        fields = ['rol','Unombre','apellido','tipo_documento','documento','celular']
+           
 class TipoElementoForm(forms.ModelForm):
     class Meta:
         model= Tipos_Elemento
@@ -43,15 +39,15 @@ class MarcaEditarForm(forms.ModelForm):
         model= Marca
         fields= ['nombre']
         
-class FacturaForm(forms.ModelForm):
-    class Meta:
-        model= Factura
-        fields= ['elemento','cantidad','compraoventa','usuario', 'monto', 'fecha']
+# class FacturaForm(forms.ModelForm):
+#     class Meta:
+#         model= Factura
+#         fields= ['elemento','cantidad','compraoventa','usuario', 'monto', 'fecha']
         
-class FacturaEditarForm(forms.ModelForm):
-    class Meta:
-        model= Factura
-        fields= ['elemento','cantidad','compraoventa','usuario', 'monto', 'fecha']
+# class FacturaEditarForm(forms.ModelForm):
+#     class Meta:
+#         model= Factura
+#         fields= ['elemento','cantidad','compraoventa','usuario', 'monto', 'fecha']
 
 class ElectrodomesticoForm(forms.ModelForm):
     class Meta:
