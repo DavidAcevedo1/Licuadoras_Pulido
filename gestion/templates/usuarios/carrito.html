@@ -1,6 +1,48 @@
 {% extends 'partials/user-body.html' %}
-{% load crispy_forms_tags %}
 {% block contenido %}
+<div class="container-fluid contenido-cuerpo " style="width: 80% !important; margin: 0 auto;" >
+    <h1 class="text-center m-1">Carrito</h1>
+    <p class="borde" style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
+    <div class="row" >
+        <div class="col-xl-8 mt-3 d-flex flex-wrap"style="justify-content: center;">
+            {% if request.session.carrito.items %}
+            {% for key, value in request.session.carrito.items %}
+            <div class="producto-box m-4 bg-light p-4 d-flex flex-column justify-content-between">
+                <div class="producto-img">
+                    {% if value.foto %}
+                        <img src="{{ value.foto }}" alt="">
+                    {% endif %}
+                </div>
+                <div class="text-center">
+                    <h3>{{value.nombre}}</h3>
+                </div>
+                <div class="text-center"><h3 class="text-danger">$ {{value.precio}}</h3></div>
+                <a href="{% url 'restar' value.elemento_id %}" class="badge btn btn-danger badge-dark p-2 fs-6">Eliminar</a><br>
+            </div>
+            {% endfor %}
+            {% else %}
+                <div class="container rounded m-3 d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <div class="d-flex justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                        </div>
+                        <p class="m-2">No has agregado productos al carrito.</p>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+        
+        <div class="col-xl-4">
+            <div class="bg-white p-3 my-4 rounded">
+                <table class="table table-responsive bg-white table-bordered table-inverse w-100">
+                    <thead class="bg-primary">
+                        <tr class="text-white">
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
 <section class="contenido-cuerpo borde">
     <h1 class="text-center m-1">Carrito</h1>
     <p class="borde" style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
@@ -37,7 +79,6 @@
                             <th scope="col">Nombre</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +87,10 @@
                         <tr>
                             <td>{{value.nombre}}</td>
                             <td class="text-center">{{value.cantidad}} <br>
+                                <a href="{% url 'agregar' value.elemento_id %}"
+                                    class="badge btn btn-dark badge-dark">+</a>
+                                <a href="{% url 'restar' value.elemento_id %}"
+                                    class="badge btn btn-dark badge-dark">-</a><br>
                                 <a href="{% url 'agregar' value.elemento_id %}" class="badge btn btn-dark badge-dark">+</a>
                                 <a href="{% url 'restar' value.elemento_id %}" class="badge btn btn-dark badge-dark">-</a><br>
                             </td>
@@ -68,6 +113,10 @@
                 <hr>
                 <div class="row text-center">
                     <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger mb-2">Limpiar</a></div>
+                    <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal"
+                            data-bs-target="#cotizar">Cotización</a></div>
+                    <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel"
+                        aria-hidden="true">
                     <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#cotizar">Cotización</a></div>
                     <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
@@ -83,6 +132,8 @@
                                 <div class="modal-body">
                                     <div class="color-dark d-flex justify-content-end">
                                         <script>
+                                            var options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
+                                            date = new Date().toLocaleDateString(undefined, options);
                                             date = new Date().toLocaleDateString();
                                             document.write(date);
                                         </script>
@@ -106,12 +157,14 @@
                                                         <td>{{value.precio}}</td>
                                                     </tr>
                                                     {% endfor %}
+                                                    {% else %}
                                         {% else %}
                                                     <tr>
                                                         <td colspan="3">
                                                             <div class="alert alert-danger text-center">Sin Productos</div>
                                                         </td>
                                                     </tr>
+                                                    {% endif %}
                                         {% endif %}
                                                 </tbody>
                                             </table>
@@ -129,5 +182,7 @@
             </div>
         </div>
     </div>
+</div>
+{% endblock contenido %}
 </section>
 {% endblock contenido %}
