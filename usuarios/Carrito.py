@@ -43,8 +43,7 @@ class Carrito:
                 if value["cantidad"]<1:
                     self.eliminar(elemento)
                 break
-        self.guardar_carrito()
-                    
+        self.guardar_carrito() 
             
     def limpiar (self):
         self.session["carrito"] = {}

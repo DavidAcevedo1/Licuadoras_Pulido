@@ -1,0 +1,24 @@
+<div class="ContInicioSesion">
+    <div class="cont">
+        <div><a class="centrado"><img class="imgLogo" src="img/Logo Proyecto.png" alt=""></a></div>
+        <div class="centrado">
+            {% if validlink %}
+                <h1>Restablecer contraseña:</h1><br>
+                <form method="post">
+                {% csrf_token %}
+                {{ form.new_password1.errors }}
+                <label class="centrado" for="id_new_password1">Ingrese contraseña nueva</label>
+                {{ form.new_password1 }}
+                <!-- <div class="centrado"><input type="password" name="nuevacontraseña" id=""></div> -->
+                <br>
+                {{ form.new_password2.errors }}
+                <label class="centrado" for="id_new_password2">Confirmar contraseña</label>
+                {{ form.new_password2 }}
+                <!-- <div class="centrado"><input type="password" name="confirmarcontraseña" id=""></div> -->
+                <br>
+            </form> 
+            {% else %}
+            <h1 class="centrado">ENLACE INVÁLIDO: ESTE ENLACE YA HA SIDO UTILIZADO</h1>
+        </div>
+    </div>
+</div>
