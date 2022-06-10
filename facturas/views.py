@@ -71,12 +71,12 @@ def detalle(request,pk):
             
             factura= Detalle.objects.create(
                 cantidad=form.cleaned_data.get('cantidad'),
-                producto= form.cleaned_data.get('producto'),
+                elemento= form.cleaned_data.get('elemento'),
                 factura=factura_u,
                 
             )
-            producto= form.cleaned_data.get('Producto')
-            messages.success(request,f' se agregó {producto} al la factura correctamente!')
+            elemento= form.cleaned_data.get('Elemento')
+            messages.success(request,f' se agregó {elemento} al la factura correctamente!')
             return redirect('factura-detalle', pk=pk)
     else:
         form= DetalleForm()
@@ -89,7 +89,7 @@ def detalle(request,pk):
     return render(request, "factura/detalle-factura.html", context)
 
 def detalle_estado(request,pk ):
-    titulo_pagina='producto'
+    titulo_pagina='elemento'
     u_detalles= Detalle.objects.get(id=pk)
     factura_u= u_detalles.factura
     detalles= Detalle.objects.filter(factura_id=factura_u.id)
@@ -123,8 +123,8 @@ def detalle_eliminar(request,pk):
     accion_txt= f"la marca {detalle.id}, una vez eliminado no hay marcha atras!"
     if request.method == 'POST':
         detalle.delete()
-        detalle_producto= detalle.producto
-        messages.success(request,f'La marca {detalle_producto} se eliminó correctamente!')
+        detalle_elemento= detalle.elemento
+        messages.success(request,f'La marca {detalle_elemento} se eliminó correctamente!')
         return redirect('detalle_estado')
                 
     else:
@@ -158,7 +158,7 @@ def factura_estado(request,pk, estado):
             else:
                 form=FacturaForm()
         else:
-            messages.warning(request,f'la factura {pk} no se puede eliminar tiene productos registrados!')
+            messages.warning(request,f'la factura {pk} no se puede eliminar tiene elementos registrados!')
             return redirect('factura-tfactura')
     elif estado == "Cerrada":
         estado_txt= "Anular"
