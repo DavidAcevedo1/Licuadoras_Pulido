@@ -1,12 +1,8 @@
 from django.urls import path
-from administrador.views import copiaseguridad, electrodomestico, electrodomestico_editar, electrodomestico_eliminar, elemento, elemento_editar, elemento_eliminar, factura, factura_eliminar, inicioadmin, marca, marca_editar, marca_eliminar, servicio, servicio_editar, servicio_eliminar, tipoelemento, tipoelemento_editar, tipoelemento_eliminar, usuario, usuario_editar, usuario_eliminar
+from administrador.views import copiaseguridad, electrodomestico, electrodomestico_editar, electrodomestico_eliminar, elemento, elemento_editar, elemento_eliminar, factura, factura_eliminar, inicioadmin, marca, marca_editar, marca_eliminar, servicio, servicio_editar, servicio_eliminar, tipoelemento, tipoelemento_editar, tipoelemento_eliminar
 
 urlpatterns = [
     path('inicioadmin/', inicioadmin, name='administrador-inicioadmin'),
-    
-    path('usuario/', usuario, name='administrador-usuario'),
-    path('usuario/u/<int:pk>/', usuario_editar, name='administrador-usuario-editar'),
- 
     
     path('categoria/', tipoelemento, name='administrador-categoria'),
     path('categoria/u/<int:pk>/', tipoelemento_editar, name='administrador-categoria-editar'),

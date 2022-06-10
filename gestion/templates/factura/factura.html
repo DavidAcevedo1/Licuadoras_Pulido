@@ -1,0 +1,117 @@
+{% extends 'partials/admin-body.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block contenido %}
+
+<div class="contenido-cuerpo borde">
+  <div>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'inicio' %}">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'factura-factura' %}">Factura</a></li>
+    </ol>
+  </div>
+  <form id="form1">
+      <table class="table bg-white table-bordered results" id="proyectos">
+          <thead class="bg-info">
+              <tr class="text-white">
+                <th scope="col">ID</th>
+                <th scope="col">Tipo de usuario</th>
+                <th scope="col">Nombre de usuario</th>
+                <th scope="col">Fecha</th>
+                <th scoper="col">Neto a pagar</th>
+                <th scope="col">Tipo de factura</th> 
+                <th scope="col">Estado</th> 
+               
+                <th scope="col">Opciones</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for tfactura in tfacturas %}
+            {% if not tfactura.estado == "Anulada" %}
+            <tr>
+              <td>{{tfactura.id}}</td>
+              <td>{{tfactura.rol}}</td>
+              <td>{{tfactura.usuario}}</td>
+              <td>{{tfactura.fecha}}</td>
+              <td>{{tfactura.}}</td>
+              <td>{{tfactura.tipofactura}}</td>
+              <td>{{tfactura.estado}}</td>
+              {% if tfactura.estado == "Abierta" %}
+              <td><a href="{% url 'factura-detalle' tfactura.id  %}"><img src="{% static 'img/png/plus-circle-fill.svg' %}" width="20" alt=""
+                  srcset=""></a>
+              <a href="{% url 'factura_estado' tfactura.id tfactura.estado%}"><svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="opcionesTabla bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+              {% else %}
+              <td><a href="{% url 'factura-verfactura' tfactura.id %}"><svg src="img/png/eye.svg"   fill="currentColor" class=" opcionesTabla bi bi-eye" viewBox="0 0 16 16">
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+              </svg></a> 
+              {% endif %}
+              
+
+            {% endif %} 
+            </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+  </form>
+  <div class="anuncio"><!-- Boton modal -->
+      <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <input class="btn btn-success btn-block" type="submit" Value="Crear Factura">
+      </a>
+                          <!-- Modal -->
+      {% load crispy_forms_tags %}                    
+      <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Crear Nueva Factura</h5>
+                      <a class="btn-close" data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
+                  </div>
+                  <div class="modal-body">
+                    <form action="" method="POST">
+                      <div id="div_id_rol" class="mb-3"> 
+                      <label for="id_rol" class="form-label requiredField">Rol<span class="asteriskField">*</span></label> 
+                          <select  name="rol" class="select form-select select1" required="" id="id_rol"> 
+                              
+                              <option selected disabled="true" >--- Seleccione el rol ---</option>
+                              {% for ro in  rol %}
+                              <option  value="{{ro.Rid}}" >{{ro.Rnombre}}</option>
+                              {% endfor  %}
+                              
+                          </select>
+                      </div>
+  
+                      <div id="div_id_usuario" class="mb-3">
+                          <label for="id_usuario" class="form-label requiredField">Nombre<span class="asteriskField">*</span></label> 
+                          <select name="usuario" class="select form-select select2" required="" id="id_usuario"> 
+                                  
+                              <option selected disabled="true">--- Seleccione el usuario ---</option>    
+                              {% for items in usuario %}
+                              <option  data-index-number="{{items.rol_id}}|{{items.estado}}" value="{{items.Uid}}">{{items.Unombre}}</option>
+                              {% endfor %}
+  
+                          </select>
+                      </div>
+  
+                      {% csrf_token %}
+                      {{form|crispy}}
+  
+  
+                  </form>
+                  </div>
+                  <div class="modal-footer">
+                      <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
+                      <input type="submit" class="btn btn-success" value="Agregar Factura"></button>
+                      </form> 
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+{% endblock contenido %}
