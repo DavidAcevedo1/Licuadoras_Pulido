@@ -1,40 +1,7 @@
+from xml.dom.minidom import Element
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
-
-class Usuario(models.Model):
-    documento=models.CharField(unique=True,max_length=10)
-    class TipoDoc(models.TextChoices):
-        CEDULA='C.C.', _('Cedula')
-        TARJETA='T.I.', _('Tarjeta')
-        REGISTRO='R.C.', _('Registro Civil')
-        EXTRANJERIA='C.E.', _('Cedula Extranjeria')
-    tipodoc= models.CharField(max_length=20, choices=TipoDoc.choices, verbose_name="Tipo de documento")
-    class Rol(models.TextChoices):
-        ADMINISTRADOR='Administrador', _('Administrador')
-        TRABAJADOR='Trabajador', _('Trabajador')
-        PROVEEDOR='Proveedor', _('Proveedor')
-        CLIENTE='Cliente', _('Cliente')
-    rol= models.CharField(max_length=20, choices=Rol.choices, verbose_name="Rol")
-    nombre= models.CharField(max_length=30, blank=False, verbose_name="Nombre")
-    apellido= models.CharField (max_length=30, blank=False, verbose_name="Apellido")
-    telefono= PhoneNumberField()
-    direccion= models.CharField(max_length=30)
-    correo= models.EmailField( max_length=25)
-    especializacion= models.CharField(max_length=50)
-    contraseña= models.CharField(blank=False, null=False, max_length=20)
-    ciudad= models.CharField(max_length=50)
-    class Estado(models.TextChoices):
-        ACTIVO='Activo', _('Activo')
-        INACTIVO='Inactivo', _('Inactivo')
-    estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
-    def __str__(self) -> str:
-        return '%s %s' %( self.nombre, self.apellido)
-    def clean(self):
-        self.nombre= self.nombre.title()
-        self.apellido= self.apellido.title()
-        
     
 class Marca(models.Model):
     nombre= models.CharField(max_length=10)
@@ -65,6 +32,7 @@ class Elemento(models.Model):
     marca= models.ForeignKey(Marca,on_delete=models.SET_NULL, null=True,verbose_name=u"Marca")
     descripcion=models.CharField(max_length=500)
     precio=models.IntegerField(verbose_name="Precio")
+    favorito=models.BooleanField(default=False)
     class Porcentaje_ganancia(models.TextChoices):
         diez= '0.1', _('10%')
         quince= '0.15', _('15%')
@@ -73,30 +41,27 @@ class Elemento(models.Model):
     porcentaje_ganancia=models.CharField(max_length=10, choices=Porcentaje_ganancia.choices, verbose_name="Porcentaje")
     foto=models.ImageField(upload_to="carrito", null=True, blank=True,default="carrito/casa.png")
     class Estado(models.TextChoices):
-        ACTIVO='Activo',_('Activo')
-        INACTIVO='Inactivo',_('Inactivo')
-    estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
+        ACTIVO='Activo', _('Activo')
+        INACTIVO='Inactivo', _('Inactivo')
+        ANULADO='Anulado', _('Anulado')
+    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
         return '%s'%(self.nombre)
     def clean(self):
         self.nombre= self.nombre.title()
-
-class Factura(models.Model):
-    elemento= models.ForeignKey(Elemento,on_delete=models.SET_NULL, null=True,verbose_name=u"Elemento")
-    cantidad= models.IntegerField()
-    class CompraoVenta(models.TextChoices):
-        COMPRA='Compra', _('Compra')
-        VENTA='Venta', _('Venta')
-    compraoventa= models.CharField(max_length=6, choices=CompraoVenta.choices, verbose_name="CompraoVenta")
-    usuario= models.ForeignKey(Usuario,on_delete=models.SET_NULL, null=True,verbose_name=u"Usuario")
-    monto=models.IntegerField()
-    fecha= models.DateField(verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
+        
+class Cantidad(models.Model):
+    fecha= models.DateField(auto_now=True, verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
+    cantidad_agregada=models.IntegerField(default=0)
+    cantidad_stock=models.IntegerField(verbose_name="Cantidad")
+    producto= models.ForeignKey(Elemento, on_delete=models.SET_NULL, null=True, verbose_name=u"Producto")
     class Estado(models.TextChoices):
-        PAGADO='Pagado',_('Pagado')
-        ANULADO='Anulado',_('Anulado')
-    estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.PAGADO)
+        ACTIVO='Activo', _('Activo')
+        INACTIVO='Inactivo', _('Inactivo')
+        ANULADO='Anulado', _('Anulado')
+    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
-        return '%s '%(self.elemento)
+        return '%s' % (self.cantidad_stock)
   
 class Electrodomestico(models.Model):
     nombre=models.CharField(max_length=25)
