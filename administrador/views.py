@@ -1,10 +1,7 @@
-from dataclasses import field
 from datetime import datetime
 from django.shortcuts import render, redirect
-from administrador.forms import  ElectrodomesticoEditarForm,StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, UsuarioEditarForm, UsuarioForm, ElementoForm, ElementoEditarForm, FacturaEditarForm, FacturaForm, MarcaForm, ServicioForm
-from administrador.models import Electrodomestico,Elemento, Factura, Marca, Servicio, Stock, Tipos_Elemento, Usuario
-from administrador.forms import  ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
-from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Tipos_Elemento
+from administrador.forms import  ElectrodomesticoEditarForm,StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm,ElementoForm, ElementoEditarForm,MarcaForm, ServicioForm
+from administrador.models import Electrodomestico,Elemento,Marca, Servicio, Stock, Tipos_Elemento
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
