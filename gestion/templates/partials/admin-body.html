@@ -34,12 +34,14 @@
    
     
     <link rel="shortcut icon" href="{% static 'img/Logooo.png' %}">
-    <title>Licuadoras - {{titulo_pagina}} </title>
+    <title>{{titulo_pagina}} </title>
 </head>
 <body>
     {% include "partials/admin-header.html" %}
+    
+    
     {% block contenido %}
-    <h1>{{titulo_pagina}}</h1>
+    <h1 id="dt-title ">{{titulo_pagina}}</h1>
     {% endblock contenido %}
     {% if messages %}
     {% for message in messages %}
