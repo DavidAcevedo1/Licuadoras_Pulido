@@ -65,6 +65,7 @@ class Elemento(models.Model):
     marca= models.ForeignKey(Marca,on_delete=models.SET_NULL, null=True,verbose_name=u"Marca")
     descripcion=models.CharField(max_length=500)
     precio=models.IntegerField(verbose_name="Precio")
+    favorito=models.BooleanField(default=False)
     class Porcentaje_ganancia(models.TextChoices):
         diez= '0.1', _('10%')
         quince= '0.15', _('15%')
