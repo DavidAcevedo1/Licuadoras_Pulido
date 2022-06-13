@@ -388,7 +388,6 @@ def copiaseguridad(request):
     }
     return render(request, "administrador/copiaseguridad.html", context)
 
-
 def stock(request,pk):
     titulo_pagina="Stock"
     elemento= Elemento.objects.get(id=pk)
@@ -400,8 +399,7 @@ def stock(request,pk):
                 fecha=  datetime.now().strftime("%Y-%m-%d"),
                 elemento= elemento,
                 stock_agregada = form.cleaned_data.get('stock_stock'),
-                stock_stock = elemento.stock_elemento + form.cleaned_data.get('stock_stock'),
-                
+                stock_stock = elemento.stock_elemento + form.cleaned_data.get('stock_stock'), 
             )
             Elemento.objects.filter(id=pk).update(
                 stock_elemento= stock.stock_stock
@@ -410,7 +408,6 @@ def stock(request,pk):
             messages.success(request,f'El stock con el id {stockck_id} se agregó correctamente!')
         return redirect('elemento-stock', pk)
     else:
-
         form = StockForm()
     context={
         "titulo_pagina": titulo_pagina,
@@ -419,6 +416,3 @@ def stock(request,pk):
         "elemento":elemento
     }
     return render(request, "administrador/elemento/elemento-stock.html", context)
-
-
-

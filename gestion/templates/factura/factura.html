@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block contenido %}
-
 <div class="contenido-cuerpo borde">
   <div>
     <ol class="breadcrumb">
@@ -21,7 +20,6 @@
           <th scoper="col">Neto a pagar</th>
           <th scope="col">Tipo de factura</th>
           <th scope="col">Estado</th>
-
           <th scope="col">Opciones</th>
         </tr>
       </thead>
@@ -63,8 +61,6 @@
             </svg></a>
             {% else %}
             {% endif %}
-
-
             {% endif %}
           </td>
         </tr>
@@ -76,5 +72,4 @@
     <a href="{% url 'factura-factura' %}" class="btn btn-success btn-block">Agregar Factura</a>
   </div>
 </div>
-
 {% endblock contenido %}
