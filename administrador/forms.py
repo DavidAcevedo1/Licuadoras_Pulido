@@ -1,7 +1,8 @@
 from dataclasses import field
 from django import forms
-from administrador.models import Electrodomestico, Elemento, Marca, Servicio, Tipos_Elemento ,Stock
+from administrador.models import *
 from usuarios.models import Usuario
+# from usuarios.models import Usuario
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
@@ -62,3 +63,10 @@ class StockForm(forms.ModelForm):
     class Meta:
         model= Stock
         fields=['stock_stock']
+        
+        
+class CopiaseguridadForm(forms.ModelForm):
+    class Meta:
+        model= Copiaseguridad
+        fields= ['nombre','archivo']
+        

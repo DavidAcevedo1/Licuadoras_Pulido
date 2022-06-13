@@ -29,7 +29,7 @@
     <script type="text/javascript" src="{% static 'js/select2/select2.min.js' %}"></script>
    
     <link rel="shortcut icon" href="{% static 'img/Logooo.png' %}">
-    <title> {{titulo_pagina}} </title>
+    <title>Licuadoras -  {{titulo_pagina}} </title>
 </head>
 <body>
     {% include "partials/admin-header.html" %}
@@ -42,7 +42,7 @@
 
     {% if messages %}
     {% for message in messages %}
-    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script>
+    {% comment %} <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script> {% endcomment %}
     {% endfor %}
     {% endif %}
 
