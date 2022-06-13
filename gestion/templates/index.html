@@ -57,29 +57,21 @@
         </div>
     </div>
 </section>
-
 <section class="contenido-cuerpo borde">
     <div class="container3">
         <h3 class=" ">lo mas vendido</h3>
         <div style="width: 100%;">
             <p style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
         </div>
-        
         <div class="glider-contain col-xl-15 " id="glider-{{subcategoria.id}}">
-            
             <div class="glider-cat-1 glider">
                 {% for elemento in favoritos %}
-                    {% include "cards/card_elemento.html" %}
-               
+                    {% include "cards/card_elemento.html" %} 
                 {% endfor %}
             </div>
             <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
             <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>
-        
-    
-    
         <div class="containedorFinal">
-        
         <div class="row align-items-start">
             <div id="carouselExampleInterval" class="carousel  col-2" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -93,8 +85,7 @@
                         <img class="d-block w-100" src="{% static 'img\Oster-Logo.png' %}" alt="">
                     </div>
                 </div>
-            </div>
-           
+            </div>   
             <div id="carouselExampleInterval" class="carousel  col-2" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="10000">
@@ -148,10 +139,7 @@
                 </div>
             </div>
         </div>
-    </div> </div><br><br>
-
+    </div>
 </section>
-
 {% endblock contenido %}
-
 {% comment %} <img class="d-block w-100" src="{% static 'img\agregar-carrito.png' %}" alt=""> {% endcomment %}

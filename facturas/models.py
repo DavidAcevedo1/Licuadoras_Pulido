@@ -18,6 +18,7 @@ class Factura(models.Model):
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ABIERTA)
     class Meta:
         db_table="facturas_factura"
+        
 class Detalle(models.Model):
     factura=models.ForeignKey(Factura, on_delete=models.SET_NULL, null=True,verbose_name="Factura")
     elemento=models.ForeignKey(Elemento, on_delete=models.SET_NULL, null=True,verbose_name="elemento")
@@ -29,4 +30,3 @@ class Detalle(models.Model):
     cantidad=models.IntegerField()
     def __str__(self)-> str:
         return '%s' % (self.id)
-    

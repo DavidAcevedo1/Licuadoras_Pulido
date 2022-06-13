@@ -31,10 +31,8 @@
                         <p class="m-2">No has agregado productos al carrito.</p>
                     </div>
                 </div>
-
             {% endif %}
         </div>
-        
         <div class="col-xl-4">
             <div class="bg-white p-3 my-4 rounded">
                 <table class="table table-responsive bg-white table-bordered table-inverse w-100">
@@ -65,9 +63,7 @@
                                     <a href="{% url 'restar' value.elemento_id %}" class="badge btn btn-danger badge-dark p-2 fs-6">Eliminar</a><br>
                                 </div>
                             </div>
-
                         {% endfor %}
-
                 {% endif %}
             </div>
         </div>

@@ -52,7 +52,6 @@ class Uadministrador(models.Model):
         Tarjeta_identidad='T.I', _('T.I')
         Cedula_extranjeria='C.E', _('C.E')
     tipo_documento= models.CharField(max_length=3, choices=Tipo_documento.choices, verbose_name="Tipo documento")
-    
     def __str__(self) -> str:
         return "%s"% (self.nombre, self.apellido)
     def clean(self):
