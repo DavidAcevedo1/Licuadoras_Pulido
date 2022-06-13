@@ -15,9 +15,6 @@
   } 
 html{
     height: 100%;
-}
-html{
-    height: 100%;
 } 
 body{
     background-image: url( '../img/fondo-de-body.webp');
@@ -28,19 +25,14 @@ body{
     display: flex;
     flex-direction: column;
 }
-
 footer{
     margin-top: auto;
 }
-
 h1, h2, h3, h4 {
     TEXT-ALIGN: center !important;
     min-height: 100%;
     display: flex;
     flex-direction: column;
-}
-footer{
-    margin-top: auto;
 }
 nav  li{
     list-style: none;
@@ -128,7 +120,7 @@ nav  li a{
     background-color:#020a1d;
     color:#fff;
 }
-.sub2header {
+.sub2header{
     height: auto;
     display: flex;
     padding: 0 10%;
@@ -136,7 +128,7 @@ nav  li a{
 .marca{
     width: 320px;
 }
-.opheader {
+.opheader{
     width: 68%;
     display: flex;
     align-items: center;

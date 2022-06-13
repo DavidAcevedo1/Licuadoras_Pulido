@@ -7,15 +7,10 @@
             <div>
                 <h1 class="text-center ">Accesorios</h1>
             </div>
-            {% for subcategoria in subcategorias %}
-            
-            <div>
-                
+            {% for subcategoria in subcategorias %}    
+            <div> 
                 <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
             </div>
-            
-            
-                
                 <div class="glider-contain" id="glider-{{subcategoria.id}}">
                     <div class="glider-cat-1 glider">
                         {% for elemento in elementos %}
@@ -27,7 +22,6 @@
                     <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
                     <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>                 
                 </div>
-          
             {% endfor %}
     </section>
 </body>
@@ -39,7 +33,6 @@
     <button type="button" class="contacto2" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <img src="{% static 'img/help-outline_119052.png' %}" alt="" class="contacto2">
     </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
