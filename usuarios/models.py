@@ -8,8 +8,7 @@ class Rol(models.Model):
         db_table="usuarios_rol"
     def __str__(self) -> str:
         return "%s "% (self.Rnombre)
-    
-    
+
 class Usuario(models.Model):
     Uid=models.AutoField(primary_key=True)
     documento=models.CharField(unique=True,max_length=10)
@@ -52,7 +51,6 @@ class Uadministrador(models.Model):
         Tarjeta_identidad='T.I', _('T.I')
         Cedula_extranjeria='C.E', _('C.E')
     tipo_documento= models.CharField(max_length=3, choices=Tipo_documento.choices, verbose_name="Tipo documento")
-    
     def __str__(self) -> str:
         return "%s"% (self.nombre, self.apellido)
     def clean(self):

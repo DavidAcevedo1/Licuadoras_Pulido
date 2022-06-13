@@ -26,7 +26,7 @@ urlpatterns = [
     path('inicio-ad/', inicioadmin, name="inicioadmin"),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
-    path('factura/', include('facturas.urls')),
+    path('', include('facturas.urls')),
     # Logueo
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
     path('logout/', auth_views.LogoutView.as_view(), name='usuario-logout'),
