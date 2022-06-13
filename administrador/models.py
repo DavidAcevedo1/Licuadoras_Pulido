@@ -1,7 +1,24 @@
-from xml.dom.minidom import Element
+# from xml.dom.minidom import Element
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
+
+import os
+from django.core.exceptions import ValidationError
+
+
+
+def validate_file_extension(value):
+    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
+    valid_extensions = ['.sql']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError('Archivo no válido')
+
+class Copiaseguridad(models.Model):
+    nombre = models.CharField(max_length = 200,default="Copia de Seguridad", blank=True)
+    archivo = models.FileField(upload_to = "copiaseguridad",validators=[validate_file_extension])
+    fecha = models.DateTimeField(auto_now = True)
+
     
 class Marca(models.Model):
     nombre= models.CharField(max_length=10)

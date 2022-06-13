@@ -1,11 +1,15 @@
 from dataclasses import field
 from datetime import datetime
 from django.shortcuts import render, redirect
-from administrador.forms import  ElectrodomesticoEditarForm,StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
-from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Stock, Tipos_Elemento
+from administrador.forms import  CopiaseguridadForm, ElectrodomesticoEditarForm, StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
+from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Stock, Tipos_Elemento, Copiaseguridad
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
+
+import os
+from datetime import date
+
 
 @login_required(login_url="usuario-login")
 
@@ -381,12 +385,61 @@ def servicio_eliminar(request,pk):
     }
     return render(request, "administrador/servicio/servicio-eliminar.html", context)
 
-def copiaseguridad(request):
-    titulo_pagina='Copia Seguridad'
-    context={
-        "titulo_pagina": titulo_pagina,
+def exportar_datos():
+    fecha=date.today()
+    os.system(f"mysqldump --add-drop-table --column-statistics=0 -u root --password=admin db_licuadoraspulido> gestion/static/copiaseguridad/BKP_{fecha}.sql")
+   
+
+def importar_datos(archivo):
+    try:
+        os.system(f"mysql -u root --password=admin db_licuadoraspulido < {archivo[1:]}")
+    except:
+        print("Problemas al importar")
+
+
+
+def copiaseguridad(request,tipo):
+   
+    ejemplo_dir = 'gestion/static/copiaseguridad/'
+    with os.scandir(ejemplo_dir) as ficheros:
+        ficheros = [fichero.name for fichero in ficheros if fichero.is_file()]
+    print(ficheros)
+    filtrado=[]
+    copiaseguridad = Copiaseguridad.objects.all()
+    if request.method == 'POST' and tipo== "U":
+        # Fetching the form data
+        
+        form = CopiaseguridadForm(request.POST, request.FILES)
+        if form.is_valid():
+            nombre= request.POST['nombre']
+            archivo = request.FILES['archivo']
+            
+            insert = Copiaseguridad(nombre=nombre, archivo=archivo)
+            insert.save()
+            
+            importar_datos(insert.archivo.url)
+            
+            insert = Copiaseguridad(nombre=nombre, archivo=archivo)
+            insert.save()
+            
+            return redirect('administrador-copiaseguridad','A')
+        else:
+            print( "Error al procesar el formulario")
+              
+    elif request.method == 'POST' and tipo== "D":
+        exportar_datos()
+        return redirect('administrador-copiaseguridad','A')
+    
+    else:
+        form = CopiaseguridadForm()
+      
+        
+    context ={
+        "ficheros":ficheros,
+        "form":form,
+        "copiaseguridad":copiaseguridad
     }
-    return render(request, "administrador/copiaseguridad.html", context)
+    return render(request, 'administrador/copiaseguridad.html',context) 
 
 def stock(request,pk):
     titulo_pagina="Stock"

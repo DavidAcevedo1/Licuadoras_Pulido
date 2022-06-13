@@ -24,6 +24,6 @@ urlpatterns = [
     path('servicio/u/<int:pk>/', servicio_editar, name='administrador-servicio-editar'),
     path('servicio/d/<int:pk>/', servicio_eliminar, name='administrador-servicio-eliminar'),
     
-    path('copiaseguridad/', copiaseguridad, name='administrador-copiaseguridad'),
+    path('copiaseguridad/<str:tipo>/', copiaseguridad, name='administrador-copiaseguridad'),
     path('stock/l/<int:pk>', stock ,name='elemento-stock')
 ]
