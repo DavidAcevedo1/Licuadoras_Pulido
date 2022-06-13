@@ -12,7 +12,7 @@
                 </script>
             </div>
             <div class="part">
-                <input placeholder="Buscar" type="search" class="buscar" nombre="buscador" id="Buscador">
+                <input placeholder="Buscar.." type="text" class="buscar" id="myInput">
             </div>
             <div class="part">
                     <!-- Accesibilidad -->
@@ -121,3 +121,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myDIV *").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>

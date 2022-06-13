@@ -8,11 +8,11 @@
             <h1 class="text-center ">Productos</h1>
         </div>
         {% for subcategoria in subcategorias %}
-        <div>   
+        <div id="myDIV">   
             <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
         </div>       
             <div class="glider-contain" id="glider-{{subcategoria.id}}">
-                <div class="glider-cat-1 glider">
+                <div class="glider-cat-1 glider" id="myDIV">
                     {% for elemento in elementos %}
                         {% if subcategoria.id == elemento.tipo_elemento_id %}
                             {% include "cards/card_elemento.html" %}
