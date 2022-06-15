@@ -65,6 +65,7 @@ class Elemento(models.Model):
     marca= models.ForeignKey(Marca,on_delete=models.SET_NULL, null=True,verbose_name=u"Marca")
     descripcion=models.CharField(max_length=500)
     precio=models.IntegerField(verbose_name="Precio")
+    favorito=models.BooleanField(default=False)
     class Porcentaje_ganancia(models.TextChoices):
         diez= '0.1', _('10%')
         quince= '0.15', _('15%')
@@ -78,8 +79,14 @@ class Elemento(models.Model):
     estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
         return '%s'%(self.nombre)
-    def clean(self):
-        self.nombre= self.nombre.title()
+    
+class  Favorito(models.Model):
+    favorito=models.BooleanField(default=False)
+    class Estado(models.TextChoices):
+        ACTIVO='True',_('True')
+        INACTIVO='False',_('False')
+    def __str__(self) -> str:
+        return '%s'%(self.nombre)
 
 class Factura(models.Model):
     elemento= models.ForeignKey(Elemento,on_delete=models.SET_NULL, null=True,verbose_name=u"Elemento")

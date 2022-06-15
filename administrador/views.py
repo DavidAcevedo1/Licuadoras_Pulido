@@ -1,6 +1,6 @@
 from dataclasses import field
 from django.shortcuts import render, redirect
-from administrador.forms import  ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, UsuarioEditarForm, UsuarioForm, ElementoForm, ElementoEditarForm, FacturaEditarForm, FacturaForm, MarcaForm, ServicioForm
+from administrador.forms import TipoElementoFavoritoForm, ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, UsuarioEditarForm, UsuarioForm, ElementoForm, ElementoEditarForm, FacturaEditarForm, FacturaForm, MarcaForm, ServicioForm
 from administrador.models import Electrodomestico,Elemento, Factura, Marca, Servicio, Tipos_Elemento, Usuario
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
@@ -140,6 +140,18 @@ def tipoelemento_editar(request,pk):
     }
     return render(request, "administrador/categoria/categoria-editar.html", context)
 
+def electrodomestico_favorito(request,pk):
+    
+
+    if Elemento.objects.get(id=pk).favorito:
+        is_favorito=False
+    else:
+        is_favorito=True
+    Elemento.objects.filter(id=pk).update(
+        favorito=is_favorito
+    )
+    return redirect('administrador-elemento')
+    
 def tipoelemento_eliminar(request,pk):
     titulo_pagina='Categorias'
     url_eliminar= '/categoria/'

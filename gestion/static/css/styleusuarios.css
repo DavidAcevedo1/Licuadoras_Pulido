@@ -20,6 +20,10 @@ body{
     margin: 0;
 
 }
+.h3, h3 {
+    font-size: calc(1.3rem + .6vw);
+    text-align: center;
+}
 nav  li{
     list-style: none;
     text-decoration: center;
