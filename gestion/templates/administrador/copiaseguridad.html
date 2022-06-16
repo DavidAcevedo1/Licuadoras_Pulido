@@ -1,26 +1,7 @@
 {% extends 'partials/admin-body.html' %} 
 {% load crispy_forms_tags %}
 {% load static %}
-{% comment %} {% block contenido %}
-<body>
-    <section class="contenido-cuerpo borde">
-        <br>
-        <h1 class="centrado">Copia de Seguridad</h1>
-        <div class="ContenedorCaja">
-            <h2 class="centrado">Generar copia</h2>
-            <br>
-            <p class="centrado">Elija el sitio en el que quiere que se guarde la copia de seguridad</p>
-            <div class="centrado">
-                <a href="#" class="boton"><i class="bi bi-house-fill"> Descargar</a></i>
-                <a href="#" class="boton"><i class="bi bi-box-arrow-in-right"> Subir</a></i>
-            </div>
-        </div>   
-    </section>
-</body>
-{% endblock contenido %} {% endcomment %}
-{% block contenido %} 
-{% load crispy_forms_tags %} 
-{% load static %}
+{% block contenido %}
 <div class="contenido-cuerpo borde ">
     <div class="row">
         <div class="col">

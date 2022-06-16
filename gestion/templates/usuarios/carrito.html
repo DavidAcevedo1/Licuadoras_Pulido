@@ -46,8 +46,6 @@
                                     class="badge btn btn-dark badge-dark">+</a>
                                 <a href="{% url 'restar' value.elemento_id %}"
                                     class="badge btn btn-dark badge-dark">-</a><br>
-                                <a href="{% url 'agregar' value.elemento_id %}" class="badge btn btn-dark badge-dark">+</a>
-                                <a href="{% url 'restar' value.elemento_id %}" class="badge btn btn-dark badge-dark">-</a><br>
                             </td>
                             <td>{{value.precio}} cop</td>
                         </tr>
@@ -70,9 +68,6 @@
                     <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger mb-2">Limpiar</a></div>
                     <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal"
                             data-bs-target="#cotizar">Cotización</a></div>
-                    <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel"
-                        aria-hidden="true">
-                    <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#cotizar">Cotización</a></div>
                     <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
                             <div class="modal-content">

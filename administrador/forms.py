@@ -63,10 +63,8 @@ class StockForm(forms.ModelForm):
     class Meta:
         model= Stock
         fields=['stock_stock']
-        
-        
+           
 class CopiaseguridadForm(forms.ModelForm):
     class Meta:
         model= Copiaseguridad
         fields= ['nombre','archivo']
-        
