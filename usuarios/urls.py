@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from usuarios.views import Editarusuario, agregar_elemento, carrito, cusuario, detalles, eliminar_elemento,inicio, accesorio, limpiar_carrito, politicasprivacidad, producto, restar_elemento, serviciocliente, nosotros, tusuario, usuario_eliminar, vusuario
+from usuarios.views import Editarusuario, agregar_elemento, carrito, cusuario, detalle, eliminar_elemento,inicio, accesorio, limpiar_carrito, politicasprivacidad, producto, restar_elemento, serviciocliente, nosotros, tusuario, usuario_eliminar, vusuario
 
 urlpatterns = [
     path('inicio/', inicio, name='usuarios-inicio'),
@@ -10,7 +10,6 @@ urlpatterns = [
     path('nosotros/', nosotros, name='usuarios-nosotros'),
     path('carrito/', carrito, name='usuarios-carrito'),
     path('politicas/', politicasprivacidad, name='usuarios-politicas'),
-    path('detalles/', detalles, name='usuarios-detalles'),
     
     #usuarios
     path('crearusuario/', cusuario, name='usuario-crearUsuario'),
@@ -24,4 +23,6 @@ urlpatterns = [
     path('eliminar/<int:elemento_id>/', eliminar_elemento, name="eliminar"),
     path('restar/<int:elemento_id>/', restar_elemento, name="restar"),
     path('limpiar/', limpiar_carrito, name="limpiar"),
+    
+    path('detalle/<int:pk>/<str:url_back>/', detalle, name="detalle")
 ]

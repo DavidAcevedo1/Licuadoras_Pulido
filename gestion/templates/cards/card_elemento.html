@@ -3,16 +3,14 @@
         <div class="producto">
             <div class="flip-box">
                 <div class="flip-box-inner">
-                    <a href="">
-                        <div class="flip-box-front">
-                            {% if elemento.foto %}
-                            <img class="producto-img" src="{{ elemento.foto.url }}" alt="">
-                            {% endif %}
-                        </div>
-                        <div class="flip-box-back">
-                            <p>{{elemento.descripcion}} </p>
-                        </div>
-                    </a>
+                    <div class="flip-box-front">
+                        {% if elemento.foto %}
+                        <img class="producto-img" src="{{ elemento.foto.url }}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="flip-box-back">
+                        <p>{{elemento.descripcion}}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,10 +24,5 @@
     <div class="text-center">
         <h3 class="text-danger">{{elemento.precio}}</h3>
     </div>
-    <a href="{% url 'agregar' elemento.id %}" class="btn btn-primary">Agregar</a>
+    <a href="{% url 'detalle' pk=elemento.id url_back='inicio' %}" class="btn btn-primary">Agregar</a>
 </div>
-
-
-
-
-
