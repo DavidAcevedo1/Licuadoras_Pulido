@@ -1,51 +1,38 @@
-{% extends 'partials/user-body.html' %}
+{% extends 'partials/user-body.html' %} 
 {% load static %}
 {% load crispy_forms_tags %}
 {% block contenido %}
-<section class="contenido-cuerpo borde">
-    <div class=" color-fondo">
-
-
-        <span class="border border-light">
-            <h1 class="text-center border">Accesorios</h1>
-        </span>
-
-        {% for subcategoria in subcategorias %}
-
-        <div>
-
-            <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
-        </div>
-
-
-
-        <div class="glider-contain col-xl-10 " id="glider-{{subcategoria.id}}">
-            <div style="width: 100%;">
-                <p style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
+    <section class="contenido-cuerpo borde">
+        <div class=" color-fondo">
+            <div>
+                <h1 class="text-center ">Accesorios</h1>
             </div>
-            <div class="glider-cat-1 glider">
-                {% for elemento in elementos %}
-                {% if subcategoria.id == elemento.tipo_elemento_id %}
-                {% include "cards/card_elemento.html" %}
-                {% endif %}
-                {% endfor %}
+            {% for subcategoria in subcategorias %}    
+            <div> 
+                <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
             </div>
-            <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
-            <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>
-        </div>
-
-        {% endfor %}
-</section>
-
+                <div class="glider-contain" id="glider-{{subcategoria.id}}">
+                    <div class="glider-cat-1 glider">
+                        {% for elemento in elementos %}
+                            {% if subcategoria.id == elemento.tipo_elemento_id %}
+                                {% include "cards/card_elemento.html" %}
+                            {% endif %}
+                        {% endfor %}                   
+                    </div>
+                    <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
+                    <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>                 
+                </div>
+            {% endfor %}
+    </section>
+</body>
 <div>
     <a href="http//www.whatsapp.com"><img src="{% static 'img/Whatsapp_37229.png' %}" alt="" class="contacto"></a>
-</div>
+</div>  
 <div class="anuncio">
     <!-- Button trigger modal -->
     <button type="button" class="contacto2" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <img src="{% static 'img/help-outline_119052.png' %}" alt="" class="contacto2">
     </button>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -55,32 +42,27 @@
                         <h5 class="modal-title" id="exampleModalLabel">Manual de ayuda al cliente
                         </h5>
                     </div>
-                    <div> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                    <div> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
                 </div>
                 <div class="modal-body  ">
-                    <b>1¿Cómo puedo hacer una compra?</b>
-                    <br> Esta pagina no esta diseñada para realizar compras, ya que el objetivo de esta es brindar
-                    información y permitir a los clientes realizar sus cotizaciones de nuestros productos y servicios.
+                    <b>1¿Cómo puedo hacer una compra?</b> 
+                    <br> Esta pagina no esta diseñada para realizar compras, ya que el objetivo de esta es brindar información y permitir a los clientes realizar sus cotizaciones de nuestros productos y servicios.
                     <br>
-                    <b>2¿Que servicios ofrece la Central de Licuadoras Pulido?</b>
+                    <b>2¿Que servicios ofrece la Central de Licuadoras Pulido?</b> 
                     <br>Nosotros ofrecemos el servicio de venta, mantenimiento y reparación de electrodomésticos.
                     <br>
-                    <b>3¿Que garantía tienen los productos y servicios que ofrece este establecimientos?</b>
+                    <b>3¿Que garantía tienen los productos y servicios que ofrece este establecimientos?</b> 
                     <br>
                     <br>
-                    <b>4¿Como puedo contactarme con un técnico?</b>
-                    <br>En la parte inferior de nuestra pagina encontrara información de medios de comunicación como
-                    nuestras redes sociales y encontrara nuestra línea telefónica (3124661810).
+                    <b>4¿Como puedo contactarme con un técnico?</b> 
+                    <br>En la parte inferior de nuestra pagina encontrara información de medios de comunicación como nuestras redes sociales y encontrara nuestra línea telefónica (3124661810).
                     <br>
-                    <b>5¿En donde puedo encontrar nuestro establecimiento?</b>
+                    <b>5¿En donde puedo encontrar nuestro establecimiento?</b> 
                     <br>Nuestro establecimiento se encuentra ubicado en "Bogotá Carrera 10#19-69 Edificio Camacol".
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
-
 </html>
 {% endblock contenido %}
