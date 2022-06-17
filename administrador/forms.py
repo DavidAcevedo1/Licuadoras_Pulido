@@ -27,7 +27,12 @@ class ElementoForm(forms.ModelForm):
 class ElementoEditarForm(forms.ModelForm):
     class Meta:
         model= Elemento
-        fields= ['tipo_elemento','nombre','marca' ,'descripcion','precio','porcentaje_ganancia', 'foto']
+        fields= ['tipo_elemento','nombre','marca' ,'descripcion','precio','porcentaje_ganancia', 'foto','favorito']
+        
+class TipoElementoFavoritoForm(forms.ModelForm):
+    class Meta:
+        model= Favorito
+        fields= ['favorito']
                 
 class MarcaForm(forms.ModelForm):
     class Meta:
