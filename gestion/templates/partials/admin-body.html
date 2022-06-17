@@ -9,13 +9,11 @@
    
     <link rel="stylesheet" href="{% static 'css/styleadmin.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/all.css' %}">
+    
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/toastr.css' %}">
-    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/glider.css' %}">
-
+    
     {% comment %} CSS Datatables {% endcomment %}
     <link rel="stylesheet" type="text/css" href="{% static 'js/datatable/Bootstrap-5-5.1.3/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/datatable/DataTables-1.12.1/css/dataTables.bootstrap5.min.css' %}">
@@ -23,40 +21,47 @@
     <link rel="stylesheet" type="text/css" href="{% static 'js/datatable/SearchBuilder-1.3.3/css/searchBuilder.bootstrap5.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'js/datatable/Responsive-2.3.0/css/responsive.bootstrap5.min.css' %}">
 
+
     <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    
+    <link rel="stylesheet" href="{% static 'css/toastr.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
+
     <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script> 
     <script type="text/javascript" src="{% static 'js/toastr-options.js' %}"></script> 
     <script type="text/javascript" src="{% static 'js/select2/select2.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
    
+    
     <link rel="shortcut icon" href="{% static 'img/Logooo.png' %}">
-    <title>Licuadoras -  {{titulo_pagina}} </title>
+    <title>Licuadoras - {{titulo_pagina}} </title>
 </head>
 <body>
     {% include "partials/admin-header.html" %}
-    
     {% block contenido %}
-
-    <h1 id="dt-title ">{{titulo_pagina}}</h1>
-
+    <h1>{{titulo_pagina}}</h1>
     {% endblock contenido %}
-
     {% if messages %}
     {% for message in messages %}
-    {% comment %} <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script> {% endcomment %}
+    <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script>
     {% endfor %}
     {% endif %}
-
     {% include "partials/admin-footer.html" %}
     
     {% comment %} <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script> {% endcomment %}
     <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script> 
     <script type="text/javascript" src="{% static 'js/select2/select2.min.js' %}"></script>
     
+
     <script src="{% static 'js/popper/popper.min.js' %}"></script>
     <script src="{% static 'js/carousel-code.js' %}"></script>
     <script src="{% static 'js/toast-code.js' %}"></script>
     <script src="{% static 'js/tabla-proyecto.js' %}"></script>
-
+    
+    
+    
+   
+    
     {% comment %} Scripts Datatables {% endcomment %}
     <script type="text/javascript" src="{% static 'js/datatable/JSZip-2.5.0/jszip.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/datatable/pdfmake-0.1.36/pdfmake.min.js' %}"></script>
@@ -73,5 +78,6 @@
     <script type="text/javascript" src="{% static 'js/datatable/SearchBuilder-1.3.3/js/dataTables.searchBuilder.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/datatable/SearchBuilder-1.3.3/js/searchBuilder.bootstrap5.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    
 </body>
 </html>

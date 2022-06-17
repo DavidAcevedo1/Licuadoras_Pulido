@@ -1,39 +1,46 @@
 {% extends 'partials/user-body.html' %}
+{% load crispy_forms_tags %}
 {% block contenido %}
-<section class="contenido-cuerpo borde">
+<!-- <section class="contenido-cuerpo borde">
     <h1 class="text-center m-1">Carrito</h1>
     <p class="borde" style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
     <div class="row">
         <div class="col-7 d-flex m-3 p-5">
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% if request.session.carrito.items %}
-                        {% for key, value in request.session.carrito.items %}
-                            <div class="col">
-                                <div class="producto-box m-4 bg-light p-4 d-flex flex-column justify-content-between">
-                                    <div class="producto-img">
-                                        {% if value.foto %}
-                                            <img class="producto-img" src="{{ value.foto }}" alt="">
-                                        {% endif %}
-                                    </div>
-                                    <div class="text-center">
-                                        <h3>{{value.nombre}}</h3>
-                                    </div>
-                                    <div class="text-center"><h3 class="text-danger">$ {{value.precio}}</h3></div>
-                                    <a href="{% url 'restar' value.elemento_id %}" class="badge btn btn-danger badge-dark p-2 fs-6">Eliminar</a><br>
-                                </div>
-                            </div>
-                        {% endfor %}
+                {% for key, value in request.session.carrito.items %}
+                <div class="col border border-success">
+                    <div class="producto-box  bg-light p-4 d-flex flex-column justify-content-between">
+                        <div class="producto-img">
+                            {% if value.foto %}
+                            <img class="producto-img" src="{{ value.foto }}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="text-center">
+                            <h3>{{value.nombre}}</h3>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-danger">$ {{value.precio}}</h3>
+                        </div>
+                        <a href="{% url 'restar' value.elemento_id %}"
+                            class="badge btn btn-danger badge-dark p-2 fs-6">Eliminar</a><br>
+                    </div>
+                </div>
+
+                {% endfor %}
+
                 {% endif %}
             </div>
         </div>
-        <div class="col-4 alert m-4 ms-3">
-            <div class="bg-white p-3">
-                <table class="table-bordered table table-inverse">
-                    <thead>
-                        <tr>
+        <div class="contenido-principal2 col-md-4 alert ">
+            <div class="bg-white  w-100">
+                <table class="table">
+                    <thead class="bg-info">
+                        <tr class="text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -68,7 +75,8 @@
                     <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger mb-2">Limpiar</a></div>
                     <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal"
                             data-bs-target="#cotizar">Cotización</a></div>
-                    <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel" aria-hidden="true">
+                    <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -82,8 +90,6 @@
                                 <div class="modal-body">
                                     <div class="color-dark d-flex justify-content-end">
                                         <script>
-                                            var options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
-                                            date = new Date().toLocaleDateString(undefined, options);
                                             date = new Date().toLocaleDateString();
                                             document.write(date);
                                         </script>
@@ -110,7 +116,8 @@
                                                     {% else %}
                                                     <tr>
                                                         <td colspan="3">
-                                                            <div class="alert alert-danger text-center">Sin Productos</div>
+                                                            <div class="alert alert-danger text-center">Sin
+                                                                Productos</div>
                                                         </td>
                                                     </tr>
                                                     {% endif %}
@@ -119,9 +126,133 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <input type="submit" class="btn btn-success" value="imprimir"></button>
-                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</section> -->
+<div class="container-fluid contenido-cuerpo " style="width: 80% !important; margin: 0 auto;" >
+    <div class="row">
+        <div class="col-xl-8   d-flex flex-wrap"style="justify-content: center;">
+            {% if request.session.carrito.items %}
+            {% for key, value in request.session.carrito.items %}
+                <div class="card mx-1 my-2 justify-content-center" style="width: 18rem;">
+                    {% if value.foto %}
+                        <img src="{{ value.foto }}" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                    <h3  class="card-title">{{value.nombre}}</h3>
+                    <div class="text-center">
+                        <h3>{{value.nombre}}</h3>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-danger">$ {{value.precio}}</h3>
+                    </div>
+                    <a href="{% url 'restar' value.elemento_id %}"
+                        class="badge btn btn-danger badge-dark p-2 fs-6">Eliminar</a><br>
+                    </div>
+                </div>
+              
+            {% endfor %}
+
+            {% endif %}
+        </div>
+        <div class="col-xl-4 ">
+            <div class="bg-white  w-100">
+                <table class="table-responsive bg-white table-bordered results  w-100">
+                    <thead class="bg-info">
+                        <tr class="text-white">
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if request.session.carrito.items %}
+                        {% for key, value in request.session.carrito.items %}
+                        <tr>
+                            <td>{{value.nombre}}</td>
+                            <td class="text-center">{{value.cantidad}} <br>
+                                <a href="{% url 'agregar' value.elemento_id %}"
+                                    class="badge btn btn-dark badge-dark">+</a>
+                                <a href="{% url 'restar' value.elemento_id %}"
+                                    class="badge btn btn-dark badge-dark">-</a><br>
+                            </td>
+                            <td>{{value.precio}} cop</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="3">
+                                <div class="alert alert-danger text-center">Sin Productos</div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th scope="row">Total:</th>
+                            <td colspan="2">$ {{total_carrito}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <div class="row text-center">
+                    <div class="col-6"><a href="{% url 'limpiar' %}" class="btn btn-danger mb-2">Limpiar</a></div>
+                    <div class="col-6"><a href="#" class="btn btn-success mb-2" data-bs-toggle="modal"
+                            data-bs-target="#cotizar">Cotización</a></div>
+                    <div class="modal fade" id="cotizar" tabindex="-1" aria-labelledby="cotizarLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="centrar">
+                                        <h5 class="modal-title" id="cotizarLabel">Cotización
+                                        </h5>
+                                    </div>
+                                    <div> <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button></div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="color-dark d-flex justify-content-end">
+                                        <script>
+                                            date = new Date().toLocaleDateString();
+                                            document.write(date);
+                                        </script>
+                                    </div>
+                                    <div class="formulario">
+                                        {% if request.session.carrito.items %}
+                                        <form id="form1" class="m-3">
+                                            <table class="table bg-white table-bordered results" id="proyectos">
+                                                <thead class="bg-info">
+                                                    <tr class="text-white">
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Cantidad</th>
+                                                        <th scope="col">Precio</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for key, value in request.session.carrito.items %}
+                                                    <tr>
+                                                        <td>{{value.nombre}}</td>
+                                                        <td>{{value.cantidad}}</td>
+                                                        <td>{{value.precio}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <tr>
+                                                        <td colspan="3">
+                                                            <div class="alert alert-danger text-center">Sin
+                                                                Productos</div>
+                                                        </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -131,5 +262,8 @@
         </div>
     </div>
 </div>
-</section>
+
 {% endblock contenido %}
+
+
+    

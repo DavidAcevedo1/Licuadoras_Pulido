@@ -13,68 +13,82 @@
   .f4 {
     font-size: 1.2rem;
   } 
-html{
-    height: 100%;
-} 
 body{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
-    min-width: 100%;
+
+}
+.h3, h3 {
+    font-size: calc(1.3rem + .6vw);
+    text-align: center;
+}
+nav  li{
+    list-style: none;
+    text-decoration: center;
+    margin: 0;
+}
+nav  li a{
+    display: block;
+    text-decoration: none;
+    color: #0b318a; 
+}
+.centrado{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-footer{
-    margin-top: auto;
+.bordeAlerta{
+    align-items: center;
+    /* width: 80%; */
+	border-radius: 15%;
+	border:4px solid #CF2A27;
+	display:inline-block;
 }
-/* -------------------------------LINEA LO MAS VENDIDO INDEX------------------------------------------------ */
-.lineap{
+.X {
+    width: 10%;
+    height: 13%;
+    position: absolute;
+    background-color: #CF2A27;
+    border-radius: 50%;
+    padding: 2px;
+    top: 270px;
+    left: 28%;
+}
+.linea p{
     border-color:#000000;
     border-top-style:solid; 
     border-top-width:3px;
 }
-.dark-mode .lineap{
-    border-color: #fff;
-}
-h1, h2, h3, h4 {
-    TEXT-ALIGN: center !important;
+.dark-mode .linea p{
+    background: #fff;
+    color: #fff;
 }
 /* -------------------------------CONTENEDOR INICIO SESIÓN------------------------------------------------ */
-#contenidoinicio{
+.contenidoinicio{
     background-color: white;
+    width:35%; 
     margin-top:4%; 
     margin-bottom:111px;
     border: 1px solid hsl(0, 2%, 78%);
     border-radius: 2%;
-}
-@media only screen and (min-width: 1312px) and (max-width: 2000px) {
-    #contenidoinicio{
-        width:35%;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 1312px) {
-    #contenidoinicio{
-        width:50%;
-    }
-}
-@media only screen and (min-width: 500px) and (max-width: 768px) {
-    #contenidoinicio{
-        width:70%;
-    }
 }
 .imgLogo{
     background-color: hsl(0, 0%, 90%);
     margin-bottom: 6px;
     width: 30%;
     box-shadow: 0 2px 6px 0 white, 0 2px 5px 0 rgb(0,0,0,15);
-}   
-.centrado{
-    display: flex;
-    justify-content: center;
-    text-align: center;
 }
+/* -----------------------------------Botones Inicio Sesión------------------------------------------------ */
+.boton{
+	padding-bottom: 4%;
+}    
 /*--------------------------------------------------Estilos header----------------------------------------------- */
+*{
+    margin: 0;
+    padding: 0;
+}
 .borde{
     margin: 0 auto;
     width: 80%;
@@ -87,7 +101,7 @@ h1, h2, h3, h4 {
     background-color:#020a1d;
     color:#fff;
 }
-.sub2header{
+.sub2header {
     height: auto;
     display: flex;
     padding: 0 10%;
@@ -95,11 +109,14 @@ h1, h2, h3, h4 {
 .marca{
     width: 320px;
 }
-.opheader{
+.opheader {
     width: 68%;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+.fecha1{
+    margin: 5px;  
 }
 .part {
     color: #fff;
@@ -117,6 +134,10 @@ h1, h2, h3, h4 {
     padding-left: 10px;
     display: flex;
     justify-content: right;
+}
+.lupa{
+    width: 15px;
+    height: auto;
 }
 .intsection{
     background-color: rgb(55, 211, 198);
@@ -139,6 +160,12 @@ h1, h2, h3, h4 {
 .dark-mode .intheader{
     background: #fff;
     color: #000;
+}
+.titulos{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+    text-decoration-style: none;
 }
 .item{
     color: #fff;
@@ -168,15 +195,26 @@ h1, h2, h3, h4 {
     height: 30px;
 }
 /* ---------------------------------------------Boton Accesibilidad------------------------------------------- */
+.acces {
+    margin-right: 10px;
+}
 .acces img{
     width: 30px;
     margin: -2px -2px 0px -2px;
 }
 /*--------------------------------------------------Estilos body----------------------------------------------- */
+.h2, h2 {
+    TEXT-ALIGN: center !important;
+}
 .contenido-cuerpo {       
     height: 100%;
     background-color: #ffffffd5;
-    border: 2px solid #000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.contenido-carrito {
+    height: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -184,12 +222,19 @@ h1, h2, h3, h4 {
 .dark-mode .contenido-cuerpo{
     background: #0c111bda;
 }
-.dark-mode .contenido-cuerpo h2{
+.dark-mode .contenido-cuerpo h2 {
     color: #fff;
 }
 .texto-cuerpo {
     color: #000;
 }
+.contenedores {
+    background-color: #FF6A00;
+    width: 70%;
+    height: 50px;
+    margin: 50px;
+}
+/*------------------------------------------------------------------------------------------------------------ */
 .form1 {
     background-color:#020a1d;
     color:#fff;
@@ -232,7 +277,37 @@ footer{
     color: #fff;
     text-decoration: none;
 }
-/*------------------------------------sin definicion exacta de lo que hacen--------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------- */
+.grid-1 {
+    display: grid;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 200px 80px;
+    gap: 20px;
+    grid-template-areas: "header header header" "main   main   sidebar" "footer footer footer";
+}
+.item-1 {
+    background-color: coral;
+    grid-area: header;
+}
+.item-2 {
+    background-color: cornflowerblue;
+    grid-area: main;
+}
+.item-3 {
+    background-color: darkseagreen;
+    grid-area: sidebar;
+}
+.item-4 {
+    background-color: mediumpurple;
+    grid-area: footer;
+}
+.tachado {
+    text-decoration: line-through;
+    color: gray;
+}
 .flex-1 {
     display: flex;
     flex-wrap: wrap;
@@ -243,37 +318,60 @@ footer{
     justify-content: left;
     border-radius: 0 0px 0 0px
 }
+.grid-2:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease-in-out;
+}
+.grid-2 {
+    background-color: #f8f9fa;
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 20px;
+    width: 300px;
+    max-width: 33%;
+    min-width: 240px;
+    margin: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    height: 525px;
+    box-shadow: 14px 14px 22px -7px rgb(0 0 0 / 66%);
+    grid-template-areas: "foto foto" "titulo titulo" "precio descuento" "descripcion descripcion" "vacio fecha"  
+}
+.item-1f{
+    background-color: coral;
+    grid-area: foto;
+}
+.item-2f {
+    grid-area: titulo;
+}
+.item-3f {
+    font-weight: 600;
+    grid-area: precio;
+}
+.item-4f {
+    color: red;
+    grid-area: descuento;
+}
+.item-5f {
+    grid-area: descripcion;
+}
+.item-6f {
+    grid-area: fecha;
+}
+.item-7f {
+    grid-area: boton;
+    position: relative;
+    width: 100%; 
+}
+.centrado {
+    line-height: 50px;
+    text-align: center;
+}
 .foto {
     object-fit: cover;
     width: 100%;
 }
-.myButton {
-    margin-top: 20px;
-    min-width: 100px;
-    line-height: 20px;
-    width: 30%;
-    font-weight: 600;
-    box-shadow: rgb(2 62 138) 0px 0px 0px 0px;
-    background-color: rgb(0, 119, 182);
-    display: flex;
-    cursor: pointer;
-    position: relative !important;
-    margin: 0 auto;
-    bottom: -100%;
-    color: rgb(255, 255, 255);
-    font-family: sans-serif;
-    font-size: 17px;
-    padding: 10px 9px;
-    text-decoration: none;
-    border-top-width: thick;
-    text-shadow: rgb(47 102 39) 0px 1px 0px
-}
-.myButton:hover {
-    background-color: #00B4D8;
-}
-.myButton:active {
-    top: 1px;
-}
+
 a{
     text-decoration: none;
 }
@@ -313,18 +411,17 @@ img {
 .title-size{
     font-size: 5rem; 
 }
-/*------------------------------------------------------------------------------------- */
 /*################SLIDER PRODUCTO################*/
 .producto-box{
-    box-shadow: 7px 7px 17px 0px rgba(0,0,0,0.68);
+    box-shadow: 7px 7px 17px 0px rgb(0 0 0 / 68%);
     width: 8% !important;
-    min-width: 260px !important;
-    height: 380px !important;
+    min-width: 290px !important;
+    height: 430px !important;
     align-items: center;
 }
 .producto-img{
-    width: 220px !important;
-    height:170px !important;   
+    width: 240px !important;
+    height: 180px !important;  
 }
 .producto-img img{
     object-fit: scale-down;
@@ -381,13 +478,49 @@ h2{
     padding: 10px;
 }
 /* ---------------------Servicios al cliente x:Lina------------------------- */
+.contenedor{
+    background-color: #f1f1f188;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 610px;
+    margin: 0 auto;
+    padding: 30px;
+    align-items: center;
+}
+.centrar {
+    text-align: center;
+}
+.margenes {
+    margin: 0 !important;
+}
+.pr-des-titulo {
+    font-size: 170%;
+    font-family: 'Times New Roman', Times, serif;
+}
+.dark-mode .pr-des-titulo h1{
+    color: #fff;
+}
+.pr-des-subtitulo {
+    padding: 1em;
+    font-family: serif;
+}
+.pr-des-texto {
+    background-color: white;
+    max-width: 55%;
+    padding: 2%;
+    border: black;
+    border-radius: 11px;
+    font-size: 90% !important;
+    font-family: serif;
+}
 .pr-des-contactos {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    margin-block-end: 50px;
-    background-color: white;
-} 
+    background-color: rgba(255, 255, 255, 0.329);
+    
+}
 .liness{
     width: 30%;
     min-width: 300px;
@@ -408,9 +541,20 @@ h2{
 .ser{
     display: flex;
     margin: 0 auto;
+    
 }
 .guiones{
     font-weight: bolder;
+}
+/* --------------------------------Nosotros X:Lina---------------------------------------------- */
+.pr-des-texto-nosotros {
+    background-color: rgb(255, 255, 255);
+    max-width: 90%;
+    padding: 2%;
+    border: white;
+    border-radius: 11px;
+    font-size: 90% !important;
+    font-family: serif;
 }
 /* ----------------------------------Detalles X:Lina-------------------------------------------- */
 .contenedor-Detalles {
@@ -457,7 +601,7 @@ h2{
     margin: 10% auto;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-/* -------------------------------Glider Sin Definicion De Su Funcion--------------------------------------------------- */
+/* -------------------------------------------------------------------------------------- */
 .glider-contain {
     width: 100%;
     margin: 0 auto;

@@ -5,9 +5,10 @@
             <img src="{% static 'img/logoo1.png' %}" alt="">
         </div>
         <section class="opheader">
-            <div class="part">
+            <div class="part fecha1">
                 <script>
-                    date = new Date().toLocaleDateString(undefined);
+                    var options =
+                    date = new Date().toLocaleDateString(undefined,options);
                     document.write(date);
                 </script>
             </div>
@@ -81,6 +82,7 @@
             <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
             </svg>Nosotros</a>
     </nav>
+
 </section>
 <div>
     <a href="http//www.whatsapp.com"><img src="{% static 'img/Whatsapp_37229.png' %}" alt="" class="contacto"></a>
@@ -90,6 +92,7 @@
     <button type="button" class="contacto2" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <img src="{% static 'img/help-outline_119052.png' %}" alt="" class="contacto2">
     </button>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -121,3 +124,4 @@
         </div>
     </div>
 </div>
+

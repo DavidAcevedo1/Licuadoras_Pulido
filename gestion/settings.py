@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'administrador',
     'usuarios',
-    'facturas',
     'crispy_forms',         # pip install django-crispy-forms
     'crispy_bootstrap5',    # pip install django-bootstrap5
                             # pip install crispy_bootstrap5
@@ -151,14 +150,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'inicio'
 LOGIN_REDIRECT_URL = 'inicioadmin'
 LOGIN_URL="usuario-login"
- 
-# para lo del email documentacion django "Alejo3012154053"
+
+#Emails
+# if DEBUG:
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#     EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+# else:
+#     #aqui configurar un email real para producción
+#     pass    
+
+# para lo del email documentacion django
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"
-EMAIL_PORT=587
 EMAIL_USE_TLS=True
+EMAIL_PORT=587
 EMAIL_HOST_USER="facceres1@misena.edu.co"
-EMAIL_HOST_PASSWORD="ebsmydwxjufrozjt"
+EMAIL_HOST_PASSWORD="Alejo3024085761"
 
 STATIC_URL = '/static/'
 
