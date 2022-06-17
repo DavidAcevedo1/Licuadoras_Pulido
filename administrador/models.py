@@ -62,6 +62,14 @@ class Elemento(models.Model):
     def clean(self):
         self.nombre= self.nombre.title()
         
+class  Favorito(models.Model):
+    favorito=models.BooleanField(default=False)
+    class Estado(models.TextChoices):
+        ACTIVO='True',_('True')
+        INACTIVO='False',_('False')
+    def __str__(self) -> str:
+        return '%s'%(self.nombre)
+        
 class Cantidad(models.Model):
     fecha= models.DateField(auto_now=True, verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
     cantidad_agregada=models.IntegerField(default=0)

@@ -1,5 +1,6 @@
 from dataclasses import field
 from datetime import datetime
+from usuarios.Carrito import Carrito
 from django.shortcuts import render, redirect
 from administrador.forms import  CopiaseguridadForm, ElectrodomesticoEditarForm, StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
 from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Stock, Tipos_Elemento, Copiaseguridad
@@ -15,7 +16,9 @@ from datetime import date
 
 def inicioadmin(request):
     titulo_pagina='Inicio Administrador'
+    carrito = Carrito(request) 
     context={
+        "carrito": carrito,
         "titulo_pagina": titulo_pagina,
     }
     return render(request, "administrador/inicioadmin.html", context) 
@@ -164,6 +167,16 @@ def elemento_eliminar(request,pk):
             "url_eliminar":url_eliminar
     }
     return render(request, "administrador/elemento/elemento-eliminar.html", context)
+
+def electrodomestico_favorito(request,pk):
+    if Elemento.objects.get(id=pk).favorito:
+        is_favorito=False
+    else:
+        is_favorito=True
+    Elemento.objects.filter(id=pk).update(
+        favorito=is_favorito
+    )
+    return redirect('administrador-elemento')
 
 def marca(request):
     titulo_pagina='Marcas'

@@ -4,20 +4,23 @@
 {% block contenido %}
     <section class="contenido-cuerpo borde">
         <div class=" color-fondo">
-            <div>
-                <h1 class="text-center ">Accesorios</h1>
+            <div class="border border-light">
+                <h1 class="text-center border">Accesorios</h1>
             </div>
             {% for subcategoria in subcategorias %}    
             <div> 
-                <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
+                <h1 class="text-center">{{subcategoria.subcategoria}}</h1>
             </div>
-                <div class="glider-contain" id="glider-{{subcategoria.id}}">
+                <div class="glider-contain col-xl-10" id="glider-{{subcategoria.id}}">
+                    <div style="width: 100%;">
+                        <p style="border-color: #000000; border-top-style: solid; border-top-width: 3px;"></p>
+                    </div>
                     <div class="glider-cat-1 glider">
                         {% for elemento in elementos %}
                             {% if subcategoria.id == elemento.tipo_elemento_id %}
                                 {% include "cards/card_elemento.html" %}
                             {% endif %}
-                        {% endfor %}                   
+                        {% endfor %}
                     </div>
                     <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
                     <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>                 
