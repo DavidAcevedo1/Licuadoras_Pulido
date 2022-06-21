@@ -1,0 +1,56 @@
+
+    <!-- Modal Crear -->
+
+
+    {% load crispy_forms_tags %}
+    <div class="modal fade show" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" style="display: block;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Nueva Factura</h5>
+                    <a class="btn-close"
+                        data-bs-dismiss="modal" href="{% url 'factura-tfactura' %}" aria-label="Close"></a>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div id="div_id_rol" class="mb-3"> 
+                            <label for="id_rol" class="form-label requiredField">Rol<span class="asteriskField">*</span></label> 
+                                <select  name="rol" class="select form-select select1" required="" id="id_rol"> 
+                                    
+                                    <option selected disabled="true" >--- Seleccione el rol ---</option>
+                                    {% for ro in  rol %}
+                                    <option  value="{{ro.Rid}}" >{{ro.Rnombre}}</option>
+                                    {% endfor  %}
+                                    
+                                </select>
+                        </div>
+
+                        <div id="div_id_usuario" class="mb-3">
+                            <label for="id_usuario" class="form-label requiredField">Nombre<span class="asteriskField">*</span></label> 
+                            <select name="usuario" class="select form-select select2" required="" id="id_usuario"> 
+                                    
+                                <option selected disabled="true">--- Seleccione el usuario ---</option>    
+                                {% for items in usuario %}
+                                <option  data-index-number="{{items.rol_id}}|{{items.estado}}" value="{{items.Uid}}">{{items.Unombre}}</option>
+                                {% endfor %}
+    
+                            </select>
+                        </div>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                </div>
+                <div class="modal-footer">
+                    
+                    <a class="btn btn-secondary"
+                        data-bs-dismiss="modal" href="{% url 'factura-tfactura' %}">Cancelar</a>
+                    <input type="submit" class="btn btn-success" value="Agregar"></button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+

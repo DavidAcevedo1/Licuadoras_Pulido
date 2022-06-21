@@ -1,0 +1,111 @@
+{% extends 'partials/admin-body.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block contenido %}
+
+<div class="contenido-cuerpo borde">
+  <div aria-label="breadcrumb ">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'factura-tfactura' %}">Factura</a></li>
+      <li class="breadcrumb-item"><a href="#">Detalle Factura</a></li>
+
+    </ol>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="border bg-white p-3">
+        <h4>Agregar Productos a la Factura {{factura.id}}</h4>
+        <hr>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input class="btn btn-success btn-block " type="submit" Value="Agregar">
+          <a class="btn btn-danger btn-block text-light"
+            href="{% url 'factura_estado' pk=factura.id estado='cerrar' %}">Guardar Factura</a>
+        </form>
+      </div>
+    </div>
+    <div class="col-8">
+      <form id="form1">
+        <table class="table bg-white table-bordered results" id="proyectos">
+          <thead class="bg-info">
+            <tr class="text-white">
+              <th scope="col">Foto</th>
+              <th scope="col">Elemento</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Precio</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for detalle in detalles %}
+            {% if  detalle.estado == "Abierta"  %}
+
+            <tr>
+              <td><img class="producto-img" width="100px" src="{{detalle.elemento.foto.url}}" alt=""></td>
+              <td>{{detalle.elemento.nombre}}</td>
+              <td>{{detalle.cantidad}}</td>
+              <td>{{detalle.estado}}</td>
+              <td>{{detalle.elemento.precio}}</td>
+              <td><a href="{% url 'detalle_eliminar_estado' detalle.id  %}"><svg xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" class="opcionesTabla bi bi-trash" viewBox="0 0 16 16">
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                  </svg>
+
+                  {% endif %}
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+    {% comment %} <div class="col-md-8 p-4 bg-tabla">
+      <p class="txtMainI">Factura {{factura.id}}</p>
+      <table class="table bg-white table-bordered results" id="tabla">
+        <thead class="theadtable">
+          <tr class="text-white">
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Opciones</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for detalle in detalles %}
+          {% if  detalle.estado == "Abierta"  %}
+
+          <tr>
+            <td class="dtr-control sorting_1">{{detalle.producto}}</td>
+            <td class="dt-body-right dtr-hidden">{{detalle.cantidad}}</td>
+            <td class="dt-body-right dtr-hidden">{{detalle.estado}}</td>
+            <td class="dt-body-right dtr-hidden">{{productoT.precio}}</td>
+            <td><a href="{% url 'detalle_eliminar_estado' detalle.id  %}"><svg xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor" class="opcionesTabla bi bi-trash" viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+
+                {% endif %}
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div> {% endcomment %}
+  </div>
+</div>
+
+{% endblock contenido %}

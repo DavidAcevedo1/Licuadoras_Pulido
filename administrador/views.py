@@ -1,7 +1,7 @@
 from dataclasses import field
 from django.shortcuts import render, redirect
-from administrador.forms import  ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, UsuarioEditarForm, UsuarioForm, ElementoForm, ElementoEditarForm, FacturaEditarForm, FacturaForm, MarcaForm, ServicioForm
-from administrador.models import Electrodomestico,Elemento, Factura, Marca, Servicio, Tipos_Elemento, Usuario
+from administrador.forms import  ElectrodomesticoEditarForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
+from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Tipos_Elemento
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
@@ -15,78 +15,78 @@ def inicioadmin(request):
     }
     return render(request, "administrador/inicioadmin.html", context) 
 
-def usuario(request):
-    titulo_pagina='Usuarios'
-    usuarios= Usuario.objects.all()
-    if request.method == 'POST':
-        form= UsuarioForm(request.POST)
-        if form.is_valid():
-            form.save()
-            usuario_nombre= form.cleaned_data.get('nombre')
-            messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
-        else:
-            messages.error(request,f'Error al registrar el usuario ¡Por favor verificar los datos!  ')    
+# def usuario(request):
+#     titulo_pagina='Usuarios'
+#     usuarios= Usuario.objects.all()
+#     if request.method == 'POST':
+#         form= UsuarioForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             usuario_nombre= form.cleaned_data.get('nombre')
+#             messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
+#         else:
+#             messages.error(request,f'Error al registrar el usuario ¡Por favor verificar los datos!  ')    
             
-    else:
-        form= UsuarioForm()
-    context={
-            "titulo_pagina": titulo_pagina,
-            "usuarios": usuarios,
-            "form": form
-        }
-    return render(request, "administrador/usuario/usuario.html", context)
+#     else:
+#         form= UsuarioForm()
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "usuarios": usuarios,
+#             "form": form
+#         }
+#     return render(request, "administrador/usuario/usuario.html", context)
 
-def usuario_editar(request,pk):
-    titulo_pagina='Usuarios'
-    usuarios= Usuario.objects.all()
-    usuario= Usuario.objects.get(id=pk)
-    documento= usuario.documento
-    url_editar="/usuario"
-    if request.method == 'POST':
-        form= UsuarioEditarForm(request.POST, instance=usuario)
-        if form.is_valid():
-            form.save()
-            usuario_nombre= form.cleaned_data.get('nombre')
-            messages.success(request,f'El usuario {usuario_nombre} se editó correctamente!')
-            return redirect('administrador-usuario')
-        else:
-            usuario_nombre= form.cleaned_data.get('nombre')
-            messages.error(request,f'Error al modificar el usuario {usuario_nombre}')    
-    else:
-        form= UsuarioEditarForm(instance=usuario)
-    context={
-            "titulo_pagina": titulo_pagina,
-            "usuarios":usuarios,
-            "form": form,
-            "documento":documento,
-            "url_editar":url_editar,
-    }
-    return render(request, "administrador/usuario/usuario-editar.html", context)
+# def usuario_editar(request,pk):
+#     titulo_pagina='Usuarios'
+#     usuarios= Usuario.objects.all()
+#     usuario= Usuario.objects.get(id=pk)
+#     documento= usuario.documento
+#     url_editar="/usuario"
+#     if request.method == 'POST':
+#         form= UsuarioEditarForm(request.POST, instance=usuario)
+#         if form.is_valid():
+#             form.save()
+#             usuario_nombre= form.cleaned_data.get('nombre')
+#             messages.success(request,f'El usuario {usuario_nombre} se editó correctamente!')
+#             return redirect('administrador-usuario')
+#         else:
+#             usuario_nombre= form.cleaned_data.get('nombre')
+#             messages.error(request,f'Error al modificar el usuario {usuario_nombre}')    
+#     else:
+#         form= UsuarioEditarForm(instance=usuario)
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "usuarios":usuarios,
+#             "form": form,
+#             "documento":documento,
+#             "url_editar":url_editar,
+#     }
+#     return render(request, "administrador/usuario/usuario-editar.html", context)
 
-def usuario_eliminar(request,pk):
-    titulo_pagina='Usuarios'
-    url_eliminar= '/usuario/'
-    usuarios= Usuario.objects.all()
-    usuario= Usuario.objects.get(id=pk)
-    accion_txt= f"Usuario {usuario.documento}, una vez eliminado no hay marcha atras!"
-    if request.method == 'POST':
-        form= UsuarioForm(request.POST)
-        Usuario.objects.filter(id=pk).update(
-                    estado='Inactivo'
-                )
-        usuario_nombre= usuario.nombre
-        messages.success(request,f'El usuario {usuario_nombre} se eliminó correctamente!')
-        return redirect('administrador-usuario')
-    else:
-        form= UsuarioForm()
-    context={
-            "titulo_pagina": titulo_pagina,
-            "accion_txt":accion_txt,
-            "usuarios":usuarios,
-            "form": form,
-            "url_eliminar":url_eliminar
-    }
-    return render(request, "administrador/usuario/usuario-eliminar.html", context)
+# def usuario_eliminar(request,pk):
+#     titulo_pagina='Usuarios'
+#     url_eliminar= '/usuario/'
+#     usuarios= Usuario.objects.all()
+#     usuario= Usuario.objects.get(id=pk)
+#     accion_txt= f"Usuario {usuario.documento}, una vez eliminado no hay marcha atras!"
+#     if request.method == 'POST':
+#         form= UsuarioForm(request.POST)
+#         Usuario.objects.filter(id=pk).update(
+#                     estado='Inactivo'
+#                 )
+#         usuario_nombre= usuario.nombre
+#         messages.success(request,f'El usuario {usuario_nombre} se eliminó correctamente!')
+#         return redirect('administrador-usuario')
+#     else:
+#         form= UsuarioForm()
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "accion_txt":accion_txt,
+#             "usuarios":usuarios,
+#             "form": form,
+#             "url_eliminar":url_eliminar
+#     }
+#     return render(request, "administrador/usuario/usuario-eliminar.html", context)
 
 def tipoelemento(request):
     titulo_pagina='Categoria'
@@ -310,79 +310,79 @@ def marca_eliminar(request,pk):
     }
     return render(request, "administrador/marca/marca-eliminar.html", context)
 
-def factura(request):
-    titulo_pagina='Facturas'
-    facturas= Factura.objects.all()
-    if request.method == 'POST':
-        form= FacturaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.success(request,f'La factura {factura_elemento} se agregó correctamente!')
-        else:
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.error(request,f'La factura que ingreso ya se encuentra registrado!')     
-        return redirect('administrador-factura')
-    else:
-        form= FacturaForm()
-    context={
-            "titulo_pagina": titulo_pagina,
-            "facturas": facturas,
-            "form": form
-    }
-    return render(request, "administrador/factura/factura.html", context)
+# def factura(request):
+#     titulo_pagina='Facturas'
+#     facturas= Factura.objects.all()
+#     if request.method == 'POST':
+#         form= FacturaForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.success(request,f'La factura {factura_elemento} se agregó correctamente!')
+#         else:
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.error(request,f'La factura que ingreso ya se encuentra registrado!')     
+#         return redirect('administrador-factura')
+#     else:
+#         form= FacturaForm()
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "facturas": facturas,
+#             "form": form
+#     }
+#     return render(request, "administrador/factura/factura.html", context)
 
-def factura_editar(request,pk):
-    titulo_pagina='Facturas'  
-    facturas= Factura.objects.all()
-    factura= Factura.objects.get(id=pk)
-    documento=f"{factura.elemento} con el ID {pk}"
-    url_editar="/factura"
-    if request.method == 'POST':
-        form= FacturaEditarForm(request.POST, instance=factura)
-        if form.is_valid():
-            form.save()
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.success(request,f'La factura {factura_elemento} se editó correctamente!')
-            return redirect('administrador-factura')
-        else:
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.error(request,f'Error al modificar el factura {factura_elemento}')     
-    else:
-        form= FacturaEditarForm(instance=factura)
-    context={
-            "titulo_pagina": titulo_pagina,
-            "facturas":facturas,
-            "form": form,
-            "documento":documento,
-            "url_editar":url_editar,
-    }
-    return render(request, "administrador/factura/factura-editar.html", context)
+# def factura_editar(request,pk):
+#     titulo_pagina='Facturas'  
+#     facturas= Factura.objects.all()
+#     factura= Factura.objects.get(id=pk)
+#     documento=f"{factura.elemento} con el ID {pk}"
+#     url_editar="/factura"
+#     if request.method == 'POST':
+#         form= FacturaEditarForm(request.POST, instance=factura)
+#         if form.is_valid():
+#             form.save()
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.success(request,f'La factura {factura_elemento} se editó correctamente!')
+#             return redirect('administrador-factura')
+#         else:
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.error(request,f'Error al modificar el factura {factura_elemento}')     
+#     else:
+#         form= FacturaEditarForm(instance=factura)
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "facturas":facturas,
+#             "form": form,
+#             "documento":documento,
+#             "url_editar":url_editar,
+#     }
+#     return render(request, "administrador/factura/factura-editar.html", context)
 
-def factura_eliminar(request,pk):
-    titulo_pagina='Facturas'
-    url_eliminar= '/factura/'
-    facturas= Factura.objects.all()
-    factura= Factura.objects.get(id=pk)
-    accion_txt= f"La factura {factura.id}, una vez eliminado no hay marcha atras!"
-    if request.method == 'POST':
-        form= FacturaForm(request.POST)
-        Factura.objects.filter(id=pk).update(
-                    estado='Anulado'
-                )
-        factura_fecha= factura.fecha
-        messages.success(request,f'La factura {factura_fecha} se eliminó correctamente!')
-        return redirect('administrador-factura')
-    else:
-        form= FacturaForm()
-    context={
-            "titulo_pagina": titulo_pagina,
-            "accion_txt":accion_txt,
-            "facturas":facturas,
-            "form": form,
-            "url_eliminar":url_eliminar
-    }
-    return render(request, "administrador/factura/factura-eliminar.html", context)
+# def factura_eliminar(request,pk):
+#     titulo_pagina='Facturas'
+#     url_eliminar= '/factura/'
+#     facturas= Factura.objects.all()
+#     factura= Factura.objects.get(id=pk)
+#     accion_txt= f"La factura {factura.id}, una vez eliminado no hay marcha atras!"
+#     if request.method == 'POST':
+#         form= FacturaForm(request.POST)
+#         Factura.objects.filter(id=pk).update(
+#                     estado='Anulado'
+#                 )
+#         factura_fecha= factura.fecha
+#         messages.success(request,f'La factura {factura_fecha} se eliminó correctamente!')
+#         return redirect('administrador-factura')
+#     else:
+#         form= FacturaForm()
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "accion_txt":accion_txt,
+#             "facturas":facturas,
+#             "form": form,
+#             "url_eliminar":url_eliminar
+#     }
+#     return render(request, "administrador/factura/factura-eliminar.html", context)
 
 def electrodomestico(request):
     titulo_pagina='Electrodomestico'

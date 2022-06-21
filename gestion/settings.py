@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'administrador',
     'usuarios',
+    'facturas',
+    
     'crispy_forms',         # pip install django-crispy-forms
     'crispy_bootstrap5',    # pip install django-bootstrap5
                             # pip install crispy_bootstrap5
@@ -93,7 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_licuadoraspulido',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306',
     }

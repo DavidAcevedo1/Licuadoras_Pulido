@@ -1,4 +1,7 @@
 {% load static %}
+{% load crispy_forms_tags %}
+
+ 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,6 +50,7 @@
     {% endfor %}
     {% endif %}
     {% include "partials/admin-footer.html" %}
+
     
     {% comment %} <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script> {% endcomment %}
     <script type="text/javascript" src="{% static 'js/toastr.min.js' %}"></script> 

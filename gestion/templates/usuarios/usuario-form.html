@@ -1,0 +1,25 @@
+ <!-- Modal Crear -->
+ {% load crispy_forms_tags %}
+
+ 
+<div class="modal-dialog">
+    <div class="modal-content">  
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Usuario</h5>
+            <a class="btn-close"
+                data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'usuarios:usuario-crear' %}" method="POST" class="form-inline" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" onclick="return cerrar_modal()"></button>
+            <!-- <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a> -->
+            <input type="submit" class="btn btn-success" value="Agregar"></button>
+            </form>
+        </div>
+    </div>
+</div>
