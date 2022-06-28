@@ -53,7 +53,6 @@ def vusuario (request,pk):
     }
     return render(request,"usuarios/verusuario.html", context)
 
-
 def Editarusuario(request,pk):
     titulo_pagina="Producto"
     tusuarios= Usuario.objects.get(id=pk)
@@ -83,15 +82,13 @@ def usuario_eliminar(request,pk):
                 )
         tusuario_nombre=  tusuario.Unombre
         messages.success(request,f'El usuario {tusuario_nombre} se eliminó correctamente!')
-        return redirect('usuario-tablaUsuario')
-                                   
+        return redirect('usuario-tablaUsuario')                           
     else:
         form:UsuarioForm()
     context={
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
-            "tusuarios": tusuarios,
-           
+            "tusuarios": tusuarios,   
     }
     return render(request, "usuarios/usuario-eliminar.html", context)
 
@@ -145,15 +142,6 @@ def politicasprivacidad(request):
         "titulo_pagina": titulo_pagina,
     }
     return render(request, "usuarios/politicasprivacidad.html", context) 
-
-def detalles(request):
-    titulo_pagina='Detalles'
-    elementos = Elemento.objects.all()
-    context={
-        "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
-    }
-    return render(request, "usuarios/detalles.html", context)
     
 def carrito(request):
     titulo_pagina='Carrito'
@@ -166,25 +154,32 @@ def agregar_elemento(request, elemento_id):
     carrito = Carrito(request) 
     elemento = Elemento.objects.get(id=elemento_id) 
     carrito.agregar(elemento=elemento)
-
     return redirect("usuarios-carrito")
 
 def eliminar_elemento(request, elemento_id):
     carrito = Carrito(request)
     elemento = Elemento.objects.get(id=elemento_id)
     carrito.eliminar(elemento=elemento)
-    
     return redirect("usuarios-carrito")
 
 def restar_elemento(request, elemento_id):
     carrito = Carrito(request)
     elemento = Elemento.objects.get(id=elemento_id)
     carrito.restar(elemento=elemento)
-    
     return redirect("usuarios-carrito")
 
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
-    
     return redirect("usuarios-carrito")
+
+def detalle(request, pk, url_back):
+    titulo_pagina='Detalles'
+    db_elemento = Elemento.objects.get(id = pk)
+    _url_back = f"/{url_back}"
+    contex = {
+        "titulo_pagina": titulo_pagina,
+        'elemento': db_elemento,
+        'url_back': _url_back,
+    }
+    return render(request, 'usuarios/detalles.html', contex)

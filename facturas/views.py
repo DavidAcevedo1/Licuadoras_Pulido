@@ -4,6 +4,14 @@ from facturas.models import Factura, Detalle
 from facturas.forms import FacturaForm, DetalleForm
 from django.contrib import messages 
 from usuarios.models import Rol, Usuario
+from usuarios.Carrito import Carrito
+
+def carrito(request):
+    titulo_pagina='Carrito'
+    context={
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "usuarios/carrito.html", context)
 
 def factura(request):
     rol_c=Rol.objects.all()

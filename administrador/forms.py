@@ -1,6 +1,7 @@
 from django import forms
-from administrador.models import Electrodomestico, Elemento, Marca, Servicio, Tipos_Elemento, Stock
+from administrador.models import *
 from usuarios.models import Usuario
+# from usuarios.models import Usuario
 
 
 class UsuarioForm(forms.ModelForm):
@@ -26,7 +27,12 @@ class ElementoForm(forms.ModelForm):
 class ElementoEditarForm(forms.ModelForm):
     class Meta:
         model= Elemento
-        fields= ['tipo_elemento','nombre','marca' ,'descripcion','precio','porcentaje_ganancia', 'foto']
+        fields= ['tipo_elemento','nombre','marca' ,'descripcion','precio','porcentaje_ganancia', 'foto','favorito']
+        
+class TipoElementoFavoritoForm(forms.ModelForm):
+    class Meta:
+        model= Favorito
+        fields= ['favorito']
                 
 class MarcaForm(forms.ModelForm):
     class Meta:
@@ -60,3 +66,8 @@ class StockForm(forms.ModelForm):
     class Meta:
         model= Stock
         fields=['stock_stock']
+           
+class CopiaseguridadForm(forms.ModelForm):
+    class Meta:
+        model= Copiaseguridad
+        fields= ['nombre','archivo']
