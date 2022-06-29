@@ -7,15 +7,6 @@ from usuarios.models import Usuario
 from .Carrito import Carrito
 from administrador.models import Elemento, Tipos_Elemento
 
-def inicio(request):
-    titulo_pagina='Inicio'
-    elementos = Elemento.objects.all()
-    context={
-        "titulo_pagina": titulo_pagina,
-        "elementos":elementos,
-    }
-    return render(request, "index.html", context)
-
 def cusuario(request):
     titulo_pagina="usuario"
     usuario_db = Usuario.objects.all()
