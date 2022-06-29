@@ -2,13 +2,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Rol(models.Model):
-    Rid=models.AutoField(primary_key=True)
-    Rnombre=models.CharField(max_length=12)
-    class Meta:
-        db_table="usuarios_rol"
-    def __str__(self) -> str:
-        return "%s "% (self.Rnombre)
+# class Rol(models.Model):
+#     Rid=models.AutoField(primary_key=True)
+#     Rnombre=models.CharField(max_length=12)
+#     class Meta:
+#         db_table="usuarios_rol"
+#     def __str__(self) -> str:
+#         return "%s "% (self.Rnombre)
     
     
 class Usuario(models.Model):

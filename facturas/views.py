@@ -3,11 +3,10 @@ from django.template import context
 from facturas.models import Factura, Detalle
 from facturas.forms import FacturaForm, DetalleForm
 from django.contrib import messages 
-from usuarios.models import Rol, Usuario
+from usuarios.models import Usuario
 
 def factura(request):
     titulo_pagina='Factura'
-    rol_c=Rol.objects.all()
     usuario_c=Usuario.objects.all()
     
     facturadb = Factura.objects.all()
@@ -28,14 +27,12 @@ def factura(request):
     context={
         'base_datos':facturadb,
         'form':form, 
-        "rol":rol_c,
         "usuario":usuario_c,
         "titulo_pagina":titulo_pagina
     }
     return render(request,'factura/crearFactura.html', context)
 
 def factura_creara(request):
-    rol_c=Rol.objects.all()
     usuario_c=Usuario.objects.all()
     
     facturadb = Factura.objects.all()
@@ -45,7 +42,6 @@ def factura_creara(request):
         
         if form.is_valid(): 
             aux= Factura.objects.create(
-                rol_id= request.POST['rol'],
                 usuario= Usuario.objects.get(Uid=request.POST['usuario']),
                 tipofactura= form.cleaned_data.get('tipofactura'),
             )
@@ -56,7 +52,6 @@ def factura_creara(request):
     context={
         'base_datos':facturadb,
         'form':form, 
-        "rol":rol_c,
         "usuario":usuario_c
     }
     return render(request,'factura/crear-factura.html', context)
@@ -64,7 +59,6 @@ def factura_creara(request):
 
 def tfactura(request):
     titulo_pagina='Factura'
-    Rol_c=Rol.objects.all()
     Usuario_c=Usuario.objects.all()
     
     renew = '/factura/factura'
@@ -72,7 +66,6 @@ def tfactura(request):
     context={
         "tfacturas": tfacturas,
         "renew":renew,
-        "Rol":Rol_c,
         "Usuario":Usuario_c,
         "titulo_pagina":titulo_pagina
     }
@@ -201,7 +194,7 @@ def factura_estado(request,pk, estado):
                         estado='Anulada'
                     )
             tfactura_usuario=  tfactura.usuario
-            messages.success(request,f'factura {tfactura.id} se anuló correctamente!')
+            messages.success(request,f'factura {tfactura.id} se agregó correctamente!')
             return redirect('factura-tfactura')
         else:
             form=FacturaForm()
@@ -215,7 +208,7 @@ def factura_estado(request,pk, estado):
                         estado='Cerrada'
                     )
             tfactura_usuario=  tfactura.usuario
-            messages.success(request,f'factura {tfactura.id} se anuló correctamente!')
+            messages.success(request,f'factura {tfactura.id} se agregó correctamente!')
             return redirect('factura-tfactura')
         else:
             form:FacturaForm()
