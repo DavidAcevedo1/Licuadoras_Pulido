@@ -1,9 +1,8 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from usuarios.views import Editarusuario, agregar_elemento, carrito, cusuario, detalle, eliminar_elemento,inicio, accesorio, limpiar_carrito, politicasprivacidad, producto, restar_elemento, serviciocliente, nosotros, tusuario, usuario_eliminar, vusuario
+from usuarios.views import Editarusuario, agregar_elemento, carrito, cusuario, detalle, eliminar_elemento, accesorio, limpiar_carrito, politicasprivacidad, producto, restar_elemento, serviciocliente, nosotros, tusuario, usuario_eliminar, vusuario
 
 urlpatterns = [
-    path('inicio/', inicio, name='usuarios-inicio'),
     path('accesorios/', accesorio, name='usuarios-accesorios'),
     path('productos/', producto, name='usuarios-productos'),
     path('serviciocliente/', serviciocliente, name='usuarios-servicios'),
