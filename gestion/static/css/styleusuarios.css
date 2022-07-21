@@ -79,6 +79,11 @@ h1, h2, h3, h4 {
     margin: 0 auto;
     width: 80%;
 }
+@media (max-width:420px) {
+    .borde{
+        width: 100%;
+    }
+}
 .subheader {
     background-color: #0B318A;
     height: auto;
@@ -136,10 +141,25 @@ h1, h2, h3, h4 {
     display: flex;
     flex-wrap: wrap;
 }
+@media (max-width:420px) {
+    .intheader{
+        background-color: #e6571f;
+        height: auto;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: larger;
+        font-weight: bolder;
+        text-decoration-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0%;
+    }
+}
 .dark-mode .intheader{
     background: #fff;
     color: #000;
 }
+
 .item {
     border-color: #e6571f;
     background-color: #e6571f;
@@ -153,6 +173,7 @@ h1, h2, h3, h4 {
     flex-grow: 1;
     padding: 5px 0px;
     text-decoration: none;
+    border: 1px solid #000000;
   }
   .item:hover {
     box-shadow: 0 0 20px 0 #fff inset, 0 0 10px 4px #e6571f;
@@ -221,7 +242,12 @@ footer{
     border-radius: 50%;
     padding: 5px;
     top: -30px;
-    left: 48%;
+    left: 47.5%;
+}
+@media (max-width:420px) {
+    .sublogo{
+        left: 38%;
+    }
 }
 .sublogo img{
     width: 80px;
@@ -294,25 +320,30 @@ img {
 .centrar {
     margin: 0 auto;
 }
+
 .contacto2 {
     position: fixed;
-    bottom: 8%;
+    bottom: 9%;
     right: 2%;
     padding: 2px;
     border-radius: 90px;
     width: 3%;
+    min-width: 35px;
     height: 5%;
     background-color: #fff;
     z-index: 1000;
 }
+
 .contacto {
     position: fixed;
     bottom: 2%;
-    right: 1.7%;
+    right: 1.5%;
     padding: 4px;
     border-radius: 90px;
     width: 3.7%;
+    min-width: 45px;
     height: 5.5%;
+    min-height: 45px;
     z-index: 1000;
 }
 .color-fondo {
@@ -601,15 +632,29 @@ h2{
     width: auto;
 }
 .mal{
-    width: 300px;
-    margin: 0 auto;
-    margin-left: 10px;
+    width: 500px ;
 }
-
+@media (max-width:420px) {
+    .mal{
+        width: 265px;
+        margin: 0 auto;
+        margin-left: 10px;
+    }
+}
 
 @media (max-width:420px) {
     .titu {
 		font-size:50px;
     	color: #333;
   	}
+}
+
+.carousel{
+    width: auto;
+    min-width: 75px !important;
+}
+.row{
+    width: 100% !important;
+    padding: auto;
+    margin-block-end: 30px;
 }
