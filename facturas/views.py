@@ -14,27 +14,19 @@ def carrito(request):
     return render(request, "usuarios/carrito.html", context)
 
 def factura(request):
-    rol_c=Rol.objects.all()
-    usuario_c=Usuario.objects.all()  
-    facturadb = Factura.objects.all()
+
     if request.method == 'POST':
         print(request.POST)
-        form = FacturaForm(request.POST)
-        if form.is_valid(): 
-            aux= Factura.objects.create(
-                rol_id= request.POST['rol'],
-                usuario= Usuario.objects.get(Uid=request.POST['usuario']),
-                tipofactura= form.cleaned_data.get('tipofactura'),
-            )
-            messages.success(request,f'!La factura se agregó correctamente!')
-            return redirect('factura-detalle',aux.id)
+
+        aux= Factura.objects.create(
+            tipofactura= request.POST['tipofactura']
+        )
+        messages.success(request,f'!La factura se agregó correctamente!')
+        return redirect('factura-detalle',aux.id)
     else:
-        form = FacturaForm()
+        messages.error(request,f'!Error al agregar Factura!')
     context={
-        'base_datos':facturadb,
-        'form':form, 
-        "rol":rol_c,
-        "usuario":usuario_c
+        
     }
     return render(request,'factura/crearFactura.html', context)
 
@@ -69,20 +61,50 @@ def detalle(request,pk):
     titulo_pagina="facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
     factura_u=Factura.objects.get(id=pk)
-    if request.method == 'POST':
+    if factura_u.tipofactura == "Compra":
+        rol_aux= "Proveedor"
+    else:
+        rol_aux= "Cliente"
+    usuario= Usuario.objects.filter(rol=rol_aux)
+    if request.method == 'POST' and "form-detalle" in request.POST:
         form= DetalleForm(request.POST)
-        if form.is_valid():   
-            factura= Detalle.objects.create(
+        detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
+        if detalle_aux.exists():
+            detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
+        else:
+            detalle_aux=None
+        if detalle_aux == None:
+            
+            if form.is_valid():  
+                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
+                factura= Detalle.objects.create(
                 cantidad=form.cleaned_data.get('cantidad'),
                 elemento= form.cleaned_data.get('elemento'),
                 factura=factura_u,        
+                )
+                elemento= form.cleaned_data.get('Elemento')
+                messages.success(request,f' se agregó {elemento} al la factura correctamente!')
+                return redirect('factura-detalle', pk=pk)    
+        else:
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
+            Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento']).update(
+                cantidad = detalle_aux[0].cantidad + int(request.POST['cantidad'])
             )
-            elemento= form.cleaned_data.get('Elemento')
-            messages.success(request,f' se agregó {elemento} al la factura correctamente!')
-            return redirect('factura-detalle', pk=pk)
+            return redirect('factura-detalle', pk=pk)   
+        
     else:
         form= DetalleForm()
+    if request.method == 'POST' and "form-user" in request.POST:
+        if request.POST["usuario"] != "--- Seleccione el usuario ---":
+            Factura.objects.filter(id=pk).update(
+                usuario= request.POST["usuario"]
+            )
+            return redirect('factura-detalle', pk=pk)
+        else:
+            print('Seleccione un usuario!')
+            messages.warning(request,f'Seleccione un usuario!')
     context={
+        "usuario":usuario,
         "titulo_pagina": titulo_pagina,
         "detalles": detalles,
         "form":form,
@@ -151,6 +173,7 @@ def factura_estado(request,pk, estado):
             else:
                 form=FacturaForm()
         else:
+            print("la factura {pk} no se puede eliminar tiene elementos registrados!")
             messages.warning(request,f'la factura {pk} no se puede eliminar tiene elementos registrados!')
             return redirect('factura-tfactura')
     elif estado == "Cerrada":
