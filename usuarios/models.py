@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Rol(models.Model):
     Rid=models.AutoField(primary_key=True)
-    Rnombre=models.CharField(max_length=12)
+    Rnombre=models.CharField(max_length=20)
     class Meta:
         db_table="usuarios_rol"
     def __str__(self) -> str:
@@ -17,7 +17,12 @@ class Usuario(models.Model):
         Tarjeta_identidad='T.I', _('T.I')
         Cedula_extranjeria='C.E', _('C.E')
     tipo_documento= models.CharField(max_length=3, choices=Tipo_documento.choices, verbose_name="Tipo documento")  
-    rol=models.ForeignKey(Rol, on_delete=models.SET_NULL, null=True,verbose_name="Rol")
+    class Rol(models.TextChoices):
+        Administrador='Administrador', _('Administrador')
+        Proveedor='Proveedor', _('Proveedor')
+        Asociada='Trabajador', _('Trabajador')
+        Cliente='Cliente', _('Cliente')
+    rol= models.CharField(max_length=13, choices=Rol.choices, verbose_name="rol",blank=True)  
     Unombre=models.CharField(max_length=50, verbose_name="Nombre")
     apellido=models.CharField(max_length=50, verbose_name="Apellido")
     celular=models.CharField(unique=True,max_length=10)

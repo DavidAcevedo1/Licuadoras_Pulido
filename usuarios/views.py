@@ -16,7 +16,7 @@ def cusuario(request):
             form.save()
             usuario_nombre= form.cleaned_data.get('Unombre')
             messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
-            return redirect('usuario-crearUsuario')
+            return redirect('usuario-tablaUsuario')
     else:
         form = UsuarioForm()
     context={
@@ -47,7 +47,7 @@ def vusuario (request,pk):
 
 def Editarusuario(request,pk):
     titulo_pagina="Producto"
-    tusuarios= Usuario.objects.get(id=pk)
+    tusuarios= Usuario.objects.get(Uid=pk)
     if request.method == 'POST':
         form= UsuarioForm(request.POST, instance=tusuarios)
         if form.is_valid():
@@ -59,8 +59,9 @@ def Editarusuario(request,pk):
         context={
         "tusuarios": tusuarios,
         "titulo_pagina": titulo_pagina,
+        "form":form
     }
-    return render(request, "usuario/editarusuario.html", ({'base_datos':tusuarios,'form':form,  "titulo_pagina":titulo_pagina}))
+    return render(request, "usuarios/crearUsuario.html", context)
 
 def usuario_eliminar(request,pk):
     titulo_pagina='Usuarios'

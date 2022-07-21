@@ -58,7 +58,7 @@ class Elemento(models.Model):
         ANULADO='Anulado', _('Anulado')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
-        return '%s'%(self.nombre)
+        return '%s %s'%(self.tipo_elemento,self.nombre)
     def clean(self):
         self.nombre= self.nombre.title()
         
