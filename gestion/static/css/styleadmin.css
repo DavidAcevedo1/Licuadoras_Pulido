@@ -29,12 +29,10 @@ header{
     margin: 0 auto;
 }
 .dark-mode header{
-    background-color:#0D1821;
+    background-color:#020a1d;
     color:#fff;
 }
-.navbar{
-    height: auto; 
-}
+
 .contenido-navbar{
     margin: 0 auto;
     display: flex;
@@ -43,11 +41,7 @@ header{
 .pt1 img{
     width: 320px;
 }
-.pt2 p{
-    color: #fff;
-    font-size: 15px;
-    padding-top: 22px;
-}
+
 .salir{
     background-color: #fff;
     margin-left: 30px;

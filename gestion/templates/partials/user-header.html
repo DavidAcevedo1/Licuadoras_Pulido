@@ -1,13 +1,14 @@
 {% load static %}
-<section class=" subheader">
-    <section class="navbar sub2header">
-        <div class="marca">
+<header>
+    <section class="navbar contenido-navbar borde">
+        <div class="logo">
             <img src="{% static 'img/logoo1.png' %}" alt="">
         </div>
-        <section class="opheader">
+        <div class="opheader xs ms-4">
             <div class="part">
                 <script>
-                    date = new Date().toLocaleDateString(undefined);
+                    var options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
+                    date = new Date().toLocaleDateString(undefined, options);
                     document.write(date);
                 </script>
             </div>
@@ -50,7 +51,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </section>
 </section>
 </div>
@@ -81,7 +82,7 @@
             <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
             </svg>Nosotros</a>
     </nav>
-</section>
+</header>
 <div>
     <a href="http//www.whatsapp.com"><img src="{% static 'img/Whatsapp_37229.png' %}" alt="" class="contacto"></a>
 </div>
