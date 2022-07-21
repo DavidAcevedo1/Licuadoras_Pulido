@@ -400,11 +400,11 @@ def servicio_eliminar(request,pk):
 
 def exportar_datos():
     fecha=date.today()
-    os.system(f"mysqldump --add-drop-table --column-statistics=0 -u root --password=admin db_licuadoraspulido> gestion/static/copiaseguridad/BKP_{fecha}.sql")
+    os.system(f"mysqldump --add-drop-table --column-statistics=0 -u root db_licuadoraspulido> gestion/static/copiaseguridad/BKP_{fecha}.sql")
    
 def importar_datos(archivo):
     try:
-        os.system(f"mysql -u root --password=admin db_licuadoraspulido < {archivo[1:]}")
+        os.system(f"mysql -u root db_licuadoraspulido < {archivo[1:]}")#--password=admin
     except:
         print("Problemas al importar")
 
