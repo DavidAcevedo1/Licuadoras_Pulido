@@ -5,7 +5,7 @@ from facturas.models import Factura, Detalle
 class FacturaForm(forms.ModelForm):
     class Meta: 
         model = Factura
-        fields = [ 'rol', 'tipofactura', 'usuario']
+        fields = [ 'tipofactura']
         
 class DetalleForm(forms.ModelForm):
     class Meta: 

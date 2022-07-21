@@ -57,97 +57,21 @@
         </div>
     </div>
 </section>
-
 <section class="contenido-cuerpo borde">
     <div class="container3">
-        <h1 class="m-3 ">lo mas vendido</h1>
+        <h3>lo mas vendido</h3>
         <div style="width: 100%;">
-            <p style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
+            <p class="lineap"></p>
         </div>
-        
-        <div class="glider-contain" id="glider-{{subcategoria.id}}">
-            <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
+        <div class="glider-contain col-xl-15 " id="glider-{{subcategoria.id}}">
             <div class="glider-cat-1 glider">
-                <div class="card flex-1">
-                    <div class="">
-                        <div class="item-1f"><img class="foto" src="{% static 'img/mejores-licuadoras-potentes.jpg' %}"
-                                alt=""></div>
-                        <div class="item-2f">
-                            <h2>Liciadora full</h2>
-                        </div>
-                        <div class="item-3f centrado"><span>COL $450.000</span></div>
-                        <div class="item-4f centrado">10% <span class="tachado">$500.000</span></div>
-                        <div class="item-5f "><span>licuadoras industriales un motor que dura toda una vida</span></div>
-                        <div class="item-6f centrado">18/03/2022</div>
-                        <div class="item-7f"><a href="#" class="myButton">Agregar!</a></div>
-                    </div>
-                </div>
-                <div class="card flex-1">
-                    <div class="">
-                        <div class="item-1f"><img class="foto" src="{% static 'img/mejores-licuadoras-potentes.jpg' %}"
-                                alt=""></div>
-                        <div class="item-2f">
-                            <h2>Liciadora full</h2>
-                        </div>
-                        <div class="item-3f centrado"><span>COL $450.000</span></div>
-                        <div class="item-4f centrado">10% <span class="tachado">$500.000</span></div>
-                        <div class="item-5f "><span>licuadoras industriales un motor que dura toda una vida</span></div>
-                        <div class="item-6f centrado">18/03/2022</div>
-                        <div class="item-7f"><a href="#" class="myButton">Agregar!</a></div>
-                    </div>
-                </div>
-                <div class="card flex-1">
-                    <div class="">
-                        <div class="item-1f"><img class="foto" src="{% static 'img/mejores-licuadoras-potentes.jpg' %}"
-                                alt=""></div>
-                        <div class="item-2f">
-                            <h2>Liciadora full</h2>
-                        </div>
-                        <div class="item-3f centrado"><span>COL $450.000</span></div>
-                        <div class="item-4f centrado">10% <span class="tachado">$500.000</span></div>
-                        <div class="item-5f "><span>licuadoras industriales un motor que dura toda una vida</span></div>
-                        <div class="item-6f centrado">18/03/2022</div>
-                        <div class="item-7f"><a href="#" class="myButton">Agregar!</a></div>
-                    </div>
-                </div>
-                <div class="card flex-1">
-                    <div class="">
-                        <div class="item-1f"><img class="foto" src="{% static 'img/mejores-licuadoras-potentes.jpg' %}"
-                                alt=""></div>
-                        <div class="item-2f">
-                            <h2>Liciadora full</h2>
-                        </div>
-                        <div class="item-3f centrado"><span>COL $450.000</span></div>
-                        <div class="item-4f centrado">10% <span class="tachado">$500.000</span></div>
-                        <div class="item-5f "><span>licuadoras industriales un motor que dura toda una vida</span></div>
-                        <div class="item-6f centrado">18/03/2022</div>
-                        <div class="item-7f"><a href="#" class="myButton">Agregar!</a></div>
-                    </div>
-                </div>
-                <div class="card flex-1">
-                    <div class="">
-                        <div class="item-1f"><img class="foto" src="{% static 'img/mejores-licuadoras-potentes.jpg' %}"
-                                alt=""></div>
-                        <div class="item-2f">
-                            <h2>Liciadora full</h2>
-                        </div>
-                        <div class="item-3f centrado"><span>COL $450.000</span></div>
-                        <div class="item-4f centrado">10% <span class="tachado">$500.000</span></div>
-                        <div class="item-5f "><span>licuadoras industriales un motor que dura toda una vida</span></div>
-                        <div class="item-6f centrado">18/03/2022</div>
-                        <div class="item-7f"><a href="#" class="myButton">Agregar!</a></div>
-                    </div>
-                </div>
+                {% for elemento in favoritos %}
+                    {% include "cards/card_elemento.html" %} 
+                {% endfor %}
             </div>
+            <button class="glider-prev"><i class="fas fa-chevron-circle-left"></i></button>
             <button class="glider-next"><i class="fas fa-chevron-circle-right"></i></button>
-        </div>
-        <div style="width: 100%;">
-            <p style=" border-color:#000000; border-top-style:solid; border-top-width:3px;"></p>
-        </div>
-    
-    
         <div class="containedorFinal">
-        
         <div class="row align-items-start">
             <div id="carouselExampleInterval" class="carousel  col-2" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -161,8 +85,7 @@
                         <img class="d-block w-100" src="{% static 'img\Oster-Logo.png' %}" alt="">
                     </div>
                 </div>
-            </div>
-           
+            </div>   
             <div id="carouselExampleInterval" class="carousel  col-2" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="10000">
@@ -216,10 +139,7 @@
                 </div>
             </div>
         </div>
-    </div> </div><br><br>
-
+    </div>
 </section>
-
 {% endblock contenido %}
-
 {% comment %} <img class="d-block w-100" src="{% static 'img\agregar-carrito.png' %}" alt=""> {% endcomment %}

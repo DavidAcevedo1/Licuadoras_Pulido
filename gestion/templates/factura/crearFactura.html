@@ -1,0 +1,74 @@
+{% extends 'partials/admin-body.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Equipo {% endblock title %}
+{% block contenido %}
+<div class="container contenido-cuerpo d-flex justify-content-center">
+    <div class="d-flex flex-row  mx-auto  ">
+        <div class="derecha width-botton">
+            <a class="width-a" href=" {% url 'factura-tfactura' %}" class="btn d-flex justify-content-center ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    class="devolver opcionesTabla bi bi-arrow-left-square-fill  " viewBox="0 0 16 16">
+                    <path
+                        d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+                </svg>
+            </a>
+        </div>
+        <div class="my-5 fondoFormulario ">
+            <div class="container">
+                <h4>Agregar factura</h4>
+
+                <div class="row">
+
+           
+                    <div class="col-md-6">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="tipofactura" value="Compra">
+                            <input class="btn btn-primary my-3" type="submit" value="Compra">
+
+                        </form>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="tipofactura" value="Venta">
+
+                            <input class="btn btn-primary my-3" type="submit" value="Venta">
+
+                        </form>
+                    </div>
+                    
+                </div>
+
+
+                <div class="toast-container position-absolute bottom-0 end-0 p-3">
+                    <div id="liveToastExito" class="toast align-items-center text-white bg-success border-0 fade hide"
+                        role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Correcto! mensaje de exito.
+                            </div>
+                            <button type="button" class="btn-close btn-close-white  me-2 m-auto" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div id="liveToastError" class="toast align-items-center text-white bg-danger border-0 fade hide"
+                        role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Error! mensaje de Error.
+                            </div>
+                            <button type="button" class="btn-close btn-close-white
+                                            me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -2,9 +2,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block contenido %}
-
-
-
 <div class="padding">
     <h1 class="text-center font-4em">Datos de la factura</h1>
 </div>
@@ -32,40 +29,27 @@
             </table>
         </div>      
     </div>
-
     <div class="col-md-4 p-4  my-5 bg-tabla  ver-Detalle mx-auto">
         <p class="txtMainI">Detalle factura  {{factura.id}}</p>
     <table class="table bg-white table-bordered results" >
       <thead class="theadtable">
         <tr class="text-white">
           <th scope="col">Producto</th>            
-          <th scope="col">Cantidad</th>
-    
-          
+          <th scope="col">Cantidad</th>    
         </tr>
       </thead>
       <tbody>
         {% for detalle in detalles %}
         {% if  detalle.estado == "Abierta"  %}
-    
-        <tr>
-        
+        <tr> 
           <td class="dtr-control sorting_1">{{detalle.producto}}</td>
           <td class="dt-body-right dtr-hidden">{{detalle.cantidad}}</td>
-    
             {% endif %}
           </td>
-        </tr>
-        
+        </tr>    
         {% endfor %}
       </tbody>
     </table>
     </div>
 </div>
-
-
-   
-
-
 {% endblock contenido %}
-

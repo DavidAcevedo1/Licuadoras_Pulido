@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'administrador',
     'usuarios',
     'facturas',
-    
     'crispy_forms',         # pip install django-crispy-forms
     'crispy_bootstrap5',    # pip install django-bootstrap5
                             # pip install crispy_bootstrap5
@@ -95,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_licuadoraspulido',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -153,13 +152,13 @@ LOGOUT_REDIRECT_URL = 'inicio'
 LOGIN_REDIRECT_URL = 'inicioadmin'
 LOGIN_URL="usuario-login"
  
-# para lo del email documentacion django
+# para lo del email documentacion django "Alejo3012154053"
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER="facceres1@misena.edu.co"
-EMAIL_HOST_PASSWORD="Alejo3012154053"
+EMAIL_HOST_PASSWORD="ebsmydwxjufrozjt"
 
 STATIC_URL = '/static/'
 
