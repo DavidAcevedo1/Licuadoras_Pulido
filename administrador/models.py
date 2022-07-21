@@ -101,7 +101,6 @@ class Servicio(models.Model):
         REPARACION='Reparación', _('Reparación')
         MANTENIMIENTO='Mantenimiento', _('Mantenimiento')
     tiposervicio= models.CharField(max_length=20, choices=TipoServicio.choices, verbose_name="Tipo de Servicio")
-    cantidad= models.IntegerField()
     fallas_basicas= models.CharField(max_length=255, blank=False, verbose_name="Falla Basica")
     fecha_entrega=models.DateField(verbose_name="Fecha de Entrega", help_text=u"MM/DD/AAAA")
     class Estado(models.TextChoices):
