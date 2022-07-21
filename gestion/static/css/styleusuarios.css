@@ -140,16 +140,26 @@ h1, h2, h3, h4 {
     background: #fff;
     color: #000;
 }
-.item{
-    color: #fff;
+.item {
+    border-color: #e6571f;
     background-color: #e6571f;
+    color: #fff;
     text-align: center;
+    box-shadow: 0 0 40px 40px #e6571f inset, 0 0 0 0 #e6571f;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
     width: 100px;
     min-width: 170px;
     flex-grow: 1;
-    border: 1px solid #000000;
     padding: 5px 0px;
     text-decoration: none;
+  }
+  .item:hover {
+    box-shadow: 0 0 20px 0 #fff inset, 0 0 10px 4px #e6571f;
+    color: black !important;
+  }
+  .item:active {
+    color: lime !important;
 }
 .dark-mode .item{
     background: #ffffff;
@@ -293,6 +303,7 @@ img {
     width: 3%;
     height: 5%;
     background-color: #fff;
+    z-index: 1000;
 }
 .contacto {
     position: fixed;
@@ -302,6 +313,7 @@ img {
     border-radius: 90px;
     width: 3.7%;
     height: 5.5%;
+    z-index: 1000;
 }
 .color-fondo {
     background-color: #ffffffd5;
@@ -583,4 +595,21 @@ h2{
         background-color: rgba(156, 156, 156, 0.25);
         box-shadow: 0 0 1px rgba(255,255,255,.25);
     }
+}
+
+.otrologo{
+    width: auto;
+}
+.mal{
+    width: 300px;
+    margin: 0 auto;
+    margin-left: 10px;
+}
+
+
+@media (max-width:420px) {
+    .titu {
+		font-size:50px;
+    	color: #333;
+  	}
 }
