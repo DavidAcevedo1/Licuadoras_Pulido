@@ -109,7 +109,6 @@ class Servicio(models.Model):
     estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
         return '%s'%(self.electrodomestico)
-    
 class Stock(models.Model):
     fecha= models.DateField(auto_now=True, verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
     stock_agregada=models.IntegerField(verbose_name="Stock Nuevo", default=0)
@@ -121,4 +120,5 @@ class Stock(models.Model):
         ANULADO='Anulado', _('Anulado')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
-        return '%s' % (self.stock_stock)  
+        return '%s' % (self.stock_stock)
+   
