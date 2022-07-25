@@ -40,24 +40,3 @@ class Usuario(models.Model):
     def clean(self):
         self.nombre= self.Unombre.title()
     
-class Uadministrador(models.Model):
-    class Rol(models.TextChoices):
-        Administrador='Administrador', _('Administrador')
-        Proveedor='Proveedor', _('Proveedor')
-        Asociada='Trabajador', _('Trabajador')
-        Cliente='Cliente', _('Cliente')
-    rol= models.CharField(max_length=13, choices=Rol.choices, verbose_name="rol")  
-    nombre=models.CharField(max_length=50, verbose_name="Nombre")
-    apellido=models.CharField(max_length=50, verbose_name="Apellido")
-    documento=models.CharField(unique=True,max_length=10)
-    celular=models.CharField(unique=True,max_length=10)
-    class Tipo_documento(models.TextChoices):
-        Cedula_ciudadania='C.C', _('C.C')
-        Tarjeta_identidad='T.I', _('T.I')
-        Cedula_extranjeria='C.E', _('C.E')
-    tipo_documento= models.CharField(max_length=3, choices=Tipo_documento.choices, verbose_name="Tipo documento")
-    def __str__(self) -> str:
-        return "%s"% (self.nombre, self.apellido)
-    def clean(self):
-        self.nombre= self.nombre.capitalize()
-        self.apellido= self.apellido.capitalize()

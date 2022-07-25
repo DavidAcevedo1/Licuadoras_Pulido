@@ -76,7 +76,6 @@ def detalle(request,pk):
         if detalle_aux == None:
             
             if form.is_valid():  
-                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
                 factura= Detalle.objects.create(
                 cantidad=form.cleaned_data.get('cantidad'),
                 elemento= form.cleaned_data.get('elemento'),
@@ -86,7 +85,6 @@ def detalle(request,pk):
                 messages.success(request,f' se agregó {elemento} al la factura correctamente!')
                 return redirect('factura-detalle', pk=pk)    
         else:
-            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
             Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento']).update(
                 cantidad = detalle_aux[0].cantidad + int(request.POST['cantidad'])
             )
@@ -208,7 +206,7 @@ def factura_estado(request,pk, estado):
             "estado_txt":estado_txt,
             "tfacturas": tfacturas,
     }
-    return render(request, "factura/factura-estado.html", context)
+    return render(request, "factura/factura.html", context)
 
 def factura_anular(request,pk):
     titulo_pagina='Factura'

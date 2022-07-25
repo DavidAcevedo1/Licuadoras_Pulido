@@ -3,9 +3,14 @@
 {% block title %} Equipo {% endblock title %}
 {% load static %}
 {% block contenido %}
-<div class="contenido-principal2">
 <div class="container">
-  <div class="row ">
+  <div class="row">
+    {% if factura.usuario != None %}
+
+    <h2 class="text-center">{{factura.usuario}} - Factura de {{factura.tipofactura}} N° {{factura.id}}</h2>
+    {% else %}
+    <h2 class="txtMainI text-center">Factura N° {{factura.id}}</h2>
+
     <a href=" {% url 'factura-tfactura' %}" class="btn d-flex justify-content-center "
       style=" margin-top: 25px; margin-bottom: 25px; width: 65px; ">
       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class=" opcionesTabla bi bi-arrow-left-square-fill  "
@@ -16,60 +21,55 @@
     </a>
   </div>
   <div class="row bg-light p-3">
-    
-    {% if factura.usuario != None %}
-    
-    <h2>{{factura.usuario}} - Factura de {{factura.tipofactura}} N° {{factura.id}}</h2>
-    {% else %}
-    <h2 class="txtMainI">Factura {{factura.id}}</h2>
     <form method="POST">
       {% csrf_token %}
       <div id="div_id_usuario" class="mb-3">
         <label for="id_usuario" class="form-label requiredField">Nombre<span class="asteriskField">*</span></label>
         <select name="usuario" class="select form-select select2" required="" id="id_usuario">
-          <option selected >--- Seleccione el usuario ---</option>
+          <option selected>--- Seleccione el usuario ---</option>
           {% for items in usuario %}
           <option value="{{items.Uid}}">{{items.Unombre}}</option>
           {% endfor %}
         </select>
       </div>
-      <button class="btn btn-primary" name="form-user">Seleccionar usuario</button>
+      <button class="btn btn-primary" name="form-user">Seleccionar</button>
+      <a href="{% url 'usuario-crearUsuario' %}" class=" btn btn-primary btn-block my-2">Crear</a>
+
     </form>
     {% endif %}
   </div>
+  {% if factura.usuario %}
   <div class="row p-1">
     <div class="col-md-4">
       <div class="border bg-white p-3">
-        <h4>Agregar Detalles a la Factura {{factura.id}}</h4>
+        <h4>Agregar Elementos</h4>
         <hr>
         <form action="" method="POST">
           {% csrf_token %}
           {{ form|crispy }}
-          <button class="btn btn-success btn-block " name="form-detalle">Agregar Factura</button>
-            <a class="btn btn-danger btn-block text-light"
-              href="{% url 'factura_estado' pk=factura.id estado='cerrar' %}">Cerrar Factura</a>
+          <button class="btn btn-success btn-block " name="form-detalle">Agregar</button>
+          <a class="btn btn-danger btn-block text-light"
+            href="{% url 'factura_estado' pk=factura.id estado='cerrar' %}">Generar Factura</a>
         </form>
       </div>
     </div>
     <div class="col-md-8 p-4 bg-white">
-      
+
       <table class="table bg-white table-bordered results dataTable no-footer dtr-inline" id="proyectos">
         <thead class="bg-info">
           <tr class="text-white">
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
-            <th scope="col">Estado</th>
             <th scope="col">Precio</th>
-            <th scope="col">Opciones</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {% for detalle in detalles %}
-          
+
           <tr>
             <td class="dtr-control sorting_1">{{detalle.elemento.nombre}}</td>
             <td class="dt-body-right dtr-hidden">{{detalle.cantidad}}</td>
-            <td class="dt-body-right dtr-hidden">{{detalle.estado}}</td>
             <td class="dt-body-right dtr-hidden">{{detalle.elemento.precio}}</td>
             <td><a href="{% url 'detalle_eliminar_estado' detalle.id  %}"><svg xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor" class="opcionesTabla bi bi-trash" viewBox="0 0 16 16">
@@ -78,7 +78,7 @@
                   <path fill-rule="evenodd"
                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                 </svg>
-              
+
             </td>
           </tr>
           {% endfor %}
@@ -86,6 +86,6 @@
       </table>
     </div>
   </div>
-</div>
+  {% endif %}
 </div>
 {% endblock contenido %}

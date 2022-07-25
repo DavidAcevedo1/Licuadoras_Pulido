@@ -14,13 +14,12 @@
       <thead class="bg-info">
         <tr class="text-white">
           <th scope="col">ID</th>
-          <th scope="col">Tipo de usuario</th>
           <th scope="col">Nombre de usuario</th>
           <th scope="col">Fecha</th>
           <th scoper="col">Neto a pagar</th>
           <th scope="col">Tipo de factura</th>
           <th scope="col">Estado</th>
-          <th scope="col">Opciones</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +27,6 @@
         {% if not tfactura.estado == "Anulada" %}
         <tr>
           <td>{{tfactura.id}}</td>
-          <td>{{tfactura.rol}}</td>
           <td>{{tfactura.usuario}}</td>
           <td>{{tfactura.fecha}}</td>
           <td>{{tfactura.}}</td>
