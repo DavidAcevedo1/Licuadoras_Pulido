@@ -1,75 +1,78 @@
 from dataclasses import field
-from django import forms
+from django.forms import ModelForm, Textarea
 from administrador.models import *
 from usuarios.models import Usuario
 # from usuarios.models import Usuario
 
-class UsuarioForm(forms.ModelForm):
+class UsuarioForm(ModelForm):
     class Meta:
         model = Usuario
         fields = ['rol','Unombre','apellido','tipo_documento','documento','celular']
            
-class TipoElementoForm(forms.ModelForm):
+class TipoElementoForm(ModelForm):
     class Meta:
         model= Tipos_Elemento
         fields=['categoria','subcategoria']
         
-class TipoElementoEditarForm(forms.ModelForm):
+class TipoElementoEditarForm(ModelForm):
     class Meta:
         model= Tipos_Elemento
         fields=['categoria','subcategoria']
         
-class ElementoForm(forms.ModelForm):
+class ElementoForm(ModelForm):
     class Meta:
         model= Elemento
-        fields= ['tipo_elemento','nombre','marca','descripcion','precio','porcentaje_ganancia', 'foto']
+        fields= ['tipo_elemento','nombre','marca','descripcion','precio', 'foto']
 
-class ElementoEditarForm(forms.ModelForm):
+class ElementoEditarForm(ModelForm):
     class Meta:
         model= Elemento
-        fields= ['tipo_elemento','nombre','marca' ,'descripcion','precio','porcentaje_ganancia', 'foto','favorito']
+        fields= ['tipo_elemento','nombre','marca' ,'descripcion','precio', 'foto','favorito']
         
-class TipoElementoFavoritoForm(forms.ModelForm):
+class TipoElementoFavoritoForm(ModelForm):
     class Meta:
         model= Favorito
         fields= ['favorito']
                 
-class MarcaForm(forms.ModelForm):
+class MarcaForm(ModelForm):
     class Meta:
         model= Marca
         fields= ['nombre']
         
-class MarcaEditarForm(forms.ModelForm):
+class MarcaEditarForm(ModelForm):
     class Meta:
         model= Marca
         fields= ['nombre']
 
-class ElectrodomesticoForm(forms.ModelForm):
+class ElectrodomesticoForm(ModelForm):
     class Meta:
         model= Electrodomestico
         fields=['nombre', 'marca', 'referencia']
 
-class ElectrodomesticoEditarForm(forms.ModelForm):
+class ElectrodomesticoEditarForm(ModelForm):
     class Meta:
         model= Electrodomestico
         fields=['nombre', 'marca', 'referencia']
         
-class ServicioForm(forms.ModelForm):
+class ServicioForm(ModelForm):
     class Meta:
         model= Servicio
-        fields=['tiposervicio', 'electrodomestico', 'fallas_basicas', 'diagnostico', 'observacion', 'fecha_entrada']
+        fields=['usuario','tiposervicio', 'electrodomestico','observacion', 'fallas_basicas', 'diagnostico']
+        widgets = {
+            'observacion': Textarea(attrs={'cols': 80, 'rows': 5}),
+        }
 
-class ServicioEditarForm(forms.ModelForm):
+class ServicioEditarForm(ModelForm):
     class Meta:
         model= Servicio
-        fields=['tiposervicio', 'electrodomestico', 'fallas_basicas', 'diagnostico', 'observacion', 'fecha_entrada']
+        fields=['tiposervicio', 'electrodomestico', 'fallas_basicas','observacion', 'diagnostico']
         
-class StockForm(forms.ModelForm):
+class StockForm(ModelForm):
     class Meta:
         model= Stock
         fields=['stock_stock']
            
-class CopiaseguridadForm(forms.ModelForm):
+class CopiaseguridadForm(ModelForm):
     class Meta:
         model= Copiaseguridad
         fields= ['nombre','archivo']

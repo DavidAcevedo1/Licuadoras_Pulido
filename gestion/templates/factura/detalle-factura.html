@@ -22,12 +22,13 @@
     <h2 class="txtMainI">Factura {{factura.id}}</h2>
     <form method="POST">
       {% csrf_token %}
-      <div id="div_id_usuario" class="mb-3">
-        <label for="id_usuario" class="form-label requiredField">Nombre<span class="asteriskField">*</span></label>
-        <select name="usuario" class="select form-select select2" required="" id="id_usuario">
-          <option selected >--- Seleccione el usuario ---</option>
-          {% for items in usuario %}
-          <option value="{{items.Uid}}">{{items.Unombre}}</option>
+     
+      <div id="div_id_servicio" class="mb-3">
+        <label for="id_servicio" class="form-label requiredField">servicio<span class="asteriskField">*</span></label>
+        <select name="servicio" class="select form-select select2" required="" id="id_servicio">
+          <option selected >--- Seleccione el servicio ---</option>
+          {% for items in servicio %}
+          <option value="{{items.id}}">{{items.tiposervicio}} a {{items.electrodomestico}} de {{items.usuario}} del {{items.fecha_entrada}}</option>
           {% endfor %}
         </select>
       </div>
@@ -40,6 +41,7 @@
     </form>
     {% endif %}
   </div>
+  {% if factura.usuario %}
   <div class="row p-1">
     <div class="col-md-4">
       <div class="border bg-white p-3">
@@ -86,6 +88,7 @@
       </table>
     </div>
   </div>
+  {% endif %}
 </div>
 </div>
 {% endblock contenido %}

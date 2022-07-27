@@ -5,6 +5,7 @@ from facturas.forms import FacturaForm, DetalleForm
 from django.contrib import messages 
 from usuarios.models import Rol, Usuario
 from usuarios.Carrito import Carrito
+from administrador.models import Servicio
 
 def carrito(request):
     titulo_pagina='Carrito'
@@ -14,10 +15,8 @@ def carrito(request):
     return render(request, "usuarios/carrito.html", context)
 
 def factura(request):
-
     if request.method == 'POST':
         print(request.POST)
-
         aux= Factura.objects.create(
             tipofactura= request.POST['tipofactura']
         )
@@ -26,7 +25,6 @@ def factura(request):
     else:
         messages.error(request,f'!Error al agregar Factura!')
     context={
-        
     }
     return render(request,'factura/crearFactura.html', context)
 
@@ -66,6 +64,7 @@ def detalle(request,pk):
     else:
         rol_aux= "Cliente"
     usuario= Usuario.objects.filter(rol=rol_aux)
+    servicio= Servicio.objects.all()
     if request.method == 'POST' and "form-detalle" in request.POST:
         form= DetalleForm(request.POST)
         detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
@@ -91,9 +90,11 @@ def detalle(request,pk):
     else:
         form= DetalleForm()
     if request.method == 'POST' and "form-user" in request.POST:
-        if request.POST["usuario"] != "--- Seleccione el usuario ---":
+        if request.POST["servicio"] != "--- Seleccione el servicio ---":
+            usuario_final=Servicio.objects.get(id=request.POST["servicio"]).usuario
             Factura.objects.filter(id=pk).update(
-                usuario= request.POST["usuario"]
+                usuario=usuario_final,
+                servicio= request.POST["servicio"]
             )
             return redirect('factura-detalle', pk=pk)
         else:
@@ -101,6 +102,7 @@ def detalle(request,pk):
             messages.warning(request,f'Seleccione un usuario!')
     context={
         "usuario":usuario,
+        "servicio":servicio,
         "titulo_pagina": titulo_pagina,
         "detalles": detalles,
         "form":form,
