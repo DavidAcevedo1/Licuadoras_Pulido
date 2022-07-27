@@ -251,3 +251,68 @@ footer{
 .sublogo img{
     width: 80px;
 }
+
+
+
+
+.conttoast{
+    width: 350px !important;
+    height: 120px !important;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    background-color: transparent !important;
+}
+.conttoast2{ 
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    position: absolute;
+    top: 17px;
+    left: 0;
+    padding: auto;
+}
+.iconos{
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    
+}
+.coco{
+    background-color: green !important;
+}
+.cco{
+    border: 4px solid green;
+}
+.coer{
+    background-color: red !important;
+}
+.ce{
+    border: 4px solid red;
+}
+.coal{
+    background-color: orange !important;
+}
+.ca{
+    border: 4px solid orange;
+}
+.conttoast3{
+    border-radius: 10px;
+    width: 310px;
+    height: 100%;
+    margin-left: auto;
+    padding: 10px;
+    background-color: #fff;
+}
+
+
+.titulo{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+.subtitulo{
+    font-size: 1rem;
+    font-weight: bolder;
+    margin-left: 5px;
+    
+}
