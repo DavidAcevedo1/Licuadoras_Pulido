@@ -2,7 +2,6 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from administrador.forms import UsuarioForm
-from administrador.views import tipoelemento
 from usuarios.models import Usuario
 from .Carrito import Carrito
 from administrador.models import Elemento, Tipos_Elemento

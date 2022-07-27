@@ -8,9 +8,13 @@
             <h1 class="text-center border titu">Productos</h1>
         </div>
         {% for subcategoria in subcategorias %}
-        <div>   
+        <div id="myDIV">   
             <h1 class="text-center ">{{subcategoria.subcategoria}}</h1>
         </div>       
+{% comment %}
+            <div class="glider-contain" id="glider-{{subcategoria.id}}">
+                <div class="glider-cat-1 glider" id="myDIV">
+{% endcomment %}
             <div class="glider-contain col-xl-10" id="glider-{{subcategoria.id}}">
                 <div style="width: 100%;">
                     <p style="border-color: #000000; border-top-style: solid; border-top-width: 3px;"></p>

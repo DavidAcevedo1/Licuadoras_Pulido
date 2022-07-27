@@ -8,7 +8,8 @@ class Rol(models.Model):
         db_table="usuarios_rol"
     def __str__(self) -> str:
         return "%s "% (self.Rnombre)
-
+    
+    
 class Usuario(models.Model):
     Uid=models.AutoField(primary_key=True)
     documento=models.CharField(unique=True,max_length=10)

@@ -11,3 +11,4 @@ class DetalleForm(forms.ModelForm):
     class Meta: 
         model = Detalle
         fields = ['elemento', 'cantidad']
+

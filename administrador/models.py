@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 import os
 from django.core.exceptions import ValidationError
+from usuarios.models import Usuario
 
 def validate_file_extension(value):
     ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
@@ -45,12 +46,6 @@ class Elemento(models.Model):
     precio=models.IntegerField(verbose_name="Precio")
     stock_elemento=models.IntegerField(verbose_name="Stock", default=0)
     favorito=models.BooleanField(default=False)
-    class Porcentaje_ganancia(models.TextChoices):
-        diez= '0.1', _('10%')
-        quince= '0.15', _('15%')
-        veinte= '0.2', _('20%')
-        treinta= '0.3', _('30%')
-    porcentaje_ganancia=models.CharField(max_length=10, choices=Porcentaje_ganancia.choices, verbose_name="Porcentaje")
     foto=models.ImageField(upload_to="carrito", null=True, blank=True,default="carrito/casa.png")
     class Estado(models.TextChoices):
         ACTIVO='Activo', _('Activo')
@@ -103,13 +98,14 @@ class Servicio(models.Model):
     fallas_basicas= models.CharField(max_length=255, blank=False, verbose_name="Falla que Presenta")
     diagnostico= models.CharField(max_length=250, blank=False, verbose_name="Diagnostico")
     observacion= models.CharField(max_length=100, blank=True, verbose_name="Observacion")
-    fecha_entrada= models.DateField(verbose_name="Fecha de Entrada", help_text=u"MM/DD/AAAA")
+    fecha_entrada= models.DateField(auto_now=True,verbose_name="Fecha de Entrada", help_text=u"MM/DD/AAAA")
+    usuario=models.ForeignKey(Usuario, on_delete=models.SET_NULL,blank=True, null=True,verbose_name="Usuario")   
     class Estado(models.TextChoices):
         ACTIVO='Activo',_('Activo')
         INACTIVO='Inactivo',_('Inactivo')
     estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
-        return '%s'%(self.electrodomestico)
+        return '%s'%(self.tiposervicio)
     
 class Stock(models.Model):
     fecha= models.DateField(auto_now=True, verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
@@ -122,4 +118,4 @@ class Stock(models.Model):
         ANULADO='Anulado', _('Anulado')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
-        return '%s' % (self.stock_stock)  
+        return '%s' % (self.stock_stock)
