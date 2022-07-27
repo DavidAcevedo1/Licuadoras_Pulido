@@ -57,12 +57,12 @@ class ElectrodomesticoEditarForm(forms.ModelForm):
 class ServicioForm(forms.ModelForm):
     class Meta:
         model= Servicio
-        fields=['electrodomestico','diagnostico', 'tiposervicio', 'fallas_basicas','fecha_entrega']
+        fields=['tiposervicio', 'electrodomestico', 'fallas_basicas', 'diagnostico', 'observacion', 'fecha_entrada']
 
 class ServicioEditarForm(forms.ModelForm):
     class Meta:
         model= Servicio
-        fields=['electrodomestico','diagnostico', 'tiposervicio', 'fallas_basicas','fecha_entrega']
+        fields=['tiposervicio', 'electrodomestico', 'fallas_basicas', 'diagnostico', 'observacion', 'fecha_entrada']
         
 class StockForm(forms.ModelForm):
     class Meta:

@@ -74,9 +74,7 @@ def detalle(request,pk):
         else:
             detalle_aux=None
         if detalle_aux == None:
-            
             if form.is_valid():  
-                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
                 factura= Detalle.objects.create(
                 cantidad=form.cleaned_data.get('cantidad'),
                 elemento= form.cleaned_data.get('elemento'),
@@ -86,12 +84,10 @@ def detalle(request,pk):
                 messages.success(request,f' se agregó {elemento} al la factura correctamente!')
                 return redirect('factura-detalle', pk=pk)    
         else:
-            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
             Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento']).update(
                 cantidad = detalle_aux[0].cantidad + int(request.POST['cantidad'])
             )
             return redirect('factura-detalle', pk=pk)   
-        
     else:
         form= DetalleForm()
     if request.method == 'POST' and "form-user" in request.POST:

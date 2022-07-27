@@ -85,8 +85,8 @@ class Cantidad(models.Model):
   
 class Electrodomestico(models.Model):
     nombre=models.CharField(max_length=25)
-    marca= models.ForeignKey(Marca, on_delete=models.SET_NULL, null=True, verbose_name=u"Marca")
-    referencia=models.CharField(max_length=25)
+    marca= models.ForeignKey(Marca, on_delete=models.SET_NULL, blank=True, null=True, verbose_name=u"Marca")
+    referencia=models.CharField(max_length=25, blank=True)
     class Estado(models.TextChoices):
         ACTIVO='Activo',_('Activo')
         INACTIVO='Inactivo',_('Inactivo')
@@ -95,14 +95,15 @@ class Electrodomestico(models.Model):
         return '%s'%(self.nombre)
     
 class Servicio(models.Model):
-    electrodomestico= models.ForeignKey(Electrodomestico, on_delete=models.SET_NULL, null=True, verbose_name=u"Electrodomestico")
-    diagnostico= models.CharField(max_length=500, blank=False, verbose_name="Diagnostico")
     class TipoServicio(models.TextChoices):
         REPARACION='Reparación', _('Reparación')
         MANTENIMIENTO='Mantenimiento', _('Mantenimiento')
     tiposervicio= models.CharField(max_length=20, choices=TipoServicio.choices, verbose_name="Tipo de Servicio")
-    fallas_basicas= models.CharField(max_length=255, blank=False, verbose_name="Falla Basica")
-    fecha_entrega=models.DateField(verbose_name="Fecha de Entrega", help_text=u"MM/DD/AAAA")
+    electrodomestico= models.ForeignKey(Electrodomestico, on_delete=models.SET_NULL, null=True, verbose_name=u"Articulo")
+    fallas_basicas= models.CharField(max_length=255, blank=False, verbose_name="Falla que Presenta")
+    diagnostico= models.CharField(max_length=250, blank=False, verbose_name="Diagnostico")
+    observacion= models.CharField(max_length=100, blank=True, verbose_name="Observacion")
+    fecha_entrada= models.DateField(verbose_name="Fecha de Entrada", help_text=u"MM/DD/AAAA")
     class Estado(models.TextChoices):
         ACTIVO='Activo',_('Activo')
         INACTIVO='Inactivo',_('Inactivo')
