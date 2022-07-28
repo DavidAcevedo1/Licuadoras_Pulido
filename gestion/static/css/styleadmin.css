@@ -251,3 +251,23 @@ footer{
 .sublogo img{
     width: 80px;
 }
+.tabla-ver{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100% !important;
+}
+.tabla-ver div{
+    min-width: 200px !important;
+    margin: 0 10px;
+}
+@media (min-width: 420px ){
+    .tabla-ver{
+        width: 100% !important;
+        min-width: 300px !important;
+    }
+    .tabla-ver div{
+        width: 100% !important;
+        min-width: 300px !important;
+    }
+}
