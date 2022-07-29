@@ -8,6 +8,7 @@
             <table class="table bg-white table-bordered results  w-100" id="proyectos">
                 <thead class="bg-info">
                     <tr class="text-white">
+                        <th scope="col">Codigo</th>
                         <th scope="col">Elemento</th>
                         <th scope="col">Stock</th>
                         <th scope="col">Nombre</th>
@@ -22,6 +23,7 @@
                     {% for elemento in elementos %}
                     {% if elemento.estado == "Activo" %}
                     <tr>
+                        <td>{{elemento.id}}</td>
                         <td>{{elemento.tipo_elemento}}</td>
                         <td>{{elemento.stock}}
                             {{elemento.stock_elemento}}
