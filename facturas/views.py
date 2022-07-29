@@ -5,6 +5,7 @@ from facturas.forms import FacturaForm, DetalleForm
 from django.contrib import messages 
 from usuarios.models import Rol, Usuario
 from usuarios.Carrito import Carrito
+from administrador.models import Servicio
 
 def carrito(request):
     titulo_pagina='Carrito'
@@ -14,10 +15,8 @@ def carrito(request):
     return render(request, "usuarios/carrito.html", context)
 
 def factura(request):
-
     if request.method == 'POST':
         print(request.POST)
-
         aux= Factura.objects.create(
             tipofactura= request.POST['tipofactura']
         )
@@ -26,7 +25,6 @@ def factura(request):
     else:
         messages.error(request,f'!Error al agregar Factura!')
     context={
-        
     }
     return render(request,'factura/crearFactura.html', context)
 
@@ -60,12 +58,15 @@ def vfactura (request,pk):
 def detalle(request,pk):
     titulo_pagina="facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
-    factura_u=Factura.objects.get(id=pk)
+    factura_u= Factura.objects.get(id=pk)
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
-    else:
+    elif factura_u.tipofactura == "Venta":    
         rol_aux= "Cliente"
+    else:
+        rol_aux= "servicio"
     usuario= Usuario.objects.filter(rol=rol_aux)
+    servicio= Servicio.objects.all()
     if request.method == 'POST' and "form-detalle" in request.POST:
         form= DetalleForm(request.POST)
         detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
@@ -74,9 +75,7 @@ def detalle(request,pk):
         else:
             detalle_aux=None
         if detalle_aux == None:
-            
             if form.is_valid():  
-                print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
                 factura= Detalle.objects.create(
                 cantidad=form.cleaned_data.get('cantidad'),
                 elemento= form.cleaned_data.get('elemento'),
@@ -86,25 +85,37 @@ def detalle(request,pk):
                 messages.success(request,f' se agregó {elemento} al la factura correctamente!')
                 return redirect('factura-detalle', pk=pk)    
         else:
-            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",detalle_aux) 
             Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento']).update(
                 cantidad = detalle_aux[0].cantidad + int(request.POST['cantidad'])
             )
             return redirect('factura-detalle', pk=pk)   
-        
     else:
         form= DetalleForm()
-    if request.method == 'POST' and "form-user" in request.POST:
-        if request.POST["usuario"] != "--- Seleccione el usuario ---":
+    if request.method == 'POST' and "form-serv" in request.POST:
+        print(request.POST)
+        if request.POST["servicio"] and request.POST["servicio"] != "--- Seleccione el servicio ---":
+            usuario_final=Servicio.objects.get(id=request.POST["servicio"]).usuario
             Factura.objects.filter(id=pk).update(
-                usuario= request.POST["usuario"]
+                usuario=usuario_final,
+                servicio= request.POST["servicio"]
             )
             return redirect('factura-detalle', pk=pk)
-        else:
+    else:
+            print('Seleccione un sevicio!')
+            messages.warning(request,f'Seleccione un servicio!')
+    if request.method == 'POST' and "form-user" in request.POST:
+            if request.POST["usuario"] and request.POST["usuario"] != "--- Seleccione el usuario ---":
+                usuario_final=Servicio.objects.get(id=request.POST["servicio"]).usuario
+                Factura.objects.filter(id=pk).update(
+                    usuario=usuario_final,
+                )
+            return redirect('factura-detalle', pk=pk)
+    else:
             print('Seleccione un usuario!')
             messages.warning(request,f'Seleccione un usuario!')
     context={
         "usuario":usuario,
+        "servicio":servicio,
         "titulo_pagina": titulo_pagina,
         "detalles": detalles,
         "form":form,

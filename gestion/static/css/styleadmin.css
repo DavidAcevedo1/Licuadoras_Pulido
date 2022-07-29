@@ -145,7 +145,6 @@ nav{
     padding: 3% 10px;
     border: 1px solid #000;
     display: flex;
-    align-items: center;
     justify-content: center;
     flex-direction: column;
 }

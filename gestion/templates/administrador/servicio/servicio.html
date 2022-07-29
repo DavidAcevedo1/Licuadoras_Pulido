@@ -7,12 +7,12 @@
         <table class="table bg-white table-bordered results" id="proyectos">
             <thead class="bg-info">
                 <tr class="text-white">
-                    <th scope="col">Electrodoméstico</th>
-                    <th scope="col">Diagnostico</th>
-                    <th scope="col">Tipo de Servicio</th>
-                    <th scope="col">Fallas Básicas</th>
-                    <th scope="col">Fecha Entrega</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Tipo Servicio</th>
+                    <th scope="col">Articulo</th>
+                    <th scope="col">Falla que Presenta</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Observaciones</th>
+                    <th scope="col">Fecha Entrada</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -20,12 +20,12 @@
                 {% for servicio in servicios %}
                 {% if servicio.estado == "Activo" %}
                 <tr>
-                    <td>{{servicio.electrodomestico}}</td>
-                    <td>{{servicio.diagnostico}}</td>
                     <td>{{servicio.tiposervicio}}</td>
+                    <td>{{servicio.electrodomestico}}</td>
                     <td>{{servicio.fallas_basicas}}</td>
-                    <td>{{servicio.fecha_entrega}}</td>
-                    <td>{{servicio.estado}}</td>
+                    <td>{{servicio.diagnostico}}</td>
+                    <td>{{servicio.observacion}}</td>
+                    <td>{{servicio.fecha_entrada}}</td>
                     <td>
                         <!-- Boton modal servicio editar -->
                         <a class="btn btn-primary btn-sm"
