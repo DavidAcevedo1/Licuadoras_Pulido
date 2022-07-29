@@ -58,11 +58,13 @@ def vfactura (request,pk):
 def detalle(request,pk):
     titulo_pagina="facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
-    factura_u=Factura.objects.get(id=pk)
+    factura_u= Factura.objects.get(id=pk)
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
-    else:
+    elif factura_u.tipofactura == "Venta":    
         rol_aux= "Cliente"
+    else:
+        rol_aux= "servicio"
     usuario= Usuario.objects.filter(rol=rol_aux)
     servicio= Servicio.objects.all()
     if request.method == 'POST' and "form-detalle" in request.POST:
@@ -89,15 +91,26 @@ def detalle(request,pk):
             return redirect('factura-detalle', pk=pk)   
     else:
         form= DetalleForm()
-    if request.method == 'POST' and "form-user" in request.POST:
-        if request.POST["servicio"] != "--- Seleccione el servicio ---":
+    if request.method == 'POST' and "form-serv" in request.POST:
+        print(request.POST)
+        if request.POST["servicio"] and request.POST["servicio"] != "--- Seleccione el servicio ---":
             usuario_final=Servicio.objects.get(id=request.POST["servicio"]).usuario
             Factura.objects.filter(id=pk).update(
                 usuario=usuario_final,
                 servicio= request.POST["servicio"]
             )
             return redirect('factura-detalle', pk=pk)
-        else:
+    else:
+            print('Seleccione un sevicio!')
+            messages.warning(request,f'Seleccione un servicio!')
+    if request.method == 'POST' and "form-user" in request.POST:
+            if request.POST["usuario"] and request.POST["usuario"] != "--- Seleccione el usuario ---":
+                usuario_final=Servicio.objects.get(id=request.POST["servicio"]).usuario
+                Factura.objects.filter(id=pk).update(
+                    usuario=usuario_final,
+                )
+            return redirect('factura-detalle', pk=pk)
+    else:
             print('Seleccione un usuario!')
             messages.warning(request,f'Seleccione un usuario!')
     context={
