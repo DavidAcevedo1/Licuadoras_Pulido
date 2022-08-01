@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from gestion.views import inicio
+from gestion.views import inicio, login
 from administrador.views import inicioadmin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,22 +26,8 @@ urlpatterns = [
     path('inicio-ad/', inicioadmin, name="inicioadmin"),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
-    path('', include('facturas.urls')),
     # Logueo
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
     path('logout/', auth_views.LogoutView.as_view(), name='usuario-logout'),
-    # Recuperación
-    path('password_reset/', 
-        auth_views.PasswordResetView.as_view(template_name='recuperacion/password_reset.html', email_template_name='recuperacion/password_reset_email.html'),
-        name='password_reset'),
-    path('password_reset_sent/',
-        auth_views.PasswordResetDoneView.as_view(template_name='recuperacion/password_reset_sent.html'),
-        name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', 
-        auth_views.PasswordResetConfirmView.as_view(template_name='recuperacion/password_reset_confirm.html'),
-        name='password_reset_confirm'),
-    path('password_reset_complete/',
-        auth_views.PasswordResetCompleteView.as_view(template_name='recuperacion/password_reset_complete.html'),
-        name='password_reset_complete'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
