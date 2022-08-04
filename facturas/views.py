@@ -105,7 +105,7 @@ def detalle(request,pk):
             messages.warning(request,f'Seleccione un servicio!')
     if request.method == 'POST' and "form-user" in request.POST:
             if request.POST["usuario"] and request.POST["usuario"] != "--- Seleccione el usuario ---":
-                usuario_final=Servicio.objects.get(id=request.POST["servicio"]).usuario
+                usuario_final=Servicio.objects.get(id=request.POST["usuario"]).usuario
                 Factura.objects.filter(id=pk).update(
                     usuario=usuario_final,
                 )
