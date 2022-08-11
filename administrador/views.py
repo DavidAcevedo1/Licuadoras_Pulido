@@ -485,6 +485,7 @@ def importar_datos(archivo):
         print("Problemas al importar")
 
 def copiaseguridad(request,tipo):
+    carrito = Carrito(request) 
     ejemplo_dir = 'gestion/static/copiaseguridad/'
     with os.scandir(ejemplo_dir) as ficheros:
         ficheros = [fichero.name for fichero in ficheros if fichero.is_file()]

@@ -29,7 +29,7 @@
     <script type="text/javascript" src="{% static 'js/select2/select2.min.js' %}"></script>
    
     <link rel="shortcut icon" href="{% static 'img/Logooo.png' %}">
-    <title>Licuadoras -  {{titulo_pagina}} </title>
+    <title>{{titulo_pagina}} </title>
 </head>
 <body>
     {% include "partials/admin-header.html" %}
@@ -41,9 +41,15 @@
     {% endblock contenido %}
 
     {% if messages %}
-    {% for message in messages %}
-    {% comment %} <script type=text/javascript>toastr.{{ message.tags }}("{{ message }}");</script> {% endcomment %}
-    {% endfor %}
+        {% for message in messages %}
+            <script>
+                const toastLiveSuccess = document.getElementById('{{message.tags}}')
+                if (toastLiveSuccess) {
+                      const toast = new bootstrap.Toast(toastLiveSuccess)
+                      toast.show()
+                  }
+            </script>
+        {% endfor %}
     {% endif %}
 
     {% include "partials/admin-footer.html" %}
