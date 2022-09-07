@@ -1,5 +1,5 @@
 from django.urls import path
-from facturas.views import factura, tfactura, vfactura,  detalle, factura_estado, detalle_estado
+from facturas.views import *
 from django.contrib.auth import views as auth_views
 
 

@@ -5,7 +5,7 @@ from facturas.forms import FacturaForm, DetalleForm
 from django.contrib import messages 
 from usuarios.models import Rol, Usuario
 from usuarios.Carrito import Carrito
-from administrador.models import Servicio
+from administrador.models import *
 
 def carrito(request):
     titulo_pagina='Carrito'
@@ -75,20 +75,54 @@ def detalle(request,pk):
         else:
             detalle_aux=None
         if detalle_aux == None:
-            if form.is_valid():  
+            if form.is_valid():
                 factura= Detalle.objects.create(
                 cantidad=form.cleaned_data.get('cantidad'),
                 elemento= form.cleaned_data.get('elemento'),
                 factura=factura_u,        
                 )
-                elemento= form.cleaned_data.get('Elemento')
-                messages.success(request,f' se agregó {elemento} al la factura correctamente!')
+                if factura_u.tipofactura == "Venta":
+                    id = Detalle.objects.values_list('id', flat=True)
+                    cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
+                    cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
+                    elemento = Elemento.objects.get(id=cantidadp)
+                    if cantidad_stock > elemento.stock_elemento:
+                       Detalle.objects.filter(id= len(id) ).update(
+                            cantidad = elemento.stock_elemento  
+                            )
+                       cantidad_resta = Detalle.objects.get(id = len(id) ).cantidad
+                       Elemento.objects.filter(id = cantidadp ).update(
+                           stock_elemento = elemento.stock_elemento - cantidad_resta
+                       )
+                    else:
+                        Elemento.objects.filter(id=cantidadp).update(
+                        stock_elemento = elemento.stock_elemento   -  cantidad_stock
+                        )
+                elif  factura_u.tipofactura == "Compra":
+                      id = Detalle.objects.values_list('id', flat=True)
+                      cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
+                      cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
+                      elemento = Elemento.objects.get(id=cantidadp)
+                      Elemento.objects.filter(id=cantidadp).update(
+                        stock_elemento = elemento.stock_elemento   +  cantidad_stock
+                        )
+                # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
                 return redirect('factura-detalle', pk=pk)    
         else:
-            Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento']).update(
-                cantidad = detalle_aux[0].cantidad + int(request.POST['cantidad'])
-            )
-            return redirect('factura-detalle', pk=pk)   
+        #     stock_elemento = Detalle.objects.get(id=pk)
+        #     elemento = Elemento.objects.get(id=pk)
+        #     stock_elemento = int(request.POST["cantidad"])
+        #     Elemento.objects.filter(id=pk).update(
+        #     stock_elemento = elemento.stock_elemento + stock_elemento
+        #     )
+          if factura_u.tipofactura == "Venta":
+            id = Detalle.objects.values_list('id', flat=True)
+            # este elemento tiene que ser dinamico 
+            cantidadp = Detalle.objects.all()[15].elemento_id
+            stock_elemento = int(request.POST["cantidad"])
+            elemento__xd = Elemento.objects.filter(id=cantidadp)
+            print('abshabvghsgfagscf3', elemento__xd)
+            return redirect('factura-detalle', pk=pk)  
     else:
         form= DetalleForm()
     if request.method == 'POST' and "form-serv" in request.POST:
@@ -104,8 +138,9 @@ def detalle(request,pk):
             print('Seleccione un sevicio!')
             messages.warning(request,f'Seleccione un servicio!')
     if request.method == 'POST' and "form-user" in request.POST:
-            if request.POST["usuario"] and request.POST["usuario"] != "--- Seleccione el usuario ---":
-                usuario_final=Servicio.objects.get(id=request.POST["usuario"]).usuario
+            print(request.POST)
+            if request.POST["usuario"] and request.POST["usuario"] != "null":
+                usuario_final=Usuario.objects.get(Uid=request.POST["usuario"])
                 Factura.objects.filter(id=pk).update(
                     usuario=usuario_final,
                 )
@@ -122,6 +157,7 @@ def detalle(request,pk):
         "factura":factura_u
     }
     return render(request, "factura/detalle-factura.html", context)
+
 
 def detalle_estado(request,pk ):
     titulo_pagina='elemento'
