@@ -59,7 +59,7 @@ class ServicioForm(ModelForm):
         model= Servicio
         fields=['usuario','tiposervicio', 'electrodomestico','observacion', 'fallas_basicas', 'diagnostico']
         widgets = {
-            'observacion': Textarea(attrs={'cols': 80, 'rows': 5}),
+            'observacion': Textarea(attrs={'cols': 50, 'rows': 5}),
         }
 
 class ServicioEditarForm(ModelForm):
