@@ -29,6 +29,7 @@ def factura(request):
     return render(request,'factura/crearFactura.html', context)
 
 def tfactura(request):
+    titulo_pagina="Facturas"
     Rol_c=Rol.objects.all()
     Usuario_c=Usuario.objects.all()
     renew = '/factura/factura'
@@ -36,6 +37,7 @@ def tfactura(request):
     context={
         "tfacturas": tfacturas,
         "renew":renew,
+        "titulo_pagina":titulo_pagina,
         "Rol":Rol_c,
         "Usuario":Usuario_c
     }

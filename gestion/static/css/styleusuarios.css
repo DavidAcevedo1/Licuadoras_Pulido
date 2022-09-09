@@ -84,6 +84,16 @@ h1, h2, h3, h4 {
         width: 100%;
     }
 }
+
+header{
+    background-color: #0B318A;
+    height: auto;
+}
+.dark-mode header{
+    background-color:#020a1d;
+    color:#fff;
+}
+
 .subheader {
     background-color: #0B318A;
     height: auto;
@@ -97,13 +107,11 @@ h1, h2, h3, h4 {
     display: flex;
     padding: 0 10%;
 }
-.marca{
+.logo{
     width: 320px;
 }
 .opheader{
-    width: 68%;
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 .part {
@@ -242,7 +250,7 @@ footer{
     border-radius: 50%;
     padding: 5px;
     top: -30px;
-    left: 47.5%;
+    left: 47%;
 }
 @media (max-width:420px) {
     .sublogo{
