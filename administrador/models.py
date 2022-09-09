@@ -65,19 +65,6 @@ class  Favorito(models.Model):
     def __str__(self) -> str:
         return '%s'%(self.nombre)
         
-class Cantidad(models.Model):
-    fecha= models.DateField(auto_now=True, verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
-    cantidad_agregada=models.IntegerField(default=0)
-    cantidad_stock=models.IntegerField(verbose_name="Cantidad")
-    producto= models.ForeignKey(Elemento, on_delete=models.SET_NULL, null=True, verbose_name=u"Producto")
-    class Estado(models.TextChoices):
-        ACTIVO='Activo', _('Activo')
-        INACTIVO='Inactivo', _('Inactivo')
-        ANULADO='Anulado', _('Anulado')
-    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
-    def __str__(self) -> str:
-        return '%s' % (self.cantidad_stock)
-  
 class Electrodomestico(models.Model):
     nombre=models.CharField(max_length=25)
     marca= models.ForeignKey(Marca, on_delete=models.SET_NULL, blank=True, null=True, verbose_name=u"Marca")

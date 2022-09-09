@@ -254,6 +254,81 @@ def marca_eliminar(request,pk):
     }
     return render(request, "administrador/marca/marca-eliminar.html", context)
 
+
+# def factura(request):
+#     titulo_pagina='Facturas'
+#     facturas= Factura.objects.all()
+#     if request.method == 'POST':
+#         form= FacturaForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.success(request,f'La factura {factura_elemento} se agregó correctamente!')
+#         else:
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.error(request,f'La factura que ingreso ya se encuentra registrado!')     
+#         return redirect('administrador-factura')
+#     else:
+#         form= FacturaForm()
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "facturas": facturas,
+#             "form": form
+#     }
+#     return render(request, "administrador/factura/factura.html", context)
+
+# def factura_editar(request,pk):
+#     titulo_pagina='Facturas'  
+#     facturas= Factura.objects.all()
+#     factura= Factura.objects.get(id=pk)
+#     documento=f"{factura.elemento} con el ID {pk}"
+#     url_editar="/factura"
+#     if request.method == 'POST':
+#         form= FacturaEditarForm(request.POST, instance=factura)
+#         if form.is_valid():
+#             form.save()
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.success(request,f'La factura {factura_elemento} se editó correctamente!')
+#             return redirect('administrador-factura')
+#         else:
+#             factura_elemento= form.cleaned_data.get('elemento')
+#             messages.error(request,f'Error al modificar el factura {factura_elemento}')     
+#     else:
+#         form= FacturaEditarForm(instance=factura)
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "facturas":facturas,
+#             "form": form,
+#             "documento":documento,
+#             "url_editar":url_editar,
+#     }
+#     return render(request, "administrador/factura/factura-editar.html", context)
+
+# def factura_eliminar(request,pk):
+#     titulo_pagina='Facturas'
+#     url_eliminar= '/factura/'
+#     facturas= Factura.objects.all()
+#     factura= Factura.objects.get(id=pk)
+#     accion_txt= f"La factura {factura.id}, una vez eliminado no hay marcha atras!"
+#     if request.method == 'POST':
+#         form= FacturaForm(request.POST)
+#         Factura.objects.filter(id=pk).update(
+#                     estado='Anulado'
+#                 )
+#         factura_fecha= factura.fecha
+#         messages.success(request,f'La factura {factura_fecha} se eliminó correctamente!')
+#         return redirect('administrador-factura')
+#     else:
+#         form= FacturaForm()
+#     context={
+#             "titulo_pagina": titulo_pagina,
+#             "accion_txt":accion_txt,
+#             "facturas":facturas,
+#             "form": form,
+#             "url_eliminar":url_eliminar
+#     }
+#     return render(request, "administrador/factura/factura-eliminar.html", context)
+
 def electrodomestico(request):
     titulo_pagina='Electrodomestico'
     electrodomesticos= Electrodomestico.objects.all()
