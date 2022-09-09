@@ -245,7 +245,7 @@ footer{
     border-radius: 50%;
     padding: 5px;
     top: -30px;
-    left: 48%;
+    left: 47%;
 }
 .sublogo img{
     width: 80px;
@@ -269,6 +269,7 @@ footer{
         width: 100% !important;
         min-width: 300px !important;
     }
+}
 .conttoast{
     width: 350px !important;
     height: 120px !important;

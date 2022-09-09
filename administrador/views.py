@@ -97,7 +97,7 @@ def tipoelemento_eliminar(request,pk):
     return render(request, "administrador/categoria/categoria-eliminar.html", context)
 
 def elemento(request):
-    titulo_pagina='Elemento'
+    titulo_pagina='Elementos'
     elementos= Elemento.objects.all()
     if request.method == 'POST':
         form= ElementoForm(request.POST, request.FILES)
@@ -253,6 +253,7 @@ def marca_eliminar(request,pk):
             "url_eliminar":url_eliminar
     }
     return render(request, "administrador/marca/marca-eliminar.html", context)
+
 
 # def factura(request):
 #     titulo_pagina='Facturas'
@@ -485,6 +486,7 @@ def importar_datos(archivo):
         print("Problemas al importar")
 
 def copiaseguridad(request,tipo):
+    titulo_pagina='copia de seguridad'
     carrito = Carrito(request) 
     ejemplo_dir = 'gestion/static/copiaseguridad/'
     with os.scandir(ejemplo_dir) as ficheros:
@@ -513,6 +515,7 @@ def copiaseguridad(request,tipo):
         form = CopiaseguridadForm()
     context ={
         "ficheros":ficheros,
+        "titulo_pagina":titulo_pagina,
         "form":form,
         "copiaseguridad":copiaseguridad
     }
