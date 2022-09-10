@@ -10,7 +10,6 @@ from django.contrib import messages
 import os
 from datetime import date
 
-
 @login_required(login_url="usuario-login")
 
 def inicioadmin(request):
