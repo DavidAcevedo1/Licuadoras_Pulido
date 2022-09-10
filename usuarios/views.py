@@ -53,10 +53,10 @@ def cusuario(request):
         "usuario_db": usuario_db,
         "form":form
     }
-    return render(request,'usuarios/crearUsuario.html', context)
+    return render(request,'usuarios/usuario-crear.html', context)
 
 def tusuario(request):
-    titulo_pagina="usuario"
+    titulo_pagina="Usuarios"
     tusuarios= Usuario.objects.all()
     context={
         "tusuarios": tusuarios,

@@ -2,7 +2,14 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block contenido %}
-<div class="contenido-cuerpo borde ">
+<div class="contenido-cuerpo borde">
+    <h1 class="text-center">{{titulo_pagina}}</h1>
+    <div>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a class="text-decoration-none" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
+          <li class="breadcrumb-item"><a class="text-decoration-none">Copia de Seguridad</a></li>
+        </ol>
+    </div>
     <div class="row">
         <div class="col">
             <h2>Exportar</h2>
