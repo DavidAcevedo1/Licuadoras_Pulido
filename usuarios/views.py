@@ -64,6 +64,7 @@ def Editarusuario(request,pk):
 
 def usuario_eliminar(request,pk):
     titulo_pagina='Usuarios'
+    url_eliminar= '/tablausuario/'
     tusuarios= Usuario.objects.all()
     tusuario= Usuario.objects.get(Uid=pk)
     accion_txt= f"usuario {tusuario.Uid}, una vez eliminado no hay marcha atras!"
@@ -80,7 +81,8 @@ def usuario_eliminar(request,pk):
     context={
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
-            "tusuarios": tusuarios,   
+            "tusuarios": tusuarios,  
+            "url_eliminar":url_eliminar 
     }
     return render(request, "usuarios/usuario-eliminar.html", context)
 

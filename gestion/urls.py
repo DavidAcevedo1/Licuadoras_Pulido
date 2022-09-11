@@ -19,11 +19,12 @@ from administrador.views import inicioadmin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inicio, name="inicio"),
-    path('inicio-ad/', inicioadmin, name="inicioadmin"),
+    path('', login_required(inicio), name="inicio"),
+    path('inicio-ad/',login_required (inicioadmin), name="inicioadmin"),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
     path('', include('facturas.urls')),

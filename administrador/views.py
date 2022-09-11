@@ -1,4 +1,5 @@
 from datetime import datetime
+from multiprocessing.reduction import ForkingPickler
 from usuarios.Carrito import Carrito
 from django.shortcuts import render, redirect
 from administrador.forms import  CopiaseguridadForm, ElectrodomesticoEditarForm, StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
@@ -331,18 +332,18 @@ def marca_eliminar(request,pk):
 
 def electrodomestico(request):
     titulo_pagina='Electrodomestico'
-    electrodomesticos= Electrodomestico.objects.all()
+    electrodomesticos= Electrodomestico.objects.all.update()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
         if form.is_valid():
             form.save()
             electrodomestico_nombre= form.cleaned_data.get('nombre')
-            messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!')
+            messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!'.update)
         else:
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
             return redirect('administrador-electrodomestico')
     else:
-        form= ElectrodomesticoForm()
+        form= ElectrodomesticoForm()  
     context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
@@ -411,6 +412,7 @@ def servicio(request):
             form.save()
             servicio_electrodomestico= form.cleaned_data.get('electrodomestico')
             messages.success(request,f'El servicio {servicio_electrodomestico} se agregó correctamente!')
+            
         else:
             messages.error(request,f'Error al registrar el servicio ¡Por favor verificar los datos!  ')    
             return redirect('administrador-servicio')
