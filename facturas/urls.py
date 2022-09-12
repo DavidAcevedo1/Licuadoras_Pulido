@@ -1,13 +1,16 @@
 from django.urls import path
-from facturas.views import *
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
+from facturas.views import factura,tfactura,vfactura,detalle,detalle_estado,factura_estado
+
 
 
 urlpatterns = [
-        path('crearfactura/', factura, name='factura-factura'),
-        path('factura/', tfactura, name='factura-tfactura'),
-        path('verfactura/<int:pk>', vfactura, name='factura-verfactura'),
-        path('detalle/<int:pk>/', detalle, name='factura-detalle'),
-        path('detalle-factura/estado/<int:pk>/<str:estado>/', factura_estado, name='factura_estado'),
-        path('detalle-estado/eliminar/<int:pk>/', detalle_estado, name='detalle_eliminar_estado'),
+        path('crearfactura/',login_required (factura), name='factura-factura'),
+        path('factura/', login_required(tfactura), name='factura-tfactura'),
+        path('verfactura/<int:pk>',login_required (vfactura), name='factura-verfactura'),
+        path('detalle/<int:pk>/',login_required (detalle), name='factura-detalle'),
+        path('detalle-factura/estado/<int:pk>/<str:estado>/',login_required (factura_estado), name='factura-estado'),
+        path('detalle-estado/eliminar/<int:pk>/',login_required (detalle_estado), name='detalle-estado-eliminar'),
+        # path('categoria/d/<int:pk>/', tipoelemento_eliminar, name='administrador-categoria-eliminar'),
 ]

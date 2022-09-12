@@ -173,22 +173,27 @@ def detalle(request,pk):
             print('Seleccione un usuario!')
             messages.warning(request,f'Seleccione un usuario!')
     context={
+        
         "usuario":usuario,
         "servicio":servicio,
         "titulo_pagina": titulo_pagina,
         "detalles": detalles,
         "form":form,
-        "factura":factura_u
+        "factura":factura_u,
+       
     }
     return render(request, "factura/detalle-factura.html", context)
 
 
 def detalle_estado(request,pk ):
     titulo_pagina='elemento'
+    url_eliminar='/factura/'
+    detalle= Detalle.objects.get(id=pk)
     u_detalles= Detalle.objects.get(id=pk)
     factura_u= u_detalles.factura
     detalles= Detalle.objects.filter(factura_id=factura_u.id)
     accion_txt= f"Eliminando detalle {u_detalles.id}, una vez eliminado no hay marcha atras!"
+    url_back = "/detalles/"
     if request.method == 'POST':
         form= DetalleForm(request.POST)
         form = DetalleForm(request.POST)
@@ -200,14 +205,19 @@ def detalle_estado(request,pk ):
     context={
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
+            'url_eliminar': url_eliminar,
             "detalles": detalles,
             "factura":factura_u,
-            "form":form,    
+            "detalle":detalle,
+            
+            
+               
         }
-    return render(request, "factura/detalle-eliminar.html", context) 
+    return render(request, "factura\detalle-eliminar.html", context) 
 
 def detalle_eliminar(request,pk):
     titulo_pagina='Marca'
+    url_eliminar='/detalle-estado/'
     detalles= Detalle.objects.all()
     detalle= Detalle.objects.get(id=pk)
     accion_txt= f"la marca {detalle.id}, una vez eliminado no hay marcha atras!"
@@ -222,6 +232,8 @@ def detalle_eliminar(request,pk):
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
             "detalles": detalles,
+            "url_eliminar": url_eliminar,
+            
         }
     return render(request, "factura/detalle-factura.html", context)
     
@@ -277,7 +289,7 @@ def factura_estado(request,pk, estado):
             "titulo_pagina": titulo_pagina,
             "estado_msj":estado_msj,
             "estado_txt":estado_txt,
-            "tfacturas": tfacturas,
+            "tfacturas": tfacturas,     
     }
     return render(request, "factura/factura-estado.html", context)
 
@@ -300,5 +312,7 @@ def factura_anular(request,pk):
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
             "tfacturas": tfacturas,
+            "tfactura_usuario":tfactura_usuario,
+            
         }
     return render(request, "factura/factura-eliminar.html", context)
