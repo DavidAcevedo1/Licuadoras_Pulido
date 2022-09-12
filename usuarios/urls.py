@@ -5,7 +5,7 @@ from usuarios.views import Editarusuario, agregar_elemento, carrito, cusuario, d
 
 urlpatterns = [
     path('accesorios/',login_required (accesorio), name='usuarios-accesorios'),
-    path('productos/',login_required (producto), name='usuarios-productos'),
+    path('productos/',producto, name='usuarios-productos'),
     path('serviciocliente/',login_required (serviciocliente), name='usuarios-servicios'),
     path('nosotros/',login_required (nosotros), name='usuarios-nosotros'),
     path('carrito/',login_required (carrito), name='usuarios-carrito'),
