@@ -1,7 +1,7 @@
 {% load static %}
 <header>
     <div class="navbar contenido-navbar borde">
-        <div class="pt1">
+        <div class="logo">
             <img title="Logo" src="{% static 'img/logoo1.png' %}" alt="">
         </div>
         <div class="pt2">
@@ -13,8 +13,9 @@
                 </script>
             </div>
             <!-- Accesibilidad -->
-            <div class="acces btn-group dropstart">
-                <button type="button" class="btn btn-light rounded-circle p-1" data-bs-toggle="dropdown"
+            <div class=" dropdown d-flex justify-content-center">
+                <div class="acces">
+                    <button type="button" class="btn btn-light rounded-circle p-1" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <img class="rounded-circle" src="{% static 'img/icons/accesibilidad.svg' %}" width="33" alt=""
                         srcset="">
@@ -33,6 +34,8 @@
                                 src="{% static 'img/icons/eye-fill.svg' %}" width="30" alt="" srcset="">
                             Restaurar</button></li>
                 </ul>
+                </div>
+                
                 <div class="dropdown salir">
                     <a title="Salir" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{% static 'img/salir.png' %}" width="30" height="30" class="rounded-circle">

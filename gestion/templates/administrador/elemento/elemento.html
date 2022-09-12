@@ -2,16 +2,17 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block contenido %}
+<div class="cuerpo-admin">
     <div class="contenido-cuerpo borde">
-        <h1 class="text-center">{{titulo_pagina}}</h1>
         <div>
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a class="text-decoration-none" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
-              <li class="breadcrumb-item"><a class="text-decoration-none" href="{% url 'administrador-elemento' %}">Elemento</a></li>
+            <ol class="breadcrumb d-flex justify-content-end">
+              <li class="breadcrumb-item"><a class="indice text-decoration-none" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
+              <li class="breadcrumb-item"><a class="indice text-decoration-none" href="{% url 'administrador-elemento' %}">Elemento</a></li>
             </ol>
         </div>
+        <h1 class="text-center">{{titulo_pagina}}</h1>
         <form id="form1" action="" method="POST" enctype="multipart/form-data">
-            <table class="table bg-white table-bordered results  w-100" id="proyectos">
+            <table class="table display responsive results  w-100" id="proyectos">
                 <thead class="bg-info">
                     <tr class="text-white">
                         <th scope="col">Codigo</th>
@@ -43,7 +44,7 @@
                         <td><img class="producto-img" width="100px" src="{{elemento.foto.url}}" alt=""></td>
                         <td>
                             <div class="row">
-                                <a href="{% url 'administrador-electrodomestico-favorito' elemento.id %}" class="btn btn-primary btn-sm col-2"><img  width="16" height="16" 
+                                <a href="{% url 'administrador-electrodomestico-favorito' elemento.id %}" class="btn btn-primary btn-sm col-3 m-1"><img  width="16" height="16" 
                                 {% if elemento.favorito == True %}
                                     src="{% static 'img/estrellitaActivada-1.png' %}" 
                                 {% else %}
@@ -51,7 +52,7 @@
                                 {% endif %}
                                 alt=""/></a>
                                 <!-- Boton modal elemento editar -->
-                                <a class="btn btn-primary btn-sm col-2"
+                                <a class="btn btn-primary btn-sm col-3 m-1"
                                     href="{% url 'administrador-elemento-editar' elemento.id %}"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -61,7 +62,7 @@
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg></a>
                                 <!-- Boton modal elemento eliminar -->
-                                <a class="btn btn-danger btn-sm col-2"
+                                <a class="btn btn-danger btn-sm col-3 m-1"
                                     href="{% url 'administrador-elemento-eliminar' elemento.id %}"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-trash3" viewBox="0 0 16 16">
@@ -111,7 +112,7 @@
             </div>
         </div>
     </div>
-
+</div>
 <div class="toast-container position-fixed  end-0  p-3 " style="z-index: 1000 !important; top:150px !important; left: 800px;">
     <div id="success" class="conttoast toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="coco conttoast2 d-flex align-items-center" style="justify-content: center;">
