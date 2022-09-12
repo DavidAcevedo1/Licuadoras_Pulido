@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import context
-from facturas.models import Factura, Detalle
-from facturas.forms import FacturaForm, DetalleForm
+from facturas.models import DetalleServicio, Factura, Detalle
+from facturas.forms import DetalleServicioForm, FacturaForm, DetalleForm
 from django.contrib import messages 
 from usuarios.models import Rol, Usuario
 from usuarios.Carrito import Carrito
@@ -107,9 +107,9 @@ def detalle(request,pk):
                       elemento = Elemento.objects.get(id=cantidadp)
                       Elemento.objects.filter(id=cantidadp).update(
                         stock_elemento = elemento.stock_elemento   +  cantidad_stock
-                        )
+                        )     
                 # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
-                return redirect('factura-detalle', pk=pk)    
+                return redirect('factura-detalle', pk=pk)           
         else:
         #     stock_elemento = Detalle.objects.get(id=pk)
         #     elemento = Elemento.objects.get(id=pk)
@@ -117,16 +117,38 @@ def detalle(request,pk):
         #     Elemento.objects.filter(id=pk).update(
         #     stock_elemento = elemento.stock_elemento + stock_elemento
         #     )
-          if factura_u.tipofactura == "Venta":
-            id = Detalle.objects.values_list('id', flat=True)
-            # este elemento tiene que ser dinamico 
-            cantidadp = Detalle.objects.all()[15].elemento_id
-            stock_elemento = int(request.POST["cantidad"])
-            elemento__xd = Elemento.objects.filter(id=cantidadp)
-            print('abshabvghsgfagscf3', elemento__xd)
-            return redirect('factura-detalle', pk=pk)  
-    else:
+            if factura_u.tipofactura == "Venta":
+                id = Detalle.objects.values_list('id', flat=True)
+                # este elemento tiene que ser dinamico 
+                cantidadp = Detalle.objects.all()[15].elemento_id
+                stock_elemento = int(request.POST["cantidad"])
+                elemento__xd = Elemento.objects.filter(id=cantidadp)
+                print('abshabvghsgfagscf3', elemento__xd)
+                return redirect('factura-detalle', pk=pk) 
+    #Arreglo Servicio David
+               
+    #Final Arreglo Servicio David       
+    else:   
         form= DetalleForm()
+    
+    if request.method == 'POST' and "form-detalleservicio" in request.POST:
+        form= DetalleServicioForm(request.POST)
+        detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
+        if detalle_aux.exists():
+            detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
+        else:
+            detalle_aux=None
+        if detalle_aux == None:
+            if form.is_valid():
+                factura= DetalleServicio.objects.create(
+                cantidad=form.cleaned_data.get('cantidad'),
+                servicio= form.cleaned_data.get('servicio'),
+                factura=factura_u,        
+                )
+    else:
+        form= DetalleServicioForm() 
+    
+        
     if request.method == 'POST' and "form-serv" in request.POST:
         print(request.POST)
         if request.POST["servicio"] and request.POST["servicio"] != "--- Seleccione el servicio ---":
