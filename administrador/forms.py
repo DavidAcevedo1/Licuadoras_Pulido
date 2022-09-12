@@ -66,11 +66,6 @@ class ServicioEditarForm(ModelForm):
     class Meta:
         model= Servicio
         fields=['tiposervicio', 'electrodomestico', 'fallas_basicas','observacion', 'diagnostico']
-        
-class StockForm(ModelForm):
-    class Meta:
-        model= Stock
-        fields=['stock_stock']
            
 class CopiaseguridadForm(ModelForm):
     class Meta:

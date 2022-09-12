@@ -37,14 +37,15 @@ def restar_elemento(request, elemento_id):
     return redirect("usuarios-carrito")
 
 def cusuario(request):
-    titulo_pagina="usuario"
+    titulo_pagina="Usuarios"
     usuario_db = Usuario.objects.all()
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
             form.save()
             usuario_nombre= form.cleaned_data.get('Unombre')
-            messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
+            usuario_apellido= form.cleaned_data.get('Uapellido')
+            messages.success(request,f'El usuario {usuario_nombre} {usuario_apellido} se agregó correctamente!')
             return redirect('usuario-tablaUsuario')
     else:
         form = UsuarioForm()
@@ -65,7 +66,7 @@ def tusuario(request):
     return render(request, "usuarios/tablaUsuario.html",context)
 
 def vusuario (request,pk):
-    titulo_pagina="Producto"
+    titulo_pagina="Usuarios"
     usuario= Usuario.objects.get(Uid=pk) 
     print(usuario)
     context={
@@ -75,7 +76,7 @@ def vusuario (request,pk):
     return render(request,"usuarios/verusuario.html", context)
 
 def Editarusuario(request,pk):
-    titulo_pagina="Producto"
+    titulo_pagina="Usuarios"
     tusuarios= Usuario.objects.get(Uid=pk)
     if request.method == 'POST':
         form= UsuarioForm(request.POST, instance=tusuarios)
@@ -104,7 +105,8 @@ def usuario_eliminar(request,pk):
                     estado='Inactivo'
                 )
         tusuario_nombre=  tusuario.Unombre
-        messages.success(request,f'El usuario {tusuario_nombre} se eliminó correctamente!')
+        tusuario_apellido=  tusuario.Uapellido
+        messages.success(request,f'El usuario {tusuario_nombre} {tusuario_apellido} se eliminó correctamente!')
         return redirect('usuario-tablaUsuario')                           
     else:
         form:UsuarioForm()

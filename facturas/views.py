@@ -131,22 +131,22 @@ def detalle(request,pk):
     else:   
         form= DetalleForm()
     
-    if request.method == 'POST' and "form-detalleservicio" in request.POST:
-        form= DetalleServicioForm(request.POST)
-        detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
-        if detalle_aux.exists():
-            detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
-        else:
-            detalle_aux=None
-        if detalle_aux == None:
-            if form.is_valid():
-                factura= DetalleServicio.objects.create(
-                cantidad=form.cleaned_data.get('cantidad'),
-                servicio= form.cleaned_data.get('servicio'),
-                factura=factura_u,        
-                )
-    else:
-        form= DetalleServicioForm() 
+    # if request.method == 'POST' and "form-detalleservicio" in request.POST:
+    #     form= DetalleServicioForm(request.POST)
+    #     detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
+    #     if detalle_aux.exists():
+    #         detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
+    #     else:
+    #         detalle_aux=None
+    #     if detalle_aux == None:
+    #         if form.is_valid():
+    #             factura= DetalleServicio.objects.create(
+    #             cantidad=form.cleaned_data.get('cantidad'),
+    #             servicio= form.cleaned_data.get('servicio'),
+    #             factura=factura_u,        
+    #             )
+    # else:
+    #     form= DetalleServicioForm() 
     
         
     if request.method == 'POST' and "form-serv" in request.POST:
