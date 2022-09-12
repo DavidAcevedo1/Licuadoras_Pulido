@@ -146,13 +146,13 @@ LOGOUT_REDIRECT_URL = 'inicio'
 LOGIN_REDIRECT_URL = 'inicioadmin'
 LOGIN_URL="usuario-login"
  
-# para lo del email documentacion django "Alejo3012154053"
+# para lo del email documentacion django
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER="facceres1@misena.edu.co"
-EMAIL_HOST_PASSWORD="ebsmydwxjufrozjt"
+EMAIL_HOST_USER="jose.acevedo1111@misena.edu.co"
+EMAIL_HOST_PASSWORD="wzthfpcehjhivkqx"
 
 STATIC_URL = '/static/'
 

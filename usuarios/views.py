@@ -6,15 +6,46 @@ from usuarios.models import Usuario
 from .Carrito import Carrito
 from administrador.models import Elemento, Tipos_Elemento
 
+def carrito(request):
+    titulo_pagina='Carrito'
+    context={
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "usuarios/carrito.html", context)
+
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect("usuarios-carrito")
+
+def agregar_elemento(request, elemento_id):   
+    carrito = Carrito(request) 
+    elemento = Elemento.objects.get(id=elemento_id) 
+    carrito.agregar(elemento=elemento)
+    return redirect("usuarios-carrito")
+
+def eliminar_elemento(request, elemento_id):
+    carrito = Carrito(request)
+    elemento = Elemento.objects.get(id=elemento_id)
+    carrito.eliminar(elemento=elemento)
+    return redirect("usuarios-carrito")
+
+def restar_elemento(request, elemento_id):
+    carrito = Carrito(request)
+    elemento = Elemento.objects.get(id=elemento_id)
+    carrito.restar(elemento=elemento)
+    return redirect("usuarios-carrito")
+
 def cusuario(request):
-    titulo_pagina="usuario"
+    titulo_pagina="Usuarios"
     usuario_db = Usuario.objects.all()
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
             form.save()
             usuario_nombre= form.cleaned_data.get('Unombre')
-            messages.success(request,f'El usuario {usuario_nombre} se agregó correctamente!')
+            usuario_apellido= form.cleaned_data.get('Uapellido')
+            messages.success(request,f'El usuario {usuario_nombre} {usuario_apellido} se agregó correctamente!')
             return redirect('usuario-tablaUsuario')
     else:
         form = UsuarioForm()
@@ -35,7 +66,7 @@ def tusuario(request):
     return render(request, "usuarios/tablaUsuario.html",context)
 
 def vusuario (request,pk):
-    titulo_pagina="Producto"
+    titulo_pagina="Usuarios"
     usuario= Usuario.objects.get(Uid=pk) 
     print(usuario)
     context={
@@ -45,7 +76,7 @@ def vusuario (request,pk):
     return render(request,"usuarios/verusuario.html", context)
 
 def Editarusuario(request,pk):
-    titulo_pagina="Producto"
+    titulo_pagina="Usuarios"
     tusuarios= Usuario.objects.get(Uid=pk)
     if request.method == 'POST':
         form= UsuarioForm(request.POST, instance=tusuarios)
@@ -74,7 +105,8 @@ def usuario_eliminar(request,pk):
                     estado='Inactivo'
                 )
         tusuario_nombre=  tusuario.Unombre
-        messages.success(request,f'El usuario {tusuario_nombre} se eliminó correctamente!')
+        tusuario_apellido=  tusuario.Uapellido
+        messages.success(request,f'El usuario {tusuario_nombre} {tusuario_apellido} se eliminó correctamente!')
         return redirect('usuario-tablaUsuario')                           
     else:
         form:UsuarioForm()
@@ -136,36 +168,6 @@ def politicasprivacidad(request):
         "titulo_pagina": titulo_pagina,
     }
     return render(request, "usuarios/politicasprivacidad.html", context) 
-    
-def carrito(request):
-    titulo_pagina='Carrito'
-    context={
-        "titulo_pagina": titulo_pagina,
-    }
-    return render(request, "usuarios/carrito.html", context)
-
-def agregar_elemento(request, elemento_id):   
-    carrito = Carrito(request) 
-    elemento = Elemento.objects.get(id=elemento_id) 
-    carrito.agregar(elemento=elemento)
-    return redirect("usuarios-carrito")
-
-def eliminar_elemento(request, elemento_id):
-    carrito = Carrito(request)
-    elemento = Elemento.objects.get(id=elemento_id)
-    carrito.eliminar(elemento=elemento)
-    return redirect("usuarios-carrito")
-
-def restar_elemento(request, elemento_id):
-    carrito = Carrito(request)
-    elemento = Elemento.objects.get(id=elemento_id)
-    carrito.restar(elemento=elemento)
-    return redirect("usuarios-carrito")
-
-def limpiar_carrito(request):
-    carrito = Carrito(request)
-    carrito.limpiar()
-    return redirect("usuarios-carrito")
 
 def detalle(request, pk, url_back):
     titulo_pagina='Detalles'

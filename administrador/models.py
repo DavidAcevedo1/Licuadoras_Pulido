@@ -1,4 +1,3 @@
-# from xml.dom.minidom import Element
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import os
@@ -93,16 +92,3 @@ class Servicio(models.Model):
     estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
         return '%s'%(self.tiposervicio)
-        
-class Stock(models.Model):
-    fecha= models.DateField(auto_now=True, verbose_name="Fecha de Registro", help_text=u"MM/DD/AAAA")
-    stock_agregada=models.IntegerField(verbose_name="Stock Nuevo", default=0)
-    stock_stock=models.IntegerField(verbose_name="Stock")
-    elemento= models.ForeignKey(Elemento, on_delete=models.SET_NULL, null=True, verbose_name=u"elemento")
-    class Estado(models.TextChoices):
-        ACTIVO='Activo', _('Activo')
-        INACTIVO='Inactivo', _('Inactivo')
-        ANULADO='Anulado', _('Anulado')
-    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
-    def __str__(self) -> str:
-        return '%s' % (self.stock_stock)

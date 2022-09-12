@@ -5,7 +5,7 @@ class Carrito:
         carrito = self.session.get("carrito")
         if not carrito:
             carrito=self.session["carrito"]={}
-        # else:
+        #else:
         self.carrito = carrito
 
     def agregar(self, elemento):
@@ -15,6 +15,7 @@ class Carrito:
                 "nombre": elemento.nombre,
                 "precio": str(elemento.precio),
                 "cantidad": 1,
+                #"imagen": elemento.imagen.url
                 "foto": elemento.foto.url
             }
         else:
@@ -45,8 +46,6 @@ class Carrito:
                 break
         self.guardar_carrito()
                     
-            
     def limpiar (self):
         self.session["carrito"] = {}
         self.session.modified = True
-                
