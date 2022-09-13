@@ -44,7 +44,7 @@ def cusuario(request):
         if form.is_valid():
             form.save()
             usuario_nombre= form.cleaned_data.get('Unombre')
-            usuario_apellido= form.cleaned_data.get('Uapellido')
+            usuario_apellido= form.cleaned_data.get('apellido')
             messages.success(request,f'El usuario {usuario_nombre} {usuario_apellido} se agregó correctamente!')
             return redirect('usuario-tablaUsuario')
     else:
@@ -105,7 +105,7 @@ def usuario_eliminar(request,pk):
                     estado='Inactivo'
                 )
         tusuario_nombre=  tusuario.Unombre
-        tusuario_apellido=  tusuario.Uapellido
+        tusuario_apellido=  tusuario.apellido
         messages.success(request,f'El usuario {tusuario_nombre} {tusuario_apellido} se eliminó correctamente!')
         return redirect('usuario-tablaUsuario')                           
     else:

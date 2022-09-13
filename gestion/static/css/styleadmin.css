@@ -13,11 +13,15 @@
   .f4 {
     font-size: 1.2rem;
   } 
+html{
+    height: 100%;
+}  
 body{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
+    height: 100%;
 }
 .borde{
     width: 80%;              
