@@ -253,13 +253,13 @@ def marca_eliminar(request,pk):
 
 def electrodomestico(request):
     titulo_pagina='Electrodomesticos'
-    electrodomesticos= Electrodomestico.objects.all.update()
+    electrodomesticos= Electrodomestico.objects.all()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
         if form.is_valid():
             form.save()
             electrodomestico_nombre= form.cleaned_data.get('nombre')
-            messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!'.update)
+            messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!')
         else:
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
             return redirect('administrador-electrodomestico')
