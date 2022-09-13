@@ -3,6 +3,7 @@
 {% load static %}
 {% block contenido %}
     <div class="contenido-cuerpo borde">
+        <h1 class="text-center">Detalles Factura</h1>
         <div class="p-3">
             <a href="{% url 'factura-tfactura' %}"
                 class="btn d-flex justify-content-center" style="margin: 0px; width: 60px;">
@@ -70,14 +71,12 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <button class="btn btn-primary" name="form-serv">Seleccionar servicio</button>        
+                        <div>
+                            <button class="btn btn-primary" name="form-serv">Seleccionar servicio</button>        
                     {% endif %}
-                    <div class="iconosOpcion">
-                        <div class="agreproducto">
                             <a href="{% url 'usuario-crearUsuario' %}"
-                                class=" btn btn-success btn-block my-2">Crear Usuario</a>
+                            class=" btn btn-success btn-block my-2">Crear Usuario</a>
                         </div>
-                    </div>
                 </form>
             {% endif %}
         </div>
