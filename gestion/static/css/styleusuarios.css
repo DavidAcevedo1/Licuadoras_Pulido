@@ -666,3 +666,50 @@ h2{
     padding: auto;
     margin-block-end: 30px;
 }
+
+/* ----------------responsive Daniela ------------------------------------------ */
+@media (max-width:420px) {
+    .fecha{
+        align-items: center;
+        height: 90%;
+        width: 140%;
+        justify-content: left !important;
+        margin-left:90% !important;
+  	}
+}
+@media (max-width:420px) {
+    .buscaruser {
+        align-items: center;
+        height: 90%;
+        justify-content: left !important;
+        width: 20% !important;
+        margin-right: 30% !important;   
+  	}
+}
+@media (max-width:420px) {
+    .accesibilidad {
+        align-items: center;
+        height: 90%;
+        justify-content: center !important;
+        width: 10% !important;
+        padding: 6px !important;
+        margin-right: 12px;
+  	}
+}
+.carritouser{  
+    margin-right: 50px !important; 
+}
+@media (max-width:420px) {
+    .usuariore{
+        margin-right: 0px !important;
+    }
+}
+@media (max-width:420px) {
+    .opheader{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+/* ----------------responsive - Daniela----------------------------------------- */

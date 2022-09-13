@@ -5,19 +5,19 @@
             <img src="{% static 'img/logoo1.png' %}" alt="">
         </div>
         <section class="opheader xs ms-4">
-            <div class="part">
+            <div class="part fecha "> <!-- clase fecha  -->
                 <script>
                     var options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'};
                     date = new Date().toLocaleDateString(undefined, options);
                     document.write(date);
                 </script>
             </div>
-            <div class="part">
+            <div class="part  buscaruser"> <!-- clase buscar   -->
                 <input placeholder="Buscar.." type="text" class="buscar" id="myInput">
             </div>
             <div class="part">
                     <!-- Accesibilidad -->
-                <div class="acces btn-group dropstart m-2">
+                <div class="acces btn-group dropstart m-2 accesibilidad "> <!-- cree clase accesibilidad-->
                     <button type="button" class="btn btn-light rounded-circle p-1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img class="rounded-circle" src="{% static 'img/icons/accesibilidad.svg' %}" width="33" alt="" srcset="">
                     </button>
@@ -28,10 +28,10 @@
                     <li><button title="Restaurar" class="dropdown-item" id="restaurar" href=""><img src="{% static 'img/icons/eye-fill.svg' %}" width="30" alt="" srcset=""> Restaurar</button></li>
                     </ul>
                 </div>
-                <div class="op m-2"> 
+                <div class="op m-2 carritouser"> <!-- cree clase carritouser-->
                     <a title="carrito" href="{% url 'usuarios-carrito'%}"><img src="{% static 'img/carrito.png' %}" alt=""></a>        
                 </div>
-                <div class="op m-2">
+                <div class="op m-2 usuariore"> <!-- cree clase usuariore-->
                     <div class="dropdown pb-4">
                         <a href="#" class="" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{% static 'img/usuario1.png' %}" alt="imagen de usuario" width="30" height="30" class="rounded-circle">
