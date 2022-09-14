@@ -10,8 +10,5 @@ urlpatterns = [
         path('detalle/<int:pk>/',login_required (detalle), name='factura-detalle'),
         path('detalle-factura/estado/<int:pk>/<str:estado>/',login_required (factura_estado), name='factura-estado'),
         path('detalle-estado/eliminar/<int:pk>/',login_required (detalle_estado), name='detalle-estado-eliminar'),
-        # path('categoria/d/<int:pk>/', tipoelemento_eliminar, name='administrador-categoria-eliminar'),
-        # david servicios
-        path('detalleservicios/<int:pk>/',login_required (detalleServicio), name='factura-detalle-servicio'),
-        # final david servicios
+        #path('categoria/d/<int:pk>/', tipoelemento_eliminar, name='administrador-categoria-eliminar'),
 ]
