@@ -85,8 +85,26 @@
                             <h4>Agregar Detalles a la Factura {{ factura.id }}</h4>
                             <hr>
                             <form action="" method="POST">
+                                {% comment %} <div id="div_id_usuario" class="mb-3">
+                                    <label for="id_usuario" class="form-label requiredField">
+                                        servicio<span class="asteriskField">*</span>
+                                    </label>
+                                    <select name="usuario" class="select form-select select2" required="" id="id_usuario">
+                                        <option selected="">
+                                            --- Seleccione el elemento ---
+                                        </option>
+                                        {% for elementoL in elemento %}
+                                            <option value="2">
+                                                {{elementoL}}
+                                            </option>
+                                        {% endfor %}
+                                        
+                                         </select>
+                            </div> {% endcomment %}
                                 {% csrf_token %}
+
                                 {{ form|crispy }}
+                                
                                 <button class="btn btn-success btn-block " name="form-detalle">Agregar Factura</button>
                                 <a class="btn btn-danger btn-block text-light"
                                    href="{% url 'factura_estado' pk=factura.id estado='cerrar' %}">Cerrar Factura</a>
@@ -102,6 +120,7 @@
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Precio</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Opciones</th>
                                 </tr>
                             </thead>
@@ -111,7 +130,10 @@
                                         <td class="dtr-control sorting_1">{{ detalle.elemento.nombre }}</td>
                                         <td class="dt-body-right dtr-hidden">{{ detalle.cantidad }}</td>
                                         <td class="dt-body-right dtr-hidden">{{ detalle.estado }}</td>
-                                        <td class="dt-body-right dtr-hidden">{{ detalle.elemento.precio }}</td>
+                                        <td class="dt-body-right dtr-hidden" >{{ detalle.elemento.precio }}</td>
+                                        <td class="dt-body-right dtr-hidden" id="total_venta" >{{ detalle.total }}</td>
+
+
                                         <td>
                                             <a href="{% url 'detalle_eliminar_estado' detalle.id  %}">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -127,9 +149,21 @@
                                     {% endfor %}
                                 </tbody>
                             </table>
+                            <div class="row">
+                                <div class="col col-md-3 card mt-1">
+                                    <div class="card-body">
+                                        <span class="text-success fs-2 " id="total_campos" ></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 {% endif %}
             </div>
         </div>
     {% endblock contenido %}
+    
+    {% block javascript %}
+    <script type="text/javascript" src="{% static 'js/total-calculado.js' %}"></script>
+    {% endblock javascript %}
+    

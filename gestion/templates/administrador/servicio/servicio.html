@@ -63,6 +63,28 @@
                     <div class="modal-body">
                         <form action="" method="POST">
                             {% csrf_token %}
+                            <div id="div_id_usuario" class="mb-3"> <label for="id_usuario" class="form-label">
+                                Usuario
+                            </label> 
+                            <select name="usuario" class="select form-select" id="id_usuario"> 
+                                <option value="" selected="">---------</option>
+                                {% for usuariosA in usuario %}
+                                    <option value="" selected="">{{usuariosA}}</option>
+                                {% endfor %}
+                            </select> 
+                        </div>
+                        <div id="div_id_electrodomestico" class="mb-3"> 
+                            <label for="id_electrodomestico" class="form-label requiredField">
+                                Articulo
+                                <span class="asteriskField">*</span> 
+                            </label> 
+                            <select name="electrodomestico" class="select form-select" required="" id="id_electrodomestico"> 
+                                <option value="" selected="">---------</option> 
+                                {% for itemL in item %}
+                                    <option value="" selected="">{{itemL}}</option> 
+                                {% endfor %}
+                            </select> 
+                        </div>
                             {{ form|crispy }}
                     </div>
                     <div class="modal-footer">
