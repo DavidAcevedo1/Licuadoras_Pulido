@@ -14,6 +14,11 @@ def carrito(request):
     }
     return render(request, "usuarios/carrito.html", context)
 
+
+
+
+
+
 def factura(request):
     if request.method == 'POST':
         print(request.POST)
@@ -21,12 +26,23 @@ def factura(request):
             tipofactura= request.POST['tipofactura']
         )
         messages.success(request,f'!La factura se agregó correctamente!')
-        return redirect('factura-detalle',aux.id)
+        if aux == "servicio":
+            return redirect('factura-detalle-servicio',aux.id)
+        else:
+            return redirect('factura-detalle',aux.id)
     else:
         messages.error(request,f'!Error al agregar Factura!')
     context={
     }
     return render(request,'factura/crearFactura.html', context)
+
+
+
+
+
+
+
+
 
 def tfactura(request):
     titulo_pagina="Facturas"
@@ -57,18 +73,22 @@ def vfactura (request,pk):
     }
     return render(request,"factura/verfactura.html", context)
 
+
+
+
+
+
+
+
 def detalle(request,pk):
     titulo_pagina="facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
     factura_u= Factura.objects.get(id=pk)
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
-    elif factura_u.tipofactura == "Venta":    
+    else:    
         rol_aux= "Cliente"
-    else:
-        rol_aux= "servicio"
     usuario= Usuario.objects.filter(rol=rol_aux)
-    servicio= Servicio.objects.all()
     if request.method == 'POST' and "form-detalle" in request.POST:
         form= DetalleForm(request.POST)
         detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
@@ -124,31 +144,60 @@ def detalle(request,pk):
                 stock_elemento = int(request.POST["cantidad"])
                 elemento__xd = Elemento.objects.filter(id=cantidadp)
                 print('abshabvghsgfagscf3', elemento__xd)
-                return redirect('factura-detalle', pk=pk) 
-    #Arreglo Servicio David
-               
-    #Final Arreglo Servicio David       
+                return redirect('factura-detalle', pk=pk)      
     else:   
-        form= DetalleForm()
-    
-    # if request.method == 'POST' and "form-detalleservicio" in request.POST:
-    #     form= DetalleServicioForm(request.POST)
-    #     detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
-    #     if detalle_aux.exists():
-    #         detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
-    #     else:
-    #         detalle_aux=None
-    #     if detalle_aux == None:
-    #         if form.is_valid():
-    #             factura= DetalleServicio.objects.create(
-    #             cantidad=form.cleaned_data.get('cantidad'),
-    #             servicio= form.cleaned_data.get('servicio'),
-    #             factura=factura_u,        
-    #             )
-    # else:
-    #     form= DetalleServicioForm() 
-    
-        
+        form= DetalleForm()    
+    if request.method == 'POST' and "form-user" in request.POST:
+            print(request.POST)
+            if request.POST["usuario"] and request.POST["usuario"] != "null":
+                usuario_final=Usuario.objects.get(Uid=request.POST["usuario"])
+                Factura.objects.filter(id=pk).update(
+                    usuario=usuario_final,
+                )
+            return redirect('factura-detalle', pk=pk)
+    else:
+            print('Seleccione un usuario!')
+            messages.warning(request,f'Seleccione un usuario!')
+    context={
+        "usuario":usuario,
+        "titulo_pagina": titulo_pagina,
+        "detalles": detalles,
+        "form":form,
+        "factura":factura_u,
+    }
+    return render(request, "factura/detalle-factura.html", context)
+
+
+
+
+
+# ------------------------------David Servicios--------------------
+def detalleServicio(request,pk):
+    titulo_pagina="facturas"
+    detalles= Detalle.objects.filter(factura_id=pk)
+    factura_u= Factura.objects.get(id=pk)
+    factura_u.tipofactura == "servicio"
+    rol_aux= "servicio"
+    usuario= Usuario.objects.filter(rol=rol_aux)
+    servicio= Servicio.objects.all()
+    if request.method == 'POST' and "form-detalle-servicio" in request.POST:
+        form= DetalleServicioForm(request.POST)
+        detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
+        if detalle_aux.exists():
+            detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
+        else:
+            detalle_aux=None
+        if detalle_aux == None:
+            if form.is_valid():
+                factura= DetalleServicio.objects.create(
+                cantidad= form.cleaned_data.get('cantidad'),
+                servicio= form.cleaned_data.get('servicio'),
+                elmento= form.cleaned_data.get('elemento'),
+                costo= form.cleaned_data.get('costo'),
+                factura=factura_u,        
+                )
+    else:
+        form= DetalleServicioForm()     
     if request.method == 'POST' and "form-serv" in request.POST:
         print(request.POST)
         if request.POST["servicio"] and request.POST["servicio"] != "--- Seleccione el servicio ---":
@@ -180,9 +229,12 @@ def detalle(request,pk):
         "detalles": detalles,
         "form":form,
         "factura":factura_u,
-       
     }
     return render(request, "factura/detalle-factura.html", context)
+# ------------------------------ fin David Servicios--------------------
+
+
+
 
 
 def detalle_estado(request,pk ):
