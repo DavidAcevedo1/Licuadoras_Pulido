@@ -13,11 +13,20 @@
   .f4 {
     font-size: 1.2rem;
   } 
+html{
+    height: 100%;
+}  
 body{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
-    margin: 0;
+    height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
 }
 .borde{
     width: 80%;              
@@ -26,7 +35,6 @@ body{
 /*-------------------------------navbar-----------------------------*/
 header{
     background: #0b318a;
-    margin: 0 auto;
 }
 .dark-mode header{
     background-color:#0D1821;
