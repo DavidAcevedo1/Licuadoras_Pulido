@@ -61,19 +61,25 @@ def detalle(request,pk):
     titulo_pagina="facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
     factura_u= Factura.objects.get(id=pk)
+    # elementos = Elemento.objects.filter(estado= "Activo")
+    
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
-    elif factura_u.tipofactura == "Venta":    
-        rol_aux= "Cliente"
+        # rol_aux = Usuario.objects.filter(estado = " Activo", rol = "Proveedor")
+    elif factura_u.tipofactura == "Venta": 
+        rol_aux= "Cliente"   
+        # usuario= Usuario.objects.filter(estado = " Activo", rol = "Cliente")
     else:
         rol_aux= "servicio"
-    usuario= Usuario.objects.filter(rol=rol_aux)
+    usuario= Usuario.objects.filter(rol=rol_aux, estado="Activo")
     servicio= Servicio.objects.all()
     if request.method == 'POST' and "form-detalle" in request.POST:
         form= DetalleForm(request.POST)
         detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
+        # print('anjsnaahshabnhbnshabhsbhbabsa',detalle_aux)
         if detalle_aux.exists():
             detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
+            # print('anjsnaahshabnhbnshabhsbhbabsa',detalle_aux)
         else:
             detalle_aux=None
         if detalle_aux == None:
@@ -86,6 +92,7 @@ def detalle(request,pk):
                 if factura_u.tipofactura == "Venta":
                     id = Detalle.objects.values_list('id', flat=True)
                     cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
+                    cantidadpes = Detalle.objects.all()[len(id)-1].id
                     cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
                     elemento = Elemento.objects.get(id=cantidadp)
                     if cantidad_stock > elemento.stock_elemento:
@@ -96,18 +103,31 @@ def detalle(request,pk):
                        Elemento.objects.filter(id = cantidadp ).update(
                            stock_elemento = elemento.stock_elemento - cantidad_resta
                        )
+                       precio = Elemento.objects.get(id =  elemento.id ).precio
+                       Detalle.objects.filter(id = cantidadpes ).update(
+                            total = precio * int(request.POST["cantidad"])
+                        )
                     else:
                         Elemento.objects.filter(id=cantidadp).update(
                         stock_elemento = elemento.stock_elemento   -  cantidad_stock
                         )
+                        precio = Elemento.objects.get(id =  elemento.id ).precio
+                        Detalle.objects.filter(id = cantidadpes ).update(
+                            total = precio * int(request.POST["cantidad"])
+                        )
                 elif  factura_u.tipofactura == "Compra":
                       id = Detalle.objects.values_list('id', flat=True)
                       cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
+                      cantidadpes = Detalle.objects.all()[len(id)-1].id
                       cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
                       elemento = Elemento.objects.get(id=cantidadp)
                       Elemento.objects.filter(id=cantidadp).update(
-                        stock_elemento = elemento.stock_elemento   +  cantidad_stock
-                        )     
+                          stock_elemento = elemento.stock_elemento   +  cantidad_stock
+                        )
+                      precio = Elemento.objects.get(id =  elemento.id ).precio
+                      Detalle.objects.filter(id = cantidadpes ).update(
+                            total = precio * int(request.POST["cantidad"])
+                        )
                 # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
                 return redirect('factura-detalle', pk=pk)           
         else:
@@ -180,8 +200,6 @@ def detalle(request,pk):
         "detalles": detalles,
         "form":form,
         "factura":factura_u,
-       
-    }
     return render(request, "factura/detalle-factura.html", context)
 
 
