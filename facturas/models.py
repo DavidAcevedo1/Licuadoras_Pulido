@@ -29,6 +29,7 @@ class Detalle(models.Model):
         ANULADa='Anulada', _('Anulada')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ABIERTA)
     cantidad=models.IntegerField()
+    total= models.FloatField(default=0 )
     def __str__(self)-> str:
         return '%s' % (self.id)
     

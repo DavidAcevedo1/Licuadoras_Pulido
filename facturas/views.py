@@ -134,7 +134,7 @@ def detalle(request,pk):
                     stock_elemento = int(request.POST["cantidad"])
                     elemento__xd = Elemento.objects.filter(id=cantidadp)
                     print('abshabvghsgfagscf3', elemento__xd)
-                    return redirect('factura-detalle', pk=pk)  
+                    return redirect('factura-detalle', pk=pk)
         else:
             form= DetalleForm()
     else:

@@ -32,7 +32,7 @@
           <td>{{tfactura.rol}}</td>
           <td>{{tfactura.usuario}}</td>
           <td>{{tfactura.fecha}}</td>
-          <td>{{tfactura.}}</td>
+          <td id="total_campos2">ftrg</td>
           <td>{{tfactura.tipofactura}}</td>
           <td>{{tfactura.estado}}</td>
           {% if tfactura.estado == "Abierta" %}
@@ -73,4 +73,12 @@
     <a href="{% url 'factura-factura' %}" class="btn btn-success btn-block">Agregar Factura</a>
   </div>
 </div>
-{% endblock contenido %}
+{% endblock contenido %}   
+{% block javascript %}
+<script >
+  import total from '{% static 'js/total-calculado.js' %}'
+  document.querySelectorAll('#total_campos2').forEach(items=>{
+    items.textContent = total
+  }) 
+</script>
+{% endblock javascript %}
