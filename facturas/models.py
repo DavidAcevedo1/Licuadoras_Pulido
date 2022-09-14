@@ -15,8 +15,12 @@ class Factura(models.Model):
     class Estado(models.TextChoices):
         ABIERTA='Abierta', _('Abierta')
         CERRADA='Cerrada', _('Cerrada')
-        ANULADa='Anulada', _('Anulada')
+        ANULADA='Anulada', _('Anulada')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ABIERTA)
+    class Decision(models.TextChoices):
+        ACTIVO= 'Activo', _('Activo')
+        INACTIVO= 'Inactivo', _('Inactivo')
+    decision= models.CharField(max_length=10, choices=Decision.choices, verbose_name="Estado", default=Decision.ACTIVO)
     class Meta:
         db_table="facturas_factura"
         
@@ -26,7 +30,7 @@ class Detalle(models.Model):
     class Estado(models.TextChoices):
         ABIERTA='Abierta', _('Abierta')
         CERRADA='Cerrada', _('Cerrada')
-        ANULADa='Anulada', _('Anulada')
+        ANULADA='Anulada', _('Anulada')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ABIERTA)
     cantidad=models.IntegerField()
     def __str__(self)-> str:
@@ -38,7 +42,7 @@ class DetalleServicio(models.Model):
     class Estado(models.TextChoices):
         ABIERTA='Abierta', _('Abierta')
         CERRADA='Cerrada', _('Cerrada')
-        ANULADa='Anulada', _('Anulada')
+        ANULADA='Anulada', _('Anulada')
     estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ABIERTA)
     cantidad=models.IntegerField()
     def __str__(self)-> str:
