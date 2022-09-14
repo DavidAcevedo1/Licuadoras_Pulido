@@ -1,0 +1,98 @@
+{% extends 'partials/admin-body.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block contenido %}
+    <div class="contenido-cuerpo borde">
+        <h1 class="text-center">Detalles Factura</h1>
+        <div class="p-3">
+            <a href="{% url 'factura-tfactura' %}"
+                class="btn d-flex justify-content-center" style="margin: 0px; width: 60px;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    class="opcionesTabla bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                    <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5
+                                0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                </svg>
+            </a>
+            {% if factura.usuario != None %}
+                <h2>{{ factura.usuario }} - Factura de {{ factura.tipofactura }} N# {{ factura.id }}</h2>
+            {% else %}
+                <h2 class="txtMainI">Factura #{{ factura.id }}</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if factura.tipofactura == "Servicios" %}
+                        <div id="div_id_servicio" class="mb-3">
+                            <label for="id_servicio" class="form-label requiredField">
+                                *- Servicios <span class="asteriskField">-*</span>
+                            </label>
+                            <select name="servicio" class="select form-select select2" id="id_servicio">
+                                <option selected>
+                                    --- Seleccione el servicio ---
+                                </option>
+                                {% for items in servicio %}
+                                    <option value="{{ items.id }}">
+                                        {{ items.tiposervicio }} a {{ items.electrodomestico }} de {{ items.usuario }} del {{ items.fecha_entrada }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" name="form-serv">Seleccionar servicio</button>        
+                    {% endif %}
+                            <a href="{% url 'usuario-crearUsuario' %}"
+                            class=" btn btn-success btn-block my-2">Crear Usuario</a>
+                        </div>
+                </form>
+            {% endif %}
+        </div>
+        {% if factura.servicio %}
+            <div class="row p-1">
+                <div class="col-md-4">
+                    <div class="border bg-white p-3">
+                        <h4>Agregar Detalles a la Factura {{ factura.id }}</h4>
+                        <hr>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-success btn-block " name="form-detalle">Agregar Factura</button>
+                            <a class="btn btn-danger btn-block text-light"
+                                href="{% url 'factura-estado' pk=factura.id estado='cerrar' %}">Cerrar Factura</a>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-8 p-4 bg-white">
+                    <table class="table bg-white table-bordered results dataTable no-footer dtr-inline" id="proyectos">
+                        <thead class="bg-info">
+                            <tr class="text-white">
+                                <th scope="col">Servicio</th>
+                                <th scope="col">Accesorios</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Costo</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for detalleservicios in detallesservicios %}
+                                <tr>
+                                    <td class="dtr-control sorting_1">{{ detalleservicios.servicio.nombre }}</td>
+                                    <td class="dt-body-right dtr-hidden">{{ detalleservicios.elemento }}</td>
+                                    <td class="dt-body-right dtr-hidden">{{ detalleservicios.cantidad }}</td>
+                                    <td class="dt-body-right dtr-hidden">${{ detalleservicios.costo }}</td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm col-3"
+                                            href="{% url 'detalle-estado-eliminar' detalle.id %}">
+                                            <svg 
+                                                xmlns="http://www.w3.org/2000/svg/favicon.ico" width="16" height="16" fill="currentColor"
+                                                class="bi bi-trash3 " viewBox="0 0 16 16">
+                                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                            </svg>
+                                        </a>   
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock contenido %}
