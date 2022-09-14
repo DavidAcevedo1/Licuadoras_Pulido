@@ -19,18 +19,14 @@
                             <p class="card-text fw-bold text-wrap">{{elemento.descripcion}}</p>
                             <div class="row">
                                 <div class="col">
-                                    <strong class="card-text">Unidades disponibles:</strong>
+                                    <strong class="card-text">Unidades disponibles: {{elemento.stock_elemento}}</strong>
                                 </div>
                                 <div class="col">
-                                
                                     <strong class="card-text">{{elemento.stock}}</strong>
                                 </div>
-                                {% comment %} <div class="col">
-                                    <p class="card-text fw-bold">Iva: Xd</p>
-                                </div> {% endcomment %}
                             </div>
                         </div>
-                        <a href="{% url 'agregar' elemento.id %}" class="btn w-75 mx-auto mt-3 text-light" style="background-color: #560000;">Agregar al carrito</a>
+                        <a href="{% url 'agregar' elemento.id %}" class="btn w-75 mx-auto mt-3 text-light btn btn-primary">Agregar al carrito</a>
                     </div>    
                 </div>   
             </div>

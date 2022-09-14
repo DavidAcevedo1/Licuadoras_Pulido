@@ -20,7 +20,7 @@ body{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
-    margin: 0;
+    height: 100%;
     min-width: 100%;
     display: flex;
     flex-direction: column;
@@ -84,6 +84,16 @@ h1, h2, h3, h4 {
         width: 100%;
     }
 }
+
+header{
+    background-color: #0B318A;
+    height: auto;
+}
+.dark-mode header{
+    background-color:#020a1d;
+    color:#fff;
+}
+
 .subheader {
     background-color: #0B318A;
     height: auto;
@@ -97,13 +107,11 @@ h1, h2, h3, h4 {
     display: flex;
     padding: 0 10%;
 }
-.marca{
+.logo{
     width: 320px;
 }
 .opheader{
-    width: 68%;
     display: flex;
-    align-items: center;
     flex-direction: column;
 }
 .part {
@@ -242,7 +250,7 @@ footer{
     border-radius: 50%;
     padding: 5px;
     top: -30px;
-    left: 47.5%;
+    left: 47%;
 }
 @media (max-width:420px) {
     .sublogo{
@@ -428,15 +436,15 @@ h2{
     width: 90%;
     display: flex;
     flex-wrap: wrap;
-    margin-block-end: 50px;
-    background-color: white;
+    margin: 5% 5% 5% 5%;
 } 
 .liness{
     width: 30%;
     min-width: 300px;
     height: auto;
     margin: 0 auto;
-    border-block-end: 1px solid black;
+    border: 1px solid black;
+    border-radius: 5%;
     display: flex;
     flex-direction: column;
     flex-grow: 1;

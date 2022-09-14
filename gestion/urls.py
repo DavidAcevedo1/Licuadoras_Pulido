@@ -19,17 +19,18 @@ from administrador.views import inicioadmin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+# from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', inicio, name="inicio"),
-    path('inicio-ad/', inicioadmin, name="inicioadmin"),
+    path('',inicio, name="inicio"),
+    path('inicio-ad/',inicioadmin, name="inicioadmin"),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
     path('', include('facturas.urls')),
     # Logueo
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='usuario-logout'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='usuario-logout'),
     # Recuperación
     path('password_reset/', 
         auth_views.PasswordResetView.as_view(template_name='recuperacion/password_reset.html', email_template_name='recuperacion/password_reset_email.html'),

@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definitionA
 
 INSTALLED_APPS = [
@@ -85,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gestion.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -99,7 +97,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -119,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -127,11 +123,9 @@ LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'America/Bogota'
 
-
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -152,13 +146,13 @@ LOGOUT_REDIRECT_URL = 'inicio'
 LOGIN_REDIRECT_URL = 'inicioadmin'
 LOGIN_URL="usuario-login"
  
-# para lo del email documentacion django "Alejo3012154053"
+# para lo del email documentacion django
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER="facceres1@misena.edu.co"
-EMAIL_HOST_PASSWORD="ebsmydwxjufrozjt"
+EMAIL_HOST_USER="jose.acevedo1111@misena.edu.co"
+EMAIL_HOST_PASSWORD="wzthfpcehjhivkqx"
 
 STATIC_URL = '/static/'
 

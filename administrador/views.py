@@ -1,17 +1,16 @@
 from datetime import datetime
+from multiprocessing.reduction import ForkingPickler
 from usuarios.Carrito import Carrito
 from django.shortcuts import render, redirect
-from administrador.forms import  CopiaseguridadForm, ElectrodomesticoEditarForm, StockForm, ElectrodomesticoForm, MarcaEditarForm, ServicioEditarForm, TipoElementoEditarForm, TipoElementoForm, ElementoForm, ElementoEditarForm, MarcaForm, ServicioForm
-from administrador.models import Electrodomestico,Elemento, Marca, Servicio, Stock, Tipos_Elemento, Copiaseguridad
+from administrador.forms import * 
+from administrador.models import *
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
 
 import os
 from datetime import date
-
 from usuarios.models import Usuario
-
 
 @login_required(login_url="usuario-login")
 
@@ -29,17 +28,14 @@ def tipoelemento(request):
     categorias= Tipos_Elemento.objects.all()
     if request.method == 'POST':
         form=TipoElementoForm(request.POST, request.FILES)
-        
         if form.is_valid():
             form.save()
             categoria_nombre= form.cleaned_data.get('subcategoria')
             messages.success(request,f'La subcategoria {categoria_nombre} se agregó correctamente!')
             return redirect('administrador-categoria')
         else:
-           
             categoria_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'La subcategoria ya se encuentra agregada!')    
-        
     else:
         form= TipoElementoForm()
     context={
@@ -256,82 +252,8 @@ def marca_eliminar(request,pk):
     }
     return render(request, "administrador/marca/marca-eliminar.html", context)
 
-def factura(request):
-    titulo_pagina='Facturas'
-    facturas= Factura.objects.all()
-    if request.method == 'POST':
-        form= FacturaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.success(request,f'La factura {factura_elemento} se agregó correctamente!')
-        else:
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.error(request,f'La factura que ingreso ya se encuentra registrado!')     
-        return redirect('administrador-factura')
-    else:
-        form= FacturaForm()
-    context={
-            "titulo_pagina": titulo_pagina,
-            "facturas": facturas,
-            "form": form
-    }
-    return render(request, "administrador/factura/factura.html", context)
-
-def factura_editar(request,pk):
-    titulo_pagina='Facturas'  
-    facturas= Factura.objects.all()
-    factura= Factura.objects.get(id=pk)
-    documento=f"{factura.elemento} con el ID {pk}"
-    url_editar="/factura"
-    if request.method == 'POST':
-        form= FacturaEditarForm(request.POST, instance=factura)
-        if form.is_valid():
-            form.save()
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.success(request,f'La factura {factura_elemento} se editó correctamente!')
-            return redirect('administrador-factura')
-        else:
-            factura_elemento= form.cleaned_data.get('elemento')
-            messages.error(request,f'Error al modificar el factura {factura_elemento}')     
-    else:
-        form= FacturaEditarForm(instance=factura)
-    context={
-            "titulo_pagina": titulo_pagina,
-            "facturas":facturas,
-            "form": form,
-            "documento":documento,
-            "url_editar":url_editar,
-    }
-    return render(request, "administrador/factura/factura-editar.html", context)
-
-def factura_eliminar(request,pk):
-    titulo_pagina='Facturas'
-    url_eliminar= '/factura/'
-    facturas= Factura.objects.all()
-    factura= Factura.objects.get(id=pk)
-    accion_txt= f"La factura {factura.id}, una vez eliminado no hay marcha atras!"
-    if request.method == 'POST':
-        form= FacturaForm(request.POST)
-        Factura.objects.filter(id=pk).update(
-                    estado='Anulado'
-                )
-        factura_fecha= factura.fecha
-        messages.success(request,f'La factura {factura_fecha} se eliminó correctamente!')
-        return redirect('administrador-factura')
-    else:
-        form= FacturaForm()
-    context={
-            "titulo_pagina": titulo_pagina,
-            "accion_txt":accion_txt,
-            "facturas":facturas,
-            "form": form,
-            "url_eliminar":url_eliminar
-    }
-    return render(request, "administrador/factura/factura-eliminar.html", context)
-
 def electrodomestico(request):
-    titulo_pagina='Electrodomestico'
+    titulo_pagina='Electrodomesticos'
     electrodomesticos= Electrodomestico.objects.all()
     form = ElectrodomesticoForm()
     if request.method == 'POST':
@@ -350,7 +272,7 @@ def electrodomestico(request):
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
             return redirect('administrador-electrodomestico')
     else:
-        form= ElectrodomesticoForm()
+        form= ElectrodomesticoForm()  
     context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
@@ -422,6 +344,7 @@ def servicio(request):
             form.save()
             servicio_electrodomestico= form.cleaned_data.get('electrodomestico')
             messages.success(request,f'El servicio {servicio_electrodomestico} se agregó correctamente!')
+            
         else:
             messages.error(request,f'Error al registrar el servicio ¡Por favor verificar los datos!  ')    
             return redirect('administrador-servicio')
@@ -450,7 +373,7 @@ def servicio_editar(request,pk):
             messages.success(request,f'El servicio {servicio_electrodomestico} se editó correctamente!')
             return redirect('administrador-servicio')
         else:
-            servicio_nombre= form.cleaned_data.get('nombre')
+            servicio_electrodomestico= form.cleaned_data.get('nombre')
             messages.error(request,f'Error al modificar el servicio {servicio_electrodomestico}')    
     else:
         form= ServicioEditarForm(instance=servicio)
@@ -499,6 +422,7 @@ def importar_datos(archivo):
         print("Problemas al importar")
 
 def copiaseguridad(request,tipo):
+    titulo_pagina='Copia Seguridad'
     carrito = Carrito(request) 
     ejemplo_dir = 'gestion/static/copiaseguridad/'
     with os.scandir(ejemplo_dir) as ficheros:
@@ -527,36 +451,8 @@ def copiaseguridad(request,tipo):
         form = CopiaseguridadForm()
     context ={
         "ficheros":ficheros,
+        "titulo_pagina":titulo_pagina,
         "form":form,
         "copiaseguridad":copiaseguridad
     }
     return render(request, 'administrador/copiaseguridad.html',context) 
-
-def stock(request,pk):
-    titulo_pagina="Stock"
-    elemento= Elemento.objects.get(id=pk)
-    stocks= Stock.objects.filter(elemento=pk)
-    if request.method == 'POST':
-        form= StockForm(request.POST)
-        if form.is_valid():
-            stock= Stock.objects.create(
-                fecha=  datetime.now().strftime("%Y-%m-%d"),
-                elemento= elemento,
-                stock_agregada = form.cleaned_data.get('stock_stock'),
-                stock_stock = elemento.stock_elemento + form.cleaned_data.get('stock_stock'), 
-            )
-            Elemento.objects.filter(id=pk).update(
-                stock_elemento= stock.stock_stock
-            )
-            stockck_id= form.cleaned_data.get('id')
-            messages.success(request,f'El stock con el id {stockck_id} se agregó correctamente!')
-        return redirect('elemento-stock', pk)
-    else:
-        form = StockForm()
-    context={
-        "titulo_pagina": titulo_pagina,
-        "stocks": stocks,
-        "form":form,
-        "elemento":elemento
-    }
-    return render(request, "administrador/elemento/elemento-stock.html", context)

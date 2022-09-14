@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template import context
-from facturas.models import Factura, Detalle
-from facturas.forms import FacturaForm, DetalleForm
+from facturas.models import DetalleServicio, Factura, Detalle
+from facturas.forms import DetalleServicioForm, FacturaForm, DetalleForm
 from django.contrib import messages 
 from usuarios.models import Rol, Usuario
 from usuarios.Carrito import Carrito
@@ -29,6 +29,7 @@ def factura(request):
     return render(request,'factura/crearFactura.html', context)
 
 def tfactura(request):
+    titulo_pagina="Facturas"
     Rol_c=Rol.objects.all()
     Usuario_c=Usuario.objects.all()
     renew = '/factura/factura'
@@ -36,6 +37,7 @@ def tfactura(request):
     context={
         "tfacturas": tfacturas,
         "renew":renew,
+        "titulo_pagina":titulo_pagina,
         "Rol":Rol_c,
         "Usuario":Usuario_c
     }
@@ -127,7 +129,7 @@ def detalle(request,pk):
                             total = precio * int(request.POST["cantidad"])
                         )
                 # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
-                return redirect('factura-detalle', pk=pk)    
+                return redirect('factura-detalle', pk=pk)           
         else:
         #     stock_elemento = Detalle.objects.get(id=pk)
         #     elemento = Elemento.objects.get(id=pk)
@@ -135,16 +137,38 @@ def detalle(request,pk):
         #     Elemento.objects.filter(id=pk).update(
         #     stock_elemento = elemento.stock_elemento + stock_elemento
         #     )
-          if factura_u.tipofactura == "Venta":
-            id = Detalle.objects.values_list('id', flat=True)
-            # este elemento tiene que ser dinamico 
-            cantidadp = Detalle.objects.all()[15].elemento_id
-            stock_elemento = int(request.POST["cantidad"])
-            elemento__xd = Elemento.objects.filter(id=cantidadp)
-            print('abshabvghsgfagscf3', elemento__xd)
-            return redirect('factura-detalle', pk=pk)  
-    else:
+            if factura_u.tipofactura == "Venta":
+                id = Detalle.objects.values_list('id', flat=True)
+                # este elemento tiene que ser dinamico 
+                cantidadp = Detalle.objects.all()[15].elemento_id
+                stock_elemento = int(request.POST["cantidad"])
+                elemento__xd = Elemento.objects.filter(id=cantidadp)
+                print('abshabvghsgfagscf3', elemento__xd)
+                return redirect('factura-detalle', pk=pk) 
+    #Arreglo Servicio David
+               
+    #Final Arreglo Servicio David       
+    else:   
         form= DetalleForm()
+    
+    # if request.method == 'POST' and "form-detalleservicio" in request.POST:
+    #     form= DetalleServicioForm(request.POST)
+    #     detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
+    #     if detalle_aux.exists():
+    #         detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
+    #     else:
+    #         detalle_aux=None
+    #     if detalle_aux == None:
+    #         if form.is_valid():
+    #             factura= DetalleServicio.objects.create(
+    #             cantidad=form.cleaned_data.get('cantidad'),
+    #             servicio= form.cleaned_data.get('servicio'),
+    #             factura=factura_u,        
+    #             )
+    # else:
+    #     form= DetalleServicioForm() 
+    
+        
     if request.method == 'POST' and "form-serv" in request.POST:
         print(request.POST)
         if request.POST["servicio"] and request.POST["servicio"] != "--- Seleccione el servicio ---":
@@ -169,23 +193,25 @@ def detalle(request,pk):
             print('Seleccione un usuario!')
             messages.warning(request,f'Seleccione un usuario!')
     context={
+        
         "usuario":usuario,
         "servicio":servicio,
         "titulo_pagina": titulo_pagina,
         "detalles": detalles,
         "form":form,
         "factura":factura_u,
-        # "elemento": elementos
-    }
     return render(request, "factura/detalle-factura.html", context)
 
 
 def detalle_estado(request,pk ):
     titulo_pagina='elemento'
+    url_eliminar='/factura/'
+    detalle= Detalle.objects.get(id=pk)
     u_detalles= Detalle.objects.get(id=pk)
     factura_u= u_detalles.factura
     detalles= Detalle.objects.filter(factura_id=factura_u.id)
     accion_txt= f"Eliminando detalle {u_detalles.id}, una vez eliminado no hay marcha atras!"
+    url_back = "/detalles/"
     if request.method == 'POST':
         form= DetalleForm(request.POST)
         form = DetalleForm(request.POST)
@@ -197,14 +223,19 @@ def detalle_estado(request,pk ):
     context={
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
+            'url_eliminar': url_eliminar,
             "detalles": detalles,
             "factura":factura_u,
-            "form":form,    
+            "detalle":detalle,
+            
+            
+               
         }
-    return render(request, "factura/detalle-eliminar.html", context) 
+    return render(request, "factura\detalle-eliminar.html", context) 
 
 def detalle_eliminar(request,pk):
     titulo_pagina='Marca'
+    url_eliminar='/detalle-estado/'
     detalles= Detalle.objects.all()
     detalle= Detalle.objects.get(id=pk)
     accion_txt= f"la marca {detalle.id}, una vez eliminado no hay marcha atras!"
@@ -219,6 +250,8 @@ def detalle_eliminar(request,pk):
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
             "detalles": detalles,
+            "url_eliminar": url_eliminar,
+            
         }
     return render(request, "factura/detalle-factura.html", context)
     
@@ -274,7 +307,7 @@ def factura_estado(request,pk, estado):
             "titulo_pagina": titulo_pagina,
             "estado_msj":estado_msj,
             "estado_txt":estado_txt,
-            "tfacturas": tfacturas,
+            "tfacturas": tfacturas,     
     }
     return render(request, "factura/factura-estado.html", context)
 
@@ -297,5 +330,7 @@ def factura_anular(request,pk):
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
             "tfacturas": tfacturas,
+            "tfactura_usuario":tfactura_usuario,
+            
         }
     return render(request, "factura/factura-eliminar.html", context)

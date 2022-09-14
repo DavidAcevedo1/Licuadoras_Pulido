@@ -32,3 +32,15 @@ class Detalle(models.Model):
     total= models.FloatField(default=0 )
     def __str__(self)-> str:
         return '%s' % (self.id)
+    
+class DetalleServicio(models.Model):
+    factura=models.ForeignKey(Factura, on_delete=models.SET_NULL, null=True,verbose_name="Factura")
+    servicio=models.ForeignKey(Servicio, on_delete=models.SET_NULL, null=True,verbose_name="servicio")
+    class Estado(models.TextChoices):
+        ABIERTA='Abierta', _('Abierta')
+        CERRADA='Cerrada', _('Cerrada')
+        ANULADa='Anulada', _('Anulada')
+    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ABIERTA)
+    cantidad=models.IntegerField()
+    def __str__(self)-> str:
+        return '%s' % (self.id)    

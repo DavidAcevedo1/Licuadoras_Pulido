@@ -60,18 +60,13 @@ class ServicioForm(ModelForm):
         model= Servicio
         fields=['tiposervicio','observacion', 'fallas_basicas', 'diagnostico']
         widgets = {
-            'observacion': Textarea(attrs={'cols': 80, 'rows': 5}),
+            'observacion': Textarea(attrs={'cols': 50, 'rows': 5}),
         }
 
 class ServicioEditarForm(ModelForm):
     class Meta:
         model= Servicio
         fields=['tiposervicio', 'electrodomestico', 'fallas_basicas','observacion', 'diagnostico']
-        
-class StockForm(ModelForm):
-    class Meta:
-        model= Stock
-        fields=['stock_stock']
            
 class CopiaseguridadForm(ModelForm):
     class Meta:

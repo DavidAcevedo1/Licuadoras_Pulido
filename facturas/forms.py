@@ -1,6 +1,6 @@
 from tkinter import Widget
 from django import forms
-from facturas.models import Factura, Detalle
+from facturas.models import Factura, Detalle, DetalleServicio
 
 class FacturaForm(forms.ModelForm):
     class Meta: 
@@ -12,3 +12,7 @@ class DetalleForm(forms.ModelForm):
         model = Detalle
         fields = ['elemento','cantidad']
 
+class DetalleServicioForm(forms.ModelForm):
+    class Meta: 
+        model = DetalleServicio
+        fields = ['servicio', 'cantidad']
