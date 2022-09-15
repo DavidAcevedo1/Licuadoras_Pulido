@@ -164,9 +164,9 @@ def detalle(request,pk):
         else:
             form= DetalleForm()
     else:
-        if request.method == 'POST' and "form-detalle-servicio" in request.POST:
+        if request.method == 'POST' and "form-detalle" in request.POST:
             form= DetalleServicioForm(request.POST)
-            detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
+            detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
             if detalle_aux.exists():
                 detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
             else:

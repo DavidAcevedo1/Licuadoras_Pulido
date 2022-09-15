@@ -74,6 +74,7 @@
                     <div class="modal-body">
                         <form action="" method="POST">
                             {% csrf_token %}
+                            {{ form|crispy }}
                             <div id="div_id_usuario" class="mb-3"> <label for="id_usuario" class="form-label">
                                 Usuario
                             </label> 
@@ -96,7 +97,7 @@
                                 {% endfor %}
                             </select> 
                         </div>
-                            {{ form|crispy }}
+                            
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
