@@ -260,14 +260,17 @@ def electrodomestico(request):
         form= ElectrodomesticoForm(request.POST)
         
         if form.is_valid():
-            insumo = form.cleaned_data('electrodomestico')
-            if insumo.estado != 'Activo':
-                messages.success(request,'xd')
-            else:
-                electrodomestico_nombre= form.cleaned_data.get('nombre')
-                messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!')
-                s =form.save()
-                s.save()
+            form.save()
+            electrodomestico_nombre= form.cleaned_data.get('nombre')
+            messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!')
+            # insumo = form.cleaned_data('electrodomestico')
+            # if insumo.estado != 'Activo':
+            #     messages.success(request,'xd')
+            # else:
+            #     electrodomestico_nombre= form.cleaned_data.get('nombre')
+            #     messages.success(request,f'El electrodomestico {electrodomestico_nombre} se agregó correctamente!')
+            #     s =form.save()
+            #     s.save()
         else:
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
             return redirect('administrador-electrodomestico')
