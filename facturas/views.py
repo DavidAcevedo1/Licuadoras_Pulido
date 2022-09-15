@@ -61,13 +61,13 @@ def detalle(request,pk):
     titulo_pagina="Detalle facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
     factura_u= Factura.objects.get(id=pk)
-    #elementos = Elemento.objects.filter(estado= "Activo")
+    # elementos = Elemento.objects.filter(estado= "Activo")
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
-        #rol_aux = Usuario.objects.filter(estado = " Activo", rol = "Proveedor")
+        # rol_aux = Usuario.objects.filter(estado = " Activo", rol = "Proveedor")
     elif factura_u.tipofactura == "Venta": 
         rol_aux= "Cliente"   
-        #usuario= Usuario.objects.filter(estado = " Activo", rol = "Cliente")
+        # usuario= Usuario.objects.filter(estado = " Activo", rol = "Cliente")
     else:
         rol_aux= "servicio"
     usuario= Usuario.objects.filter(rol=rol_aux, estado="Activo")
@@ -134,7 +134,7 @@ def detalle(request,pk):
                     stock_elemento = int(request.POST["cantidad"])
                     elemento__xd = Elemento.objects.filter(id=cantidadp)
                     print('abshabvghsgfagscf3', elemento__xd)
-                    return redirect('factura-detalle', pk=pk)
+                    return redirect('factura-detalle', pk=pk)  
         else:
             form= DetalleForm()
     else:
