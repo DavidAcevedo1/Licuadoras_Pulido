@@ -1,10 +1,12 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+
 from facturas.views import factura,tfactura,vfactura,detalle,detalle_estado,factura_estado,factura_eliminar
 
 
 
+from facturas.views import *
 urlpatterns = [
         path('crearfactura/',login_required (factura), name='factura-factura'),
         path('factura/', login_required(tfactura), name='factura-tfactura'),
@@ -15,3 +17,6 @@ urlpatterns = [
         path('factura-eliminar/<int:pk>/', factura_eliminar, name='factura-eliminar'),
         # path('categoria/d/<int:pk>/', tipoelemento_eliminar, name='administrador-categoria-eliminar'),
 ]
+
+        #path('categoria/d/<int:pk>/', tipoelemento_eliminar, name='administrador-categoria-eliminar'),
+

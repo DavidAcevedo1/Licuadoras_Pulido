@@ -29,24 +29,34 @@
           </table>
         </div>      
       </div>
-      <div  class=" bg-tabla  ver-Detalle mx-auto " style="width: auto;">
-        <table class=" table bg-white table-bordered results " style="text-align: center;"  id="detalles">
-          <thead class="bg-info">
+      <div  
+
             <tr class="text-white">
               <th scope="col  " >Producto</th>
               <th scope="col ">Cantidad</th>
+              <th scope="col">Valor unidad</th>
+              <th scope="col">Total producto</th>
             </tr>
           </thead>
           {% for detalle in detalles %}
           {% if  detalle.estado == "Abierta"  %}
           <tr> 
-            <td class="dtr-control sorting_1">{{detalle.producto}}</td>
+            <td class="dtr-control sorting_1">{{detalle.elemento.nombre}}</td>
             <td class="dt-body-center dtr-hidden">{{detalle.cantidad}}</td>
+            <td class="dt-body-right dtr-hidden">{{detalle.elemento.precio}}</td>
+            <td class="dt-body-right dtr-hidden">{{detalle.total}}</td>
               {% endif %}
           </tr>    
           {% endfor %}
         </tbody>
         </table>
+        <div class="row ml-5">
+            <div class="col col-md-3 card mt-1">
+                <div class="card-body">
+                    <span class="text-success fs-2 " id="total_campos" ></span>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
 </div>

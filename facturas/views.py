@@ -84,97 +84,104 @@ def factura_eliminar(request,pk):
     return render(request, "factura/factura-eliminar.html", context)
 
 def detalle(request,pk):
-    titulo_pagina="facturas"
+    titulo_pagina="Detalle facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
     factura_u= Factura.objects.get(id=pk)
+    #elementos = Elemento.objects.filter(estado= "Activo")
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
-    elif factura_u.tipofactura == "Venta":    
-        rol_aux= "Cliente"
+        #rol_aux = Usuario.objects.filter(estado = " Activo", rol = "Proveedor")
+    elif factura_u.tipofactura == "Venta": 
+        rol_aux= "Cliente"   
+        #usuario= Usuario.objects.filter(estado = " Activo", rol = "Cliente")
     else:
         rol_aux= "servicio"
-    usuario= Usuario.objects.filter(rol=rol_aux)
+    usuario= Usuario.objects.filter(rol=rol_aux, estado="Activo")
     servicio= Servicio.objects.all()
-    if request.method == 'POST' and "form-detalle" in request.POST:
-        form= DetalleForm(request.POST)
-        detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
-        if detalle_aux.exists():
+    if rol_aux != "servicio":
+        if request.method == 'POST' and "form-detalle" in request.POST:
+            form= DetalleForm(request.POST)
             detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
-        else:
-            detalle_aux=None
-        if detalle_aux == None:
-            if form.is_valid():
-                factura= Detalle.objects.create(
-                cantidad=form.cleaned_data.get('cantidad'),
-                elemento= form.cleaned_data.get('elemento'),
-                factura=factura_u,        
-                )
+            if detalle_aux.exists():
+                detalle_aux= Detalle.objects.filter(factura_id=pk,elemento_id=request.POST['elemento'])
+            else:
+                detalle_aux=None
+            if detalle_aux == None:
+                if form.is_valid():
+                    factura= Detalle.objects.create(
+                    cantidad=form.cleaned_data.get('cantidad'),
+                    elemento= form.cleaned_data.get('elemento'),
+                    factura=factura_u,        
+                    )
+                    if factura_u.tipofactura == "Venta":
+                        id = Detalle.objects.values_list('id', flat=True)
+                        cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
+                        cantidadpes = Detalle.objects.all()[len(id)-1].id
+                        cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
+                        elemento = Elemento.objects.get(id=cantidadp)
+                        if cantidad_stock > elemento.stock_elemento:
+                            Detalle.objects.filter(id= len(id) ).update(
+                                cantidad = elemento.stock_elemento  
+                                )
+                            cantidad_resta = Detalle.objects.get(id = len(id) ).cantidad
+                            Elemento.objects.filter(id = cantidadp ).update(
+                                stock_elemento = elemento.stock_elemento - cantidad_resta
+                                )
+                            precio = Elemento.objects.get(id =  elemento.id ).precio
+                            Detalle.objects.filter(id = cantidadpes ).update(
+                                total = precio * int(request.POST["cantidad"])
+                                )
+                        else:
+                            Elemento.objects.filter(id=cantidadp).update(
+                                stock_elemento = elemento.stock_elemento   -  cantidad_stock
+                                )
+                            precio = Elemento.objects.get(id =  elemento.id ).precio
+                            Detalle.objects.filter(id = cantidadpes ).update(
+                                total = precio * int(request.POST["cantidad"])
+                                )
+                    elif  factura_u.tipofactura == "Compra":
+                        id = Detalle.objects.values_list('id', flat=True)
+                        cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
+                        cantidadpes = Detalle.objects.all()[len(id)-1].id
+                        cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
+                        elemento = Elemento.objects.get(id=cantidadp)
+                        Elemento.objects.filter(id=cantidadp).update(
+                            stock_elemento = elemento.stock_elemento   +  cantidad_stock
+                            )
+                        precio = Elemento.objects.get(id =  elemento.id ).precio
+                        Detalle.objects.filter(id = cantidadpes ).update(
+                            total = precio * int(request.POST["cantidad"])
+                            )
+                    # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
+                    return redirect('factura-detalle', pk=pk)
                 if factura_u.tipofactura == "Venta":
                     id = Detalle.objects.values_list('id', flat=True)
-                    cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
-                    cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
-                    elemento = Elemento.objects.get(id=cantidadp)
-                    if cantidad_stock > elemento.stock_elemento:
-                       Detalle.objects.filter(id= len(id) ).update(
-                            cantidad = elemento.stock_elemento  
-                            )
-                       cantidad_resta = Detalle.objects.get(id = len(id) ).cantidad
-                       Elemento.objects.filter(id = cantidadp ).update(
-                           stock_elemento = elemento.stock_elemento - cantidad_resta
-                       )
-                    else:
-                        Elemento.objects.filter(id=cantidadp).update(
-                        stock_elemento = elemento.stock_elemento   -  cantidad_stock
-                        )
-                elif  factura_u.tipofactura == "Compra":
-                      id = Detalle.objects.values_list('id', flat=True)
-                      cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
-                      cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
-                      elemento = Elemento.objects.get(id=cantidadp)
-                      Elemento.objects.filter(id=cantidadp).update(
-                        stock_elemento = elemento.stock_elemento   +  cantidad_stock
-                        )     
-                # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
-                return redirect('factura-detalle', pk=pk)           
+                    cantidadp = Detalle.objects.all()[15].elemento_id
+                    stock_elemento = int(request.POST["cantidad"])
+                    elemento__xd = Elemento.objects.filter(id=cantidadp)
+                    print('abshabvghsgfagscf3', elemento__xd)
+                    return redirect('factura-detalle', pk=pk)
         else:
-        #     stock_elemento = Detalle.objects.get(id=pk)
-        #     elemento = Elemento.objects.get(id=pk)
-        #     stock_elemento = int(request.POST["cantidad"])
-        #     Elemento.objects.filter(id=pk).update(
-        #     stock_elemento = elemento.stock_elemento + stock_elemento
-        #     )
-            if factura_u.tipofactura == "Venta":
-                id = Detalle.objects.values_list('id', flat=True)
-                # este elemento tiene que ser dinamico 
-                cantidadp = Detalle.objects.all()[15].elemento_id
-                stock_elemento = int(request.POST["cantidad"])
-                elemento__xd = Elemento.objects.filter(id=cantidadp)
-                print('abshabvghsgfagscf3', elemento__xd)
-                return redirect('factura-detalle', pk=pk) 
-    #Arreglo Servicio David
-               
-    #Final Arreglo Servicio David       
-    else:   
-        form= DetalleForm()
-    
-    # if request.method == 'POST' and "form-detalleservicio" in request.POST:
-    #     form= DetalleServicioForm(request.POST)
-    #     detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
-    #     if detalle_aux.exists():
-    #         detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
-    #     else:
-    #         detalle_aux=None
-    #     if detalle_aux == None:
-    #         if form.is_valid():
-    #             factura= DetalleServicio.objects.create(
-    #             cantidad=form.cleaned_data.get('cantidad'),
-    #             servicio= form.cleaned_data.get('servicio'),
-    #             factura=factura_u,        
-    #             )
-    # else:
-    #     form= DetalleServicioForm() 
-    
-        
+            form= DetalleForm()
+    else:
+        if request.method == 'POST' and "form-detalle-servicio" in request.POST:
+            form= DetalleServicioForm(request.POST)
+            detalle_aux= DetalleServicio.objects.filter(factura_id=pk, serivio_id=request.POST['servicio'])
+            if detalle_aux.exists():
+                detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
+            else:
+                detalle_aux=None
+            if detalle_aux == None:
+                if form.is_valid():
+                    factura= DetalleServicio.objects.create(
+                    cantidad= form.cleaned_data.get('cantidad'),
+                    servicio= form.cleaned_data.get('servicio'),
+                    elmento= form.cleaned_data.get('elemento'),
+                    costo= form.cleaned_data.get('costo'),
+                    factura=factura_u,        
+                    )
+        else:
+            form= DetalleServicioForm()
     if request.method == 'POST' and "form-serv" in request.POST:
         print(request.POST)
         if request.POST["servicio"] and request.POST["servicio"] != "--- Seleccione el servicio ---":
@@ -199,17 +206,14 @@ def detalle(request,pk):
             print('Seleccione un usuario!')
             messages.warning(request,f'Seleccione un usuario!')
     context={
-        
         "usuario":usuario,
         "servicio":servicio,
         "titulo_pagina": titulo_pagina,
         "detalles": detalles,
         "form":form,
         "factura":factura_u,
-       
     }
     return render(request, "factura/detalle-factura.html", context)
-
 
 def detalle_estado(request,pk ):
     titulo_pagina='elemento'
@@ -234,10 +238,7 @@ def detalle_estado(request,pk ):
             'url_eliminar': url_eliminar,
             "detalles": detalles,
             "factura":factura_u,
-            "detalle":detalle,
-            
-            
-               
+            "detalle":detalle,       
         }
     return render(request, "factura\detalle-eliminar.html", context) 
 
@@ -258,8 +259,7 @@ def detalle_eliminar(request,pk):
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
             "detalles": detalles,
-            "url_eliminar": url_eliminar,
-            
+            "url_eliminar": url_eliminar,       
         }
     return render(request, "factura/detalle-factura.html", context)
     
@@ -338,7 +338,6 @@ def factura_anular(request,pk):
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
             "tfacturas": tfacturas,
-            "tfactura_usuario":tfactura_usuario,
-            
+            "tfactura_usuario":tfactura_usuario,           
         }
     return render(request, "factura/factura-eliminar.html", context)
