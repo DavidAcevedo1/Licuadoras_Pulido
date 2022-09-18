@@ -53,7 +53,7 @@
                         <form action="" method="POST">
                             {% csrf_token %}
                             {{ form|crispy }}
-                            <button class="btn btn-success btn-block " name="form-detalle">Agregar Factura</button>
+                            <button class="btn btn-success btn-block " name="form-detalle-servicio">Agregar Factura</button>
                             <a class="btn btn-danger btn-block text-light"
                                 href="{% url 'factura-estado' pk=factura.id estado='cerrar' %}">Cerrar Factura</a>
                         </form>

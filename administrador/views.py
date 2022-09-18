@@ -344,10 +344,16 @@ def servicio(request):
     if request.method == 'POST':
         form= ServicioForm(request.POST)
         if form.is_valid():
-            form.save()
+            aux= Servicio.objects.create(
+            tiposervicio= request.POST['tiposervicio'],
+            observacion= request.POST['observacion'],
+            fallas_basicas= request.POST['fallas_basicas'],
+            diagnostico= request.POST['diagnostico'],
+            electrodomestico= Electrodomestico.objects.get(id= request.POST['electrodomestico']),
+            usuario= Usuario.objects.get(Uid= request.POST['usuario']),
+            )
             servicio_electrodomestico= form.cleaned_data.get('electrodomestico')
-            messages.success(request,f'El servicio {servicio_electrodomestico} se agregó correctamente!')
-            
+            messages.success(request,f'El servicio {servicio_electrodomestico} se agregó correctamente!')           
         else:
             messages.error(request,f'Error al registrar el servicio ¡Por favor verificar los datos!  ')    
             return redirect('administrador-servicio')
