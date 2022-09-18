@@ -79,9 +79,9 @@
                                 Usuario
                             </label> 
                             <select name="usuario" class="select form-select" id="id_usuario"> 
-                                <option value="" selected="">---------</option>
+                                <option value="" selected>---------</option>
                                 {% for usuariosA in usuario %}
-                                    <option value="" selected="">{{usuariosA}}</option>
+                                    <option value="{{usuariosA.Uid}}">{{usuariosA}}</option>
                                 {% endfor %}
                             </select> 
                         </div>
@@ -91,9 +91,9 @@
                                 <span class="asteriskField">*</span> 
                             </label> 
                             <select name="electrodomestico" class="select form-select" required="" id="id_electrodomestico"> 
-                                <option value="" selected="">---------</option> 
+                                <option value="" selected>---------</option> 
                                 {% for itemL in item %}
-                                    <option value="" selected="">{{itemL}}</option> 
+                                    <option value="{{itemL.id}}">{{itemL}}</option> 
                                 {% endfor %}
                             </select> 
                         </div>

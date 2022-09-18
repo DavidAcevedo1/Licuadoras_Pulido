@@ -164,6 +164,7 @@ def detalle(request,pk):
         else:
             form= DetalleForm()
     else:
+        print("estamos aqui-----------------------------------------------------------------------")
         if request.method == 'POST' and "form-detalle" in request.POST:
             form= DetalleServicioForm(request.POST)
             detalle_aux= DetalleServicio.objects.filter(factura_id=pk, servicio_id=request.POST['servicio'])
@@ -176,7 +177,7 @@ def detalle(request,pk):
                     factura= DetalleServicio.objects.create(
                     cantidad= form.cleaned_data.get('cantidad'),
                     servicio= form.cleaned_data.get('servicio'),
-                    elmento= form.cleaned_data.get('elemento'),
+                    elemento= form.cleaned_data.get('elemento'),
                     costo= form.cleaned_data.get('costo'),
                     factura=factura_u,        
                     )
@@ -191,18 +192,18 @@ def detalle(request,pk):
                 servicio= request.POST["servicio"]
             )
             return redirect('factura-detalle', pk=pk)
-    else:
+        else:
             print('Seleccione un sevicio!')
             messages.warning(request,f'Seleccione un servicio!')
     if request.method == 'POST' and "form-user" in request.POST:
-            print(request.POST)
-            if request.POST["usuario"] and request.POST["usuario"] != "null":
-                usuario_final=Usuario.objects.get(Uid=request.POST["usuario"])
-                Factura.objects.filter(id=pk).update(
-                    usuario=usuario_final,
-                )
+        print(request.POST)
+        if request.POST["usuario"] and request.POST["usuario"] != "null":
+            usuario_final=Usuario.objects.get(Uid=request.POST["usuario"])
+            Factura.objects.filter(id=pk).update(
+                usuario=usuario_final,
+            )
             return redirect('factura-detalle', pk=pk)
-    else:
+        else:
             print('Seleccione un usuario!')
             messages.warning(request,f'Seleccione un usuario!')
     context={
