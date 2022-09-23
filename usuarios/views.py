@@ -118,6 +118,31 @@ def usuario_eliminar(request,pk):
     }
     return render(request, "usuarios/usuario-eliminar.html", context)
 
+def usuario_activar(request,pk):
+    titulo_pagina='Usuarios'
+    url_eliminar= '/tablausuario/'
+    tusuarios= Usuario.objects.all()
+    tusuario= Usuario.objects.get(Uid=pk)
+    accion_txt= f"usuario {tusuario.Uid}, una vez activado no hay marcha atras!"
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        Usuario.objects.filter(Uid=pk).update(
+                    estado='Activo'
+                )
+        tusuario_nombre=  tusuario.Unombre
+        tusuario_apellido=  tusuario.apellido
+        messages.success(request,f'El usuario {tusuario_nombre} {tusuario_apellido} se activó correctamente!')
+        return redirect('usuario-tablaUsuario')                           
+    else:
+        form:UsuarioForm()
+    context={
+            "titulo_pagina": titulo_pagina,
+            "accion_txt":accion_txt,
+            "tusuarios": tusuarios,  
+            "url_eliminar":url_eliminar 
+    }
+    return render(request, "usuarios/usuario-activar.html", context)
+
 
 def restablecercontraseña(request):
     titulo_pagina='Restablecer Contraseña'
