@@ -2,19 +2,23 @@
 {% load crispy_forms_tags %}
 {% block contenido %}
 {% load static %}
-<div class="contenido-cuerpo borde">
-    <div>
-        <h1 class="m-4">Nosotros</h1>
-        <p class="borde mb-4" style=" border-color:#000000; border-top-style:solid; border-top-width:2px;"></p>
+<div class="cuerpo-user">
+    <div class="contenido-cuerpo borde">
+        <div>
+            <h1 class="m-4">Nosotros</h1>
+        </div>
+        <div>
+            <p class="lineap borde"></p>
+        </div>   
+        <div class="m-5 px-3">
+            <h3 style="text-align: left !important;">
+                La central de licuadoras pulido cuenta con sus inicios en 1998 en busca de ser el primer negocio que pudiera garantizar el mantenimiento y la reparación de los electrodomésticos ya que grandes empresas los vendían pero de dañarse los clientes no tenían a quien recurrir.
+            </h3>
+            <h3 style="text-align: left !important;">
+                Actualmente el negocio cuenta con 3 personas internas y 4 externas, y hasta el día de hoy garantizando el mejor servicio de mantenimiento y reparación de los electrodomésticos.
+            </h3>
+        </div>
+        <img style="width: 80%; margin-left: 10%; height: auto ;" src="{% static 'img/frente_negocio.jpg' %}" alt="">
     </div>
-    <div class="m-5 px-3">
-        <h3 style="text-align: left !important;">
-            La central de licuadoras pulido cuenta con sus inicios en 1998 en busca de ser el primer negocio que pudiera garantizar el mantenimiento y la reparación de los electrodomésticos ya que grandes empresas los vendían pero de dañarse los clientes no tenían a quien recurrir.
-        </h3>
-        <h3 style="text-align: left !important;">
-            Actualmente el negocio cuenta con 3 personas internas y 4 externas, y hasta el día de hoy garantizando el mejor servicio de mantenimiento y reparación de los electrodomésticos.
-        </h3>
-    </div>
-    <img style="width: 80%; margin-left: 10%; height: auto ;" src="{% static 'img/frente_negocio.jpg' %}" alt="">
-</div>
+</div>    
 {% endblock contenido %}

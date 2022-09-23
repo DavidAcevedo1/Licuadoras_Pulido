@@ -2,6 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block contenido %}
+<div class="cuerpo-admin">
     <div class="contenido-cuerpo borde d-flex ">
         <h1 class="text-center font-4em">Datos del usuario {{usuario.Unombre}}</h1>
 
@@ -48,4 +49,5 @@
             </div>
         </div>
     </div>
+</div>
 {% endblock contenido %}
