@@ -14,9 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from gestion.views import inicio
-from administrador.views import inicioadmin
+from gestion.views import inicio, inicio2,factura_eliminar, tfactura
+from administrador.views import inicioadmin, inicioadmin2
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.conf.urls.static import static
 from django.contrib import admin
 # from django.contrib.auth.decorators import login_required
@@ -24,12 +25,17 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',inicio, name="inicio"),
+    path('',inicio2, name="inicio2"),
     path('inicio-ad/',inicioadmin, name="inicioadmin"),
+    path('inicio-ad/',inicioadmin2, name="inicioadmin2"),
+    path('factura/', login_required(tfactura), name='factura-tfactura'),
+    path('factura-eliminar/', factura_eliminar, name='factura-eliminar'),
     path('', include('administrador.urls')),
     path('', include('usuarios.urls')),
     path('', include('facturas.urls')),
     # Logueo
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='usuario-login'),
+    path('login2/', auth_views.LoginView.as_view(template_name='user/login2.html'), name='usuario-login2'),
     path('logout/', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='usuario-logout'),
     # Recuperación
     path('password_reset/', 

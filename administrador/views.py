@@ -7,7 +7,10 @@ from administrador.models import *
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
-
+from facturas.models import  Factura
+from facturas.forms import  FacturaForm
+from usuarios.models import  Usuario
+from django.shortcuts import render, redirect
 import os
 from datetime import date
 from usuarios.models import Usuario
@@ -21,7 +24,32 @@ def inicioadmin(request):
         "carrito": carrito,
         "titulo_pagina": titulo_pagina,
     }
-    return render(request, "administrador/inicioadmin.html", context) 
+    return render(request, "administrador/inicioadmin.html", context)
+
+def inicioadmin2(request,pk):
+    titulo_pagina='inicio Administrador'
+    tfacturas= Factura.objects.all()
+    tfactura= Factura.objects.get(id=pk)
+    accion_txt= f" la factura {tfactura.id}"
+    if request.method == 'POST':
+        form = FacturaForm(request.POST)
+        Factura.objects.filter(id=pk).update(
+                    decision='Inactivo'
+                )
+        tfactura_usuario=  tfactura.usuario
+        messages.success(request,f'Factura {tfactura.id} anulada correctamente')
+        return redirect('factura-tfactura')
+                
+    else:
+        form:FacturaForm()
+    context={
+            "titulo_pagina": titulo_pagina,
+            "accion_txt":accion_txt,
+            "tfacturas": tfacturas,
+            
+    }
+    return render(request, "factura/factura-eliminar.html", context)
+
 
 def tipoelemento(request):
     titulo_pagina='Categoria'
