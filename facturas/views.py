@@ -74,7 +74,7 @@ def factura_eliminar(request,pk):
         return redirect('factura-tfactura')
                 
     else:
-        form:FacturaForm()
+        form=FacturaForm()
     context={
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,

@@ -18,12 +18,12 @@
         <thead class="bg-info">
           <tr class="text-white">
             <th scope="col">ID</th>
+            <th scope="col">Rol</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Documento</th>
             <th scope="col">Celular</th>
             <th scope="col">Tipo documento</th>
-            <th scope="col">Rol</th>
             <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
           </tr>
@@ -33,13 +33,13 @@
           {% if tusuario.estado == "Activo" %}
           <tr>
             <td>{{tusuario.Uid}}</td>
+            <td>{{tusuario.rol}}</td>
             <td>{{tusuario.Unombre}}</td>
             <td>{{tusuario.apellido}}</td>
             <td>{{tusuario.documento}}</td>
             <td>{{tusuario.celular}}</td>
             <td>{{tusuario.tipo_documento}}</td>
-            <td>{{tusuario.rol}}</td>
-            <td>{{tusuario.estado}}</td>
+            <td><p class="bg-success rounded text-white text-center">{{tusuario.estado}}</p></td>
             <td>
               <!-- Boton modal usuario ver -->
               <a class="btn btn-primary btn-sm" href="{% url 'usuario-verusuario' tusuario.Uid %}"><svg
@@ -86,7 +86,7 @@
           <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg d-flex justify-content-center">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalInactivosLabel">Usuarios Anulados</h5>
+                <h5 class="modal-title" id="modalInactivosLabel">Usuarios Inactivos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -95,11 +95,11 @@
                     <thead class="bg-info">
                       <tr class="text-white">
                         <th scope="col">ID</th>
+                        <th scope="col">Rol</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Celular</th>
-                        <th scope="col">Rol</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Activar</th>
                       </tr>
@@ -109,22 +109,17 @@
                       {% if tusuario.estado == "Inactivo" %}
                       <tr>
                         <td>{{tusuario.Uid}}</td>
+                        <td>{{tusuario.rol}}</td>
                         <td>{{tusuario.Unombre}}</td>
                         <td>{{tusuario.apellido}}</td>
                         <td>{{tusuario.documento}}</td>
                         <td>{{tusuario.celular}}</td>
-                        <td>{{tusuario.rol}}</td>
-                        <td>{{tusuario.estado}}</td>
+                        <td><p class="bg-danger rounded text-white text-center">{{tusuario.estado}}</p></td>
                         <td>
                           <!-- Boton modal usuario activar -->
-                          <a class="btn btn-success btn-sm" href="{% url 'usuario-activar' tusuario.Uid %}"><svg
-                              xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                              class="bi bi-check-square" viewBox="0 0 16 16">
-                              <path
-                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                              <path
-                                d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
-                            </svg></a>
+                          <a class="btn btn-success btn-sm" href="{% url 'usuario-activar' tusuario.Uid %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                          </svg></a>
                           {% endif %}
                         </td>
                       </tr>

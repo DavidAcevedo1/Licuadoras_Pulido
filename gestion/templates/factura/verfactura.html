@@ -13,16 +13,17 @@
     </a>
     <h1 class="text-center">Detalles de la factura # {{factura.id}}</h1>
     <div class="row d-flex justify-content-center mt-3">
-      <div class="col-4">
+      <div class="col-3">
         <p><b>Fecha:</b> {{factura.fecha}}</p>
       </div>
-
       <div class="col-3">
         <p><b>Usuario:</b> {{factura.usuario}}</p>
       </div>
-
-      <div class="col-2">
+      <div class="col-3">
         <p><b>Tipo factura:</b> {{factura.tipofactura}}</p>
+      </div>
+      <div class="col-2">
+        <p><b>Total:</b> </p>
       </div>
     </div>
     {% if factura.usuario %}
