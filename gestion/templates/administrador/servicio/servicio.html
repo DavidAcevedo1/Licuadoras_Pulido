@@ -15,6 +15,7 @@
                 <thead class="bg-info">
                     <tr class="text-white">
                         <th scope="col">Tipo Servicio</th>
+                        <th scope="col">Usuario</th>
                         <th scope="col">Articulo</th>
                         <th scope="col">Falla que Presenta</th>
                         <th scope="col">Descripción</th>
@@ -28,6 +29,7 @@
                     {% if servicio.estado == "Activo" %}
                     <tr>
                         <td>{{servicio.tiposervicio}}</td>
+                        <td>{{servicio.usuario}}</td>
                         <td>{{servicio.electrodomestico}}</td>
                         <td>{{servicio.fallas_basicas}}</td>
                         <td>{{servicio.diagnostico}}</td>
@@ -70,9 +72,9 @@
             <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <input class="btn btn-success btn-block" type="submit" Value="Crear Servicio">
             </a>
-            <a type="button" class="boton" href="{% url 'administrador-electrodomestico' %}">
-                <input class="btn btn-success btn-block" type="submit" Value="Electrodomestico">
-            </a> <!-- Modal servicio -->
+            <!-- Boton modal crear electrodomestico -->
+            <a href="{% url 'administrador-electrodomestico-crear' %}" class=" btn btn-success btn-block my-2">Crear Electrodomestico</a>
+            <!-- Modal servicio -->
             {% load crispy_forms_tags %}
             <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true" role="dialog">
