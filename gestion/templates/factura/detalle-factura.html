@@ -86,7 +86,6 @@
                 <div class="col-md-4">
                     <div class="border bg-white p-3">
                         <h4>Agregar Detalles a la Factura {{ factura.id }}</h4>
-                        <hr>
                         <form action="" method="POST">
                             {% csrf_token %}
                             {{ form|crispy }}
@@ -104,6 +103,7 @@
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Precio</th>
+                                <th scope="col">Subtotal</th>
                                 <th scope="col">Opciones</th>
                             </tr>
                         </thead>
@@ -114,6 +114,7 @@
                                     <td class="dt-body-right dtr-hidden">{{ detalle.cantidad }}</td>
                                     <td class="dt-body-right dtr-hidden">{{ detalle.estado }}</td>
                                     <td class="dt-body-right dtr-hidden">${{ detalle.elemento.precio }}</td>
+                                    <td class="dt-body-right dtr-hidden">${{ detalle.total }}</td>
                                     <td>
                                         <a class="btn btn-danger btn-sm col-3"
                                             href="{% url 'detalle-estado-eliminar' detalle.id %}">
@@ -134,3 +135,8 @@
     </div>
 </div>
 {% endblock contenido %}
+<script>
+    let total = detalle.total
+    console.log('El total es de '+total)
+    export{total}
+</script>
