@@ -6,6 +6,7 @@ from django.contrib import messages
 from usuarios.models import Rol, Usuario
 from usuarios.Carrito import Carrito
 from administrador.models import *
+from django.db.models import Sum
 
 def carrito(request):
     titulo_pagina='Carrito'
@@ -86,8 +87,9 @@ def factura_eliminar(request,pk):
 def detalle(request,pk):
     titulo_pagina="Detalle facturas"
     detalles= Detalle.objects.filter(factura_id=pk)
+    cantidad2 = Elemento.objects.filter(id=pk)
     factura_u= Factura.objects.get(id=pk)
-    # elementos = Elemento.objects.filter(estado= "Activo")
+    elementos = Elemento.objects.filter(estado= "Activo")
     if factura_u.tipofactura == "Compra":
         rol_aux= "Proveedor"
         # rol_aux = Usuario.objects.filter(estado = " Activo", rol = "Proveedor")
@@ -114,52 +116,54 @@ def detalle(request,pk):
                     factura=factura_u,        
                     )
                     if factura_u.tipofactura == "Venta":
-                        id = Detalle.objects.values_list('id', flat=True)
-                        cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
-                        cantidadpes = Detalle.objects.all()[len(id)-1].id
-                        cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
-                        elemento = Elemento.objects.get(id=cantidadp)
-                        if cantidad_stock > elemento.stock_elemento:
-                            Detalle.objects.filter(id= len(id) ).update(
-                                cantidad = elemento.stock_elemento  
+                        
+                       
+                        elementosCapturados = request.POST["elemento"]
+                        cantidad_stock = int(request.POST["cantidad"])
+                        elemento = Elemento.objects.get(id=elementosCapturados).stock_elemento
+                        Elemento.objects.filter(id = elementosCapturados ).update(
+                                stock_elemento = elemento - cantidad_stock
                                 )
-                            cantidad_resta = Detalle.objects.get(id = len(id) ).cantidad
-                            Elemento.objects.filter(id = cantidadp ).update(
-                                stock_elemento = elemento.stock_elemento - cantidad_resta
+                        print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn", elementosCapturados)
+                        if cantidad_stock > elemento:
+                            Detalle.objects.filter(id= elementosCapturados ).update(
+                                cantidad = elemento 
                                 )
-                            precio = Elemento.objects.get(id =  elemento.id ).precio
-                            Detalle.objects.filter(id = cantidadpes ).update(
+                            cantidad_resta = Detalle.objects.get(id = elementosCapturados ).cantidad
+                            Elemento.objects.filter(id = elementosCapturados ).update(
+                                stock_elemento = elemento - cantidad_resta
+                                )
+                            precio = Elemento.objects.get(id =  elementosCapturados ).precio
+                            Detalle.objects.filter(id = len(id) ).update(
                                 total = precio * int(request.POST["cantidad"])
                                 )
+                            messages.warning(request,'La cantidad seleccionada a superado la cantidad que hay en el stock')
                         else:
-                            Elemento.objects.filter(id=cantidadp).update(
-                                stock_elemento = elemento.stock_elemento   -  cantidad_stock
+                            Elemento.objects.filter(id=elementosCapturados).update(
+                                stock_elemento = elemento   -  cantidad_stock
                                 )
-                            precio = Elemento.objects.get(id =  elemento.id ).precio
-                            Detalle.objects.filter(id = cantidadpes ).update(
-                                total = precio * int(request.POST["cantidad"])
+                            
+                            precio = Elemento.objects.get(id =  elementosCapturados ).precio
+                            id = Detalle.objects.values_list('id', flat=True)
+                            Detalle.objects.filter(id = len(id) ).update(
+                                total = precio * cantidad_stock
                                 )
+                            factura_id = Detalle.objects.get(id=len(id)).factura_id
+                            items = Detalle.objects.get(id=len(id)).total
+
+                            print ("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",factura_id) 
+                            print("ññññññññññññññññññññññññññññññññññññññññññññññññññññññññ",items)
+                            # total = precio * cantidad_stock
                     elif  factura_u.tipofactura == "Compra":
                         id = Detalle.objects.values_list('id', flat=True)
-                        cantidadp = Detalle.objects.all()[len(id)-1].elemento_id
-                        cantidadpes = Detalle.objects.all()[len(id)-1].id
-                        cantidad_stock = Detalle.objects.all()[len(id)-1].cantidad
-                        elemento = Elemento.objects.get(id=cantidadp)
-                        Elemento.objects.filter(id=cantidadp).update(
-                            stock_elemento = elemento.stock_elemento   +  cantidad_stock
+                        Elemento.objects.filter(id=elementosCapturados).update(
+                            stock_elemento = elemento   +  cantidad_stock
                             )
-                        precio = Elemento.objects.get(id =  elemento.id ).precio
-                        Detalle.objects.filter(id = cantidadpes ).update(
-                            total = precio * int(request.POST["cantidad"])
-                            )
-                    # messages.success(request,f' se agregó {elemento} al la factura correctamente!')
-                    return redirect('factura-detalle', pk=pk)
-                if factura_u.tipofactura == "Venta":
-                    id = Detalle.objects.values_list('id', flat=True)
-                    cantidadp = Detalle.objects.all()[15].elemento_id
-                    stock_elemento = int(request.POST["cantidad"])
-                    elemento__xd = Elemento.objects.filter(id=cantidadp)
-                    print('abshabvghsgfagscf3', elemento__xd)
+                        precio = Elemento.objects.get(id =  elementosCapturados ).precio
+                        id = Detalle.objects.values_list('id', flat=True)
+                        Detalle.objects.filter(id = len(id) ).update(
+                            total = precio * cantidad_stock
+                        )
                     return redirect('factura-detalle', pk=pk)  
         else:
             form= DetalleForm()
