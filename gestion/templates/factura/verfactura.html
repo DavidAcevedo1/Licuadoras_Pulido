@@ -2,62 +2,59 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block contenido %}
-<div class=" contenido-cuerpo borde d-flex  ">
-  <h1  class="">Datos de la factura  {{factura.id}}</h1>
-
-  <div class=" text-dark bg-light column ver-d datos ">
-    <div class="tabla-ver bg-ver w-tableVer  mx-auto">
-      <div class="contenedorTabla  tablaProducto  ">
-        <table class=" table results  centrar font-2em tablaVer" >
-          <thead class="borderT  ">
-            <tr >
-                <th scope="col"  >Fecha :</th>
-                <th scope="col" >{{factura.fecha}}</th>
-            </tr>
-            <tr>
-              <th scope="col"  >Tipo de usuario :</th>
-              <th scope="col" >{{factura.rol}}</th>
-            </tr>
-            <tr>
-              <th scope="col"  >Usuario :</th>
-              <th scope="col">{{factura.usuario}} </th>
-            </tr>
-            <tr>
-              <th scope="col"  >Tipo factura :</th>
-              <th scope="col">{{factura.tipofactura}}</th>
-            </tr>
-          </table>
-        </div>      
+<div class="cuerpo-admin">
+  <div class=" contenido-cuerpo borde">
+    <a class=" rounded-pill m-2" href="{% url 'factura-tfactura' %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor"
+        class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+        <path
+          d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+      </svg>
+    </a>
+    <h1 class="text-center">Detalles de la factura # {{factura.id}}</h1>
+    <div class="row d-flex justify-content-center mt-3">
+      <div class="col-3">
+        <p><b>Fecha:</b> {{factura.fecha}}</p>
       </div>
-      <div  
-
-            <tr class="text-white">
-              <th scope="col  " >Producto</th>
-              <th scope="col ">Cantidad</th>
-              <th scope="col">Valor unidad</th>
-              <th scope="col">Total producto</th>
-            </tr>
-          </thead>
-          {% for detalle in detalles %}
-          {% if  detalle.estado == "Abierta"  %}
-          <tr> 
-            <td class="dtr-control sorting_1">{{detalle.elemento.nombre}}</td>
-            <td class="dt-body-center dtr-hidden">{{detalle.cantidad}}</td>
-            <td class="dt-body-right dtr-hidden">{{detalle.elemento.precio}}</td>
-            <td class="dt-body-right dtr-hidden">{{detalle.total}}</td>
-              {% endif %}
-          </tr>    
-          {% endfor %}
-        </tbody>
-        </table>
-        <div class="row ml-5">
-            <div class="col col-md-3 card mt-1">
-                <div class="card-body">
-                    <span class="text-success fs-2 " id="total_campos" ></span>
-                </div>
-            </div>
-        </div>
+      <div class="col-3">
+        <p><b>Usuario:</b> {{factura.usuario}}</p>
+      </div>
+      <div class="col-3">
+        <p><b>Tipo factura:</b> {{factura.tipofactura}}</p>
+      </div>
+      <div class="col-2">
+        <p><b>Total:</b> </p>
       </div>
     </div>
+    {% if factura.usuario %}
+      <div class="p-4">
+        <table class="table bg-white table-bordered results dataTable no-footer dtr-inline" id="botonestabla">
+          <thead class="bg-info">
+            <tr class="text-white">
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Foto</th>
+              <th scope="col">Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for detalle in detalles %}
+            <tr>
+              <td class="dtr-control sorting_1">{{ detalle.elemento.nombre }}</td>
+              <td class="dt-body-right dtr-hidden">{{ detalle.cantidad }}</td>
+              <td class="dtr-control sorting_1">{{ detalle.elemento.descripcion }}</td>
+              <td><img class="producto-img" width="100px" src="{{detalle.elemento.foto.url}}" alt=""></td>
+              <td class="dt-body-right dtr-hidden">${{ detalle.elemento.precio }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div>
+           <h3>Total: </h3>
+        </div>
+      </div>
+  {% endif %}
+  </div>
 </div>
 {% endblock contenido %}
