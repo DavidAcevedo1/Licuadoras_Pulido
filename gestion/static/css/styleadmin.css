@@ -367,3 +367,65 @@ footer{
     font-weight: bolder;
     margin-left: 5px;
 }
+/*---------------------------responsive--Daniela-----------------------*/
+
+@media (max-width:420px) {
+    .contenido-cuerpo {
+		font-size:auto;
+    	width: 100% !important;
+  	}
+}
+
+
+
+@media (max-width:420px) {
+    .navbar1{
+        flex: auto !important;
+        justify-items: center !important;
+       
+        left: 1%!important;
+       
+  
+  	}
+}
+@media (max-width:420px) {
+    .fecha3{
+        align-items: center;
+        height: 90%;
+        width: 140%;
+        justify-content: left !important;
+        margin-left:15% !important;
+  	}
+
+}
+@media (max-width:420px) {
+    .accesibilidadadminre{
+        margin-left: 110% !important;
+
+  	}
+}
+@media (max-width:420px) {
+    .inicioadminre{
+        margin-left: 9% ;
+        margin-right: 85% !important;
+    
+  	}
+}
+
+@media (max-width:420px) {
+    .fecha2{
+        align-items: center;
+        height: 90%;
+        width: 140%;
+        justify-content: left !important;
+        margin-left:20% !important;
+  	}
+
+}
+@media (max-width:420px) {
+    .accesibilidad{
+        margin-left: 20% !important;
+
+  	}
+}
+
