@@ -7,10 +7,12 @@ urlpatterns = [
     path('inicioadmin/',login_required (inicioadmin), name='administrador-inicioadmin'),
 
     path('categoria/',login_required (tipoelemento), name='administrador-categoria'),
+    path('categoriacrear/',login_required (ctipoelemento), name='administrador-categoria-crear'),
     path('categoria/u/<int:pk>/',login_required (tipoelemento_editar), name='administrador-categoria-editar'),
     path('categoria/d/<int:pk>/',login_required (tipoelemento_eliminar), name='administrador-categoria-eliminar'),
     
     path('marca/', login_required(marca), name='administrador-marca'),
+    path('cmarca/', login_required(marca_crear), name='administrador-marca-crear'),
     path('marca/u/<int:pk>/',login_required (marca_editar), name='administrador-marca-editar'),
     path('marca/d/<int:pk>/',login_required(marca_eliminar), name='administrador-marca-eliminar'),
     
@@ -19,6 +21,7 @@ urlpatterns = [
     path('elemento/d/<int:pk>/',login_required (elemento_eliminar), name='administrador-elemento-eliminar'),
     
     path('electrodomestico/', electrodomestico, name='administrador-electrodomestico'),
+    path('celectrodomestico/', electrodomestico_crear, name='administrador-electrodomestico-crear'),
     path('electrodomestico/u/<int:pk>/',login_required (electrodomestico_editar), name='administrador-electrodomestico-editar'),
     path('electrodomestico/d/<int:pk>/',login_required (electrodomestico_eliminar), name='administrador-electrodomestico-eliminar'),
     path('electrodomestico/f/<int:pk>/', login_required(electrodomestico_favorito), name='administrador-electrodomestico-favorito'),
