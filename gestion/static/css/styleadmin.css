@@ -29,11 +29,22 @@
     width: 80%;              
     margin: 0 auto;
 }
-
+html{
+    height: 100%;
+}  
+body{
+    height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}
 /*-------------------------------navbar-----------------------------*/
 header{
     background: #0b318a;
-    margin: 0 auto;
+    margin: 0;
 }
 .dark-mode header{
     background-color:#030303;

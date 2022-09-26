@@ -55,34 +55,9 @@
                 </tbody>
             </table>
         </form>
-        <div class="anuncio">
-            <!-- Boton modal -->
-            <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <input class="btn btn-success btn-block" type="submit" Value="Crear Marca">
-            </a>
-            <!-- Modal -->
-            {% load crispy_forms_tags %}
-            <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Crear Nueva Marca</h5>
-                            <a class="btn-close" data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
-                            <input type="submit" class="btn btn-success" value="Agregar Marca"></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Boton modal crear marca -->
+        <div>
+            <a href="{% url 'administrador-marca-crear' %}" class=" btn btn-success btn-block my-2">Crear Marca</a>
         </div>
     </div>
     <div class="toast-container position-fixed  end-0  p-3 "
