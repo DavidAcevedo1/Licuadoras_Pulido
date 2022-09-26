@@ -3,7 +3,7 @@
 {% block contenido %}
 <div class="cuerpo-admin">
     <div class="contenido-cuerpo borde">
-        <h1 class="text-center">{{titulo_pagina}}</h1>
+        <h1 class="text-center mt-5">{{titulo_pagina}}</h1>
         <div>
             <ol class="breadcrumb d-flex justify-content-end">
             <li class="breadcrumb-item"><a class="indice text-decoration-none" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
@@ -15,6 +15,7 @@
                 <thead class="bg-info">
                     <tr class="text-white">
                         <th scope="col">Tipo Servicio</th>
+                        <th scope="col">Usuario</th>
                         <th scope="col">Articulo</th>
                         <th scope="col">Falla que Presenta</th>
                         <th scope="col">Descripción</th>
@@ -28,6 +29,7 @@
                     {% if servicio.estado == "Activo" %}
                     <tr>
                         <td>{{servicio.tiposervicio}}</td>
+                        <td>{{servicio.usuario}}</td>
                         <td>{{servicio.electrodomestico}}</td>
                         <td>{{servicio.fallas_basicas}}</td>
                         <td>{{servicio.diagnostico}}</td>
@@ -70,9 +72,9 @@
             <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <input class="btn btn-success btn-block" type="submit" Value="Crear Servicio">
             </a>
-            <a type="button" class="boton" href="{% url 'administrador-electrodomestico' %}">
-                <input class="btn btn-success btn-block" type="submit" Value="Electrodomestico">
-            </a> <!-- Modal servicio -->
+            <!-- Boton modal crear electrodomestico -->
+            <a href="{% url 'administrador-electrodomestico-crear' %}" class=" btn btn-success btn-block my-2">Crear Electrodomestico</a>
+            <!-- Modal servicio -->
             {% load crispy_forms_tags %}
             <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true" role="dialog">
@@ -97,6 +99,54 @@
                     </div>
                 </div>
             </div>
+            <div class="m-2">
+                <!-- modal inactivos -->
+                <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos"><img src="../../static/img/folder.png" style="width: 40px;" alt=""></a>
+        
+                <!-- Modal -->
+                <div class="modal fade" id="modalInactivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                  aria-labelledby="modalInactivosLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg d-flex justify-content-center">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="modalInactivosLabel">Servicios Inactivos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form id="form1">
+                            <table class="table table-bordered results" id="proyectos">
+                                <thead class="bg-info">
+                                    <tr class="text-white">
+                                        <th scope="col">Tipo Servicio</th>
+                                        <th scope="col">Articulo</th>
+                                        <th scope="col">Falla que Presenta</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Observaciones</th>
+                                        <th scope="col">Fecha Entrada</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for servicio in servicios %}
+                                    {% if servicio.estado == "Inactivo" %}
+                                    <tr>
+                                        <td>{{servicio.tiposervicio}}</td>
+                                        <td>{{servicio.electrodomestico}}</td>
+                                        <td>{{servicio.fallas_basicas}}</td>
+                                        <td>{{servicio.diagnostico}}</td>
+                                        <td>{{servicio.observacion}}</td>
+                                        <td>{{servicio.fecha_entrada}}</td>
+                                    {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
     <div class="toast-container position-fixed  end-0  p-3 "
