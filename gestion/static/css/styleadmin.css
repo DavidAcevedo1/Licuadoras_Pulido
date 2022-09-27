@@ -17,7 +17,6 @@
   .dark-mode h1{
     color: #e9e9e9;
 }
-
 .indice{
     color: #000;
 }
@@ -29,11 +28,25 @@
     width: 80%;              
     margin: 0 auto;
 }
-
+html{
+    height: 100%;
+}  
+body{
+    height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}
+.color-tabla{
+    background-color: rgb(173, 173, 173);
+}
 /*-------------------------------navbar-----------------------------*/
 header{
     background: #0b318a;
-    margin: 0 auto;
+    margin: 0;
 }
 .dark-mode header{
     background-color:#030303;
@@ -366,4 +379,13 @@ footer{
     font-size: 1rem;
     font-weight: bolder;
     margin-left: 5px;
+}
+
+
+.select2-container{
+    width: 100% !important;
+}
+.select2-container--open {
+    width: 100% !important;
+    z-index: 9999;
 }

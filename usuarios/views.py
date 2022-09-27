@@ -91,7 +91,7 @@ def Editarusuario(request,pk):
         "titulo_pagina": titulo_pagina,
         "form":form
     }
-    return render(request, "usuarios/crearUsuario.html", context)
+    return render(request, "usuarios/usuario-editar.html", context)
 
 def usuario_eliminar(request,pk):
     titulo_pagina='Usuarios'

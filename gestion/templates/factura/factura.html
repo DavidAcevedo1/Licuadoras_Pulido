@@ -4,7 +4,7 @@
 {% block contenido %}
 <div class="cuerpo-admin">
   <div class="contenido-cuerpo borde">
-    <h1 class="text-center">{{titulo_pagina}}</h1>
+    <h1 class="text-center mt-5">{{titulo_pagina}}</h1>
     <div>
       <ol class="breadcrumb d-flex justify-content-end">
         <li class="breadcrumb-item"><a class="indice text-decoration-none text-blue" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
@@ -87,7 +87,55 @@
       <div class="agreproducto m-2">
         <a href="{% url 'factura-factura' %}" class="btn btn-success btn-block">Agregar Factura</a>
       </div>
-      <div class="Inactivos m-2">
+      <div class="m-2">
+        <!-- modal inactivos -->
+        <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos"><img src="../../static/img/folder.png" style="width: 40px;" alt=""></a>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalInactivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="modalInactivosLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg d-flex justify-content-center">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalInactivosLabel">Facturas Anuladas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="form1">
+                  <table class="table table-bordered results" id="">
+                    <thead class="bg-info">
+                      <tr class="text-white">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre de usuario</th>
+                        <th scope="col">Fecha</th>
+                        <th scoper="col">Neto a pagar</th>
+                        <th scope="col">Tipo de factura</th>
+                        <th scope="col">Estado</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for tfactura in tfacturas %}
+                      {% if not tfactura.decision == "Activo" %}
+                      <tr>
+                        <td>{{tfactura.id}}</td>
+                        <td>{{tfactura.usuario}}</td>
+                        <td>{{tfactura.fecha}}</td>
+                        <td id="total_campos2">ftrg</td>
+                        <td>{{tfactura.tipofactura}}</td>
+                        <td><p class="bg-danger rounded text-white text-center">{{tfactura.decision}}</p></td>
+                      {% endif %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </form>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} <div class="Inactivos m-2">
         <!-- Button trigger modal -->
         <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos"><img
           src="../../static/img/folder.png" style="width: 40px;" alt=""></a>
@@ -103,7 +151,7 @@
               </div>
               <div class="modal-body">
                 <form id="form1">
-                  <table class="table table-bordered results" id="proyectoss">
+                  <table class="table table-bordered results" id="botonestabla">
                     <thead class="bg-info">
                       <tr class="text-white">
                         <th scope="col">ID</th>
@@ -138,7 +186,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> {% endcomment %}
     </div>
   </div>
 </div>

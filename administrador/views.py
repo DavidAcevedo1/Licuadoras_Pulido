@@ -52,7 +52,16 @@ def inicioadmin2(request,pk):
 
 
 def tipoelemento(request):
-    titulo_pagina='Categoria'
+    titulo_pagina="Categorias"
+    categorias= Tipos_Elemento.objects.all()
+    context={
+        "categorias": categorias,
+        "titulo_pagina":titulo_pagina
+    }
+    return render(request,"administrador/categoria/categoria.html", context)
+
+def ctipoelemento(request):
+    titulo_pagina='Categorias'
     categorias= Tipos_Elemento.objects.all()
     if request.method == 'POST':
         form=TipoElementoForm(request.POST, request.FILES)
@@ -71,7 +80,7 @@ def tipoelemento(request):
             "categorias": categorias,
             "form": form,
         }
-    return render(request, "administrador/categoria/categoria.html", context)
+    return render(request, "administrador/categoria/categoria-crear.html", context)
 
 def tipoelemento_editar(request,pk):
     titulo_pagina='Categorias'
@@ -207,6 +216,15 @@ def electrodomestico_favorito(request,pk):
     return redirect('administrador-elemento')
 
 def marca(request):
+    titulo_pagina="Marcas"
+    marcas= Marca.objects.all()
+    context={
+        "marcas": marcas,
+        "titulo_pagina":titulo_pagina
+    }
+    return render(request,"administrador/marca/marca.html", context)
+
+def marca_crear(request):
     titulo_pagina='Marcas'
     marcas= Marca.objects.all()
     if request.method == 'POST':
@@ -226,7 +244,7 @@ def marca(request):
             "marcas": marcas,
             "form": form
         }
-    return render(request, "administrador/marca/marca.html", context)
+    return render(request,"administrador/marca/marca-crear.html", context)
 
 def marca_editar(request,pk):
     titulo_pagina='Marcas'
@@ -281,12 +299,19 @@ def marca_eliminar(request,pk):
     return render(request, "administrador/marca/marca-eliminar.html", context)
 
 def electrodomestico(request):
+    titulo_pagina="Electrodomesticos"
+    electrodomesticos= Electrodomestico.objects.all()
+    context={
+        "electrodomesticos": electrodomesticos,
+        "titulo_pagina":titulo_pagina
+    }
+    return render(request,"administrador/electrodomestico/electrodomestico.html", context)
+
+def electrodomestico_crear(request):
     titulo_pagina='Electrodomesticos'
     electrodomesticos= Electrodomestico.objects.all()
-    form = ElectrodomesticoForm()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
-        
         if form.is_valid():
             form.save()
             electrodomestico_nombre= form.cleaned_data.get('nombre')
@@ -300,16 +325,17 @@ def electrodomestico(request):
             #     s =form.save()
             #     s.save()
         else:
+            electrodomestico_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
-            return redirect('administrador-electrodomestico')
+        return redirect('administrador-electrodomestico')
     else:
         form= ElectrodomesticoForm()  
-    context={
+        context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
             "form": form
-    }
-    return render(request, "administrador/electrodomestico/electrodomestico.html", context)
+        }
+    return render(request, "administrador/electrodomestico/electrodomestico-crear.html", context)
 
 def electrodomestico_editar(request,pk):
     titulo_pagina='Electrodomesticos'  
