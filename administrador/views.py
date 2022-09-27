@@ -62,6 +62,7 @@ def tipoelemento(request):
 
 def ctipoelemento(request):
     titulo_pagina='Categorias'
+    url_crear= '/categoria/'
     categorias= Tipos_Elemento.objects.all()
     if request.method == 'POST':
         form=TipoElementoForm(request.POST, request.FILES)
@@ -79,6 +80,7 @@ def ctipoelemento(request):
             "titulo_pagina": titulo_pagina,
             "categorias": categorias,
             "form": form,
+            "url_crear":url_crear
         }
     return render(request, "administrador/categoria/categoria-crear.html", context)
 
@@ -133,7 +135,7 @@ def tipoelemento_eliminar(request,pk):
 
 def elemento(request):
     titulo_pagina='Elemento'
-    elementos= Elemento.objects.all().filter(estado = 'Activo')
+    elementos= Elemento.objects.all()
     if request.method == 'POST':
         form= ElementoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -189,7 +191,8 @@ def elemento_eliminar(request,pk):
     if request.method == 'POST':
         form= ElementoForm(request.POST)
         Elemento.objects.filter(id=pk).update(
-                    estado='Inactivo'
+                    estado='Inactivo',
+                    
                 )
         elemento_nombre= elemento.nombre
         messages.success(request,f'El elemento {elemento_nombre} se eliminó correctamente!')
@@ -226,6 +229,7 @@ def marca(request):
 
 def marca_crear(request):
     titulo_pagina='Marcas'
+    url_crear= '/marca/'
     marcas= Marca.objects.all()
     if request.method == 'POST':
         form= MarcaForm(request.POST)
@@ -242,7 +246,8 @@ def marca_crear(request):
         context={
             "titulo_pagina": titulo_pagina,
             "marcas": marcas,
-            "form": form
+            "form": form,
+            "url_crear":url_crear
         }
     return render(request,"administrador/marca/marca-crear.html", context)
 
@@ -309,6 +314,7 @@ def electrodomestico(request):
 
 def electrodomestico_crear(request):
     titulo_pagina='Electrodomesticos'
+    url_crear= '/electrodomestico/'
     electrodomesticos= Electrodomestico.objects.all()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
@@ -333,7 +339,8 @@ def electrodomestico_crear(request):
         context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
-            "form": form
+            "form": form,
+            "url_crear": url_crear
         }
     return render(request, "administrador/electrodomestico/electrodomestico-crear.html", context)
 
