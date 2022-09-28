@@ -506,22 +506,36 @@ def servicio_eliminar(request,pk):
     }
     return render(request, "administrador/servicio/servicio-eliminar.html", context)
 
-def exportar_datos():
-    fecha=date.today()
-    os.system(f"mysqldump --add-drop-table --column-statistics=0 -u root db_licuadoraspulido> gestion/static/copiaseguridad/BKP_{fecha}.sql")
-   
-def importar_datos(archivo):
+
+def exportar_datos(request):
+    date_now = date.today()
+    tabla = request.POST['opcion']
+    os.system(f"mysqldump --add-drop-table --column-statistics=0 --password=admin -u root db_licuadoraspulido --tables {tabla}> gestion/static/tablas/BKP_{tabla}_{date_now}.sql")
+    print('imprimio la tabla ', tabla )
+    print('-------------------------------------------------------Hecho')
+     
+    
+def importar_datos(archivo, request):
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LISTO PA´ IMPRIMIR')
     try:
-        os.system(f"mysql -u root db_licuadoraspulido < {archivo[1:]}")#--password=admin
-    except:
-        print("Problemas al importar")
+        print('------------------------IMPORTAR')
+        os.system(f"mysql --password=admin -u root db_licuadoraspulido < {archivo[1:]} ")
+        messages.success(request,'su backup fue realizado correctamente')
+        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><Salio')
+    except Exception as err:
+        messages.warning(request,f'error {err} ')
+        print('error ', err)
 
 def copiaseguridad(request,tipo):
     titulo_pagina='Copia Seguridad'
     carrito = Carrito(request) 
-    ejemplo_dir = 'gestion/static/copiaseguridad/'
+    ejemplo_dir = 'gestion/static/tablas/'
     with os.scandir(ejemplo_dir) as ficheros:
         ficheros = [fichero.name for fichero in ficheros if fichero.is_file()]
+        
+    ruta = 'gestion/static/backup'
+    with os.scandir(ruta) as bases:
+       bases = [base.name for base in bases if base.is_file()]
     print(ficheros)
     filtrado=[]
     copiaseguridad = Copiaseguridad.objects.all()
@@ -533,19 +547,20 @@ def copiaseguridad(request,tipo):
             archivo = request.FILES['archivo']
             insert = Copiaseguridad(nombre=nombre, archivo=archivo)
             insert.save() 
-            importar_datos(insert.archivo.url)  
+            importar_datos(insert.archivo.url, request)  
             insert = Copiaseguridad(nombre=nombre, archivo=archivo)
             insert.save()     
             return redirect('administrador-copiaseguridad','A')
         else:
             print( "Error al procesar el formulario")    
     elif request.method == 'POST' and tipo== "D":
-        exportar_datos()
+        exportar_datos(request)
         return redirect('administrador-copiaseguridad','A')
     else:
         form = CopiaseguridadForm()
     context ={
         "ficheros":ficheros,
+        'bases':bases,
         "titulo_pagina":titulo_pagina,
         "form":form,
         "copiaseguridad":copiaseguridad

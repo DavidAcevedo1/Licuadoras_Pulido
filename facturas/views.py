@@ -151,8 +151,6 @@ def detalle(request,pk):
                             factura_id = Detalle.objects.get(id=len(id)).factura_id
                             items = Detalle.objects.get(id=len(id)).total
 
-                            print ("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",factura_id) 
-                            print("ññññññññññññññññññññññññññññññññññññññññññññññññññññññññ",items)
                             # total = precio * cantidad_stock
                     elif  factura_u.tipofactura == "Compra":
                         id = Detalle.objects.values_list('id', flat=True)
@@ -164,6 +162,8 @@ def detalle(request,pk):
                         Detalle.objects.filter(id = len(id) ).update(
                             total = precio * cantidad_stock
                         )
+                        total = id['total']
+                        print ('ñññññññññññññññññññññññññññññññññññññññññññññññññ',total)
                     return redirect('factura-detalle', pk=pk)  
         else:
             form= DetalleForm()

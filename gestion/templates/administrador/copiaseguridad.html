@@ -13,21 +13,33 @@
         </div>
         <div class="row">
             <div class="col">
-                <h2>Exportar</h2>
+                <h2>Exportar Base de datos</h2>
+                <div class="mb-3">
+                    {% for modelo in bases %}
+                    <div class="mb-3 ">
+                        <a href="{% static 'backup' %}/{{modelo}}">{{modelo}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col">
+                <h2>Exportar Tablas</h2>
                 <form action="{% url 'administrador-copiaseguridad' tipo='D' %}" method="POST">
                     {% csrf_token %}
+                    <div class="my-3" >
+                        <select class="form-select" aria-label="Default select example" name="opcion" >
+                            <option value="facturas_factura" selected >Factura</option>
+                            <option value="facturas_detalle" selected >Detalle factura</option>
+                        </select>
+                      </div>
                     <div class="mb-3">
-                        <!-- <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="modelos_lista" value="Todo" id="">
-                            <label class="form-check-label" for="modelos_lista">Todo</label>
-                        </div> -->
                         {% for modelo in ficheros %}
-                        <div class="mb-3 "> 
-                            <a href="{% static 'copiaseguridad' %}/{{modelo}}">{{modelo}}</a>
+                        <div class="mb-3 ">
+                            <a href="{% static 'tablas' %}/{{modelo}}">{{modelo}}</a>
                         </div>
                         {% endfor %}
                     </div>
-                    <input type="submit" value="Generar Copia">
+                    <input type="submit" class="btn_agregar d-block text-center text-decoration-none py-1 rounded border border-none" style="width: 120px;" value="Generar Copia">
                 </form>
             </div>
             <div class="col">
