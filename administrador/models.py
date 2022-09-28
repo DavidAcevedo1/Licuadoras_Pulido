@@ -32,6 +32,11 @@ class Tipos_Elemento(models.Model):
         PRODUCTOS="Productos",_("Productos")
     categoria=models.CharField(max_length=20,default=Categoria.ACCESORIOS,choices=Categoria.choices, verbose_name="Categoría")
     subcategoria=models.CharField(max_length=20,null=False,unique=True, verbose_name="Subcategoría")
+    class Estado(models.TextChoices):
+        ACTIVO='Activo', _('Activo')
+        INACTIVO='Inactivo', _('Inactivo')
+        ANULADO='Anulado', _('Anulado')
+    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
         return '%s - %s'%(self.categoria[:3].upper(), self.subcategoria)
     def clean(self):
@@ -47,10 +52,9 @@ class Elemento(models.Model):
     favorito=models.BooleanField(default=False)
     foto=models.ImageField(upload_to="carrito", null=True, blank=True,default="carrito/casa.png")
     class Estado(models.TextChoices):
-        ACTIVO='Activo', _('Activo')
-        INACTIVO='Inactivo', _('Inactivo')
-        ANULADO='Anulado', _('Anulado')
-    estado= models.CharField(max_length=10, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
+        ACTIVO='Activo',_('Activo')
+        INACTIVO='Inactivo',_('Inactivo')
+    estado= models.CharField(max_length=20, choices=Estado.choices, verbose_name="Estado", default=Estado.ACTIVO)
     def __str__(self) -> str:
         return '%s %s'%(self.tipo_elemento,self.nombre)
     def clean(self):

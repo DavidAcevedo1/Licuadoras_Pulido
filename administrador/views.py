@@ -7,7 +7,10 @@ from administrador.models import *
 from django.contrib.auth.decorators import login_required
 from gestion.decorators import unauthenticated_user, allowed_users
 from django.contrib import messages 
-
+from facturas.models import  Factura
+from facturas.forms import  FacturaForm
+from usuarios.models import  Usuario
+from django.shortcuts import render, redirect
 import os
 from datetime import date
 from usuarios.models import Usuario
@@ -21,7 +24,32 @@ def inicioadmin(request):
         "carrito": carrito,
         "titulo_pagina": titulo_pagina,
     }
-    return render(request, "administrador/inicioadmin.html", context) 
+    return render(request, "administrador/inicioadmin.html", context)
+
+def inicioadmin2(request,pk):
+    titulo_pagina='inicio Administrador'
+    tfacturas= Factura.objects.all()
+    tfactura= Factura.objects.get(id=pk)
+    accion_txt= f" la factura {tfactura.id}"
+    if request.method == 'POST':
+        form = FacturaForm(request.POST)
+        Factura.objects.filter(id=pk).update(
+                    decision='Inactivo'
+                )
+        tfactura_usuario=  tfactura.usuario
+        messages.success(request,f'Factura {tfactura.id} anulada correctamente')
+        return redirect('factura-tfactura')
+                
+    else:
+        form:FacturaForm()
+    context={
+            "titulo_pagina": titulo_pagina,
+            "accion_txt":accion_txt,
+            "tfacturas": tfacturas,
+            
+    }
+    return render(request, "factura/factura-eliminar.html", context)
+
 
 def tipoelemento(request):
     titulo_pagina="Categorias"
@@ -34,6 +62,7 @@ def tipoelemento(request):
 
 def ctipoelemento(request):
     titulo_pagina='Categorias'
+    url_crear= '/categoria/'
     categorias= Tipos_Elemento.objects.all()
     if request.method == 'POST':
         form=TipoElementoForm(request.POST, request.FILES)
@@ -51,6 +80,7 @@ def ctipoelemento(request):
             "titulo_pagina": titulo_pagina,
             "categorias": categorias,
             "form": form,
+            "url_crear":url_crear
         }
     return render(request, "administrador/categoria/categoria-crear.html", context)
 
@@ -105,7 +135,7 @@ def tipoelemento_eliminar(request,pk):
 
 def elemento(request):
     titulo_pagina='Elemento'
-    elementos= Elemento.objects.all().filter(estado = 'Activo')
+    elementos= Elemento.objects.all()
     if request.method == 'POST':
         form= ElementoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -161,7 +191,8 @@ def elemento_eliminar(request,pk):
     if request.method == 'POST':
         form= ElementoForm(request.POST)
         Elemento.objects.filter(id=pk).update(
-                    estado='Inactivo'
+                    estado='Inactivo',
+                    
                 )
         elemento_nombre= elemento.nombre
         messages.success(request,f'El elemento {elemento_nombre} se eliminó correctamente!')
@@ -176,6 +207,31 @@ def elemento_eliminar(request,pk):
             "url_eliminar":url_eliminar
     }
     return render(request, "administrador/elemento/elemento-eliminar.html", context)
+
+def elemento_activar(request,pk):
+    titulo_pagina='Elemento'
+    url_eliminar= '/elemento/'
+    elementos= Elemento.objects.all()
+    elemento= Elemento.objects.get(id=pk)
+    accion_txt= f"elemento {elemento.id}, una vez activado no hay marcha atras!"
+    if request.method == 'POST':
+        form = ElementoForm(request.POST)
+        Elemento.objects.filter(id=pk).update(
+                    estado='Activo'
+                )
+        elemento_nombre=  elemento.nombre
+        messages.success(request,f'El usuario {elemento_nombre} se activó correctamente!')
+        return redirect('administrador-elemento')                           
+    else:
+        form:ElementoForm()
+    context={
+            "titulo_pagina": titulo_pagina,
+            "accion_txt":accion_txt,
+            "elementos": elementos,  
+            "url_eliminar":url_eliminar 
+    }
+    return render(request, "administrador/elemento/elemento-activar.html", context)
+
 
 def electrodomestico_favorito(request,pk):
     if Elemento.objects.get(id=pk).favorito:
@@ -198,6 +254,7 @@ def marca(request):
 
 def marca_crear(request):
     titulo_pagina='Marcas'
+    url_crear= '/marca/'
     marcas= Marca.objects.all()
     if request.method == 'POST':
         form= MarcaForm(request.POST)
@@ -214,7 +271,8 @@ def marca_crear(request):
         context={
             "titulo_pagina": titulo_pagina,
             "marcas": marcas,
-            "form": form
+            "form": form,
+            "url_crear":url_crear
         }
     return render(request,"administrador/marca/marca-crear.html", context)
 
@@ -281,6 +339,7 @@ def electrodomestico(request):
 
 def electrodomestico_crear(request):
     titulo_pagina='Electrodomesticos'
+    url_crear= '/electrodomestico/'
     electrodomesticos= Electrodomestico.objects.all()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
@@ -305,7 +364,8 @@ def electrodomestico_crear(request):
         context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
-            "form": form
+            "form": form,
+            "url_crear": url_crear
         }
     return render(request, "administrador/electrodomestico/electrodomestico-crear.html", context)
 
