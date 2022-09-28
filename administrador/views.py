@@ -208,6 +208,31 @@ def elemento_eliminar(request,pk):
     }
     return render(request, "administrador/elemento/elemento-eliminar.html", context)
 
+def elemento_activar(request,pk):
+    titulo_pagina='Elemento'
+    url_eliminar= '/elemento/'
+    elementos= Elemento.objects.all()
+    elemento= Elemento.objects.get(id=pk)
+    accion_txt= f"elemento {elemento.id}, una vez activado no hay marcha atras!"
+    if request.method == 'POST':
+        form = ElementoForm(request.POST)
+        Elemento.objects.filter(id=pk).update(
+                    estado='Activo'
+                )
+        elemento_nombre=  elemento.nombre
+        messages.success(request,f'El usuario {elemento_nombre} se activó correctamente!')
+        return redirect('administrador-elemento')                           
+    else:
+        form:ElementoForm()
+    context={
+            "titulo_pagina": titulo_pagina,
+            "accion_txt":accion_txt,
+            "elementos": elementos,  
+            "url_eliminar":url_eliminar 
+    }
+    return render(request, "administrador/elemento/elemento-activar.html", context)
+
+
 def electrodomestico_favorito(request,pk):
     if Elemento.objects.get(id=pk).favorito:
         is_favorito=False
