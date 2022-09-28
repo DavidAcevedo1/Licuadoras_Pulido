@@ -11,10 +11,6 @@
                         href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
                 <li class="breadcrumb-item"><a class="indice text-decoration-none text-blue"
                         href="{% url 'administrador-elemento' %}">Elemento</a></li>
-                <li class="breadcrumb-item"><a class="indice text-decoration-none text-blue"
-                        href="{% url 'administrador-marca' %}">Marcas</a></li>
-                <li class="breadcrumb-item"><a class="indice text-decoration-none text-blue"
-                        href="{% url 'administrador-categoria' %}">Categorias</a></li>
             </ol>
         </div>
         <form id="form1" action="" method="POST" enctype="multipart/form-data">
@@ -139,7 +135,7 @@
                                         <thead class=" bg-info">
                                             <tr class="text-white">
                                                 <th scope="col">Codigo</th>
-                                                <th scope="col">Elemento</th>
+                                                <th scope="col">Foto</th>
                                                 <th scope="col">Stock</th>
                                                 <th scope="col">Nombre</th>
                                                 <th scope="col">Marca</th>
@@ -153,7 +149,7 @@
                                             {% if elemento.estado == "Inactivo" %}
                                             <tr>
                                                 <td>{{elemento.id}}</td>
-                                                <td>{{elemento.tipo_elemento}}</td>
+                                                <td><img class="producto-img" width="100px" src="{{elemento.foto.url}}" alt=""></td>
                                                 {% if  elemento.stock_elemento > 0 %}
                                                 <td class="text-success">{{elemento.stock_elemento}}</td>
                                                 {% else %}

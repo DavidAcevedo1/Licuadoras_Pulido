@@ -172,6 +172,7 @@ nav{
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
+    height: 100%;
 }
 
 .dark-mode .cuerpo-admin{
@@ -179,7 +180,7 @@ nav{
     background-size: cover;
     background-attachment: fixed;
     margin: 0;
-
+    height: 100%;
 }
 .container{
     background-color: #ffffffd5 !important;
@@ -297,11 +298,11 @@ footer{
     position: absolute;
     border-radius: 50%;
     padding: 5px;
-    top: -30px;
-    left: 47%;
+    top: -39px;
+    left: 48%;
 }
 .sublogo img{
-    width: 80px;
+    width: 60px;
 }
 .tabla-ver{
     display: flex;
