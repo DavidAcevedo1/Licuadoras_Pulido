@@ -32,7 +32,7 @@ html{
     height: 100%;
 }  
 body{
-    height: 100%;
+    height: auto;
     min-width: 100%;
     display: flex;
     flex-direction: column;
@@ -108,22 +108,16 @@ header{
 .dark-mode td{
     color: rgb(190, 188, 188);
 }
-
 .dark-mode tr{ 
     background-color: #0b318a;
 }
-
 table{
     background-color: #fff;
 }
-
 .dark-mode th{
     background-color: #212529;
     color: #fff;
 }
-
-
-
 .dark-mode table{
     background-color: #0d1821c0;
 }
@@ -171,6 +165,7 @@ nav{
     background-image: url( '../img/fondo-de-body.webp');
     background-size: cover;
     background-attachment: fixed;
+    height: inherit;
     margin: 0;
 }
 
@@ -388,4 +383,8 @@ footer{
 .select2-container--open {
     width: 100% !important;
     z-index: 9999;
+}
+
+.activo{
+    color: #198754;
 }
