@@ -106,18 +106,13 @@
                                 {% csrf_token %}
                                 {{ form|crispy }}
                         </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
+                            <input type="submit" class="btn btn-success" value="Agregar"></button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="p-2 bd-highlight">
-                <!-- Marcas -->
-                <a type="button" class="boton" href="{% url 'administrador-marca' %}">
-                    <input class="btn btn-success btn-block m-2" type="submit" Value="Marcas"></a>
-            </div>
-            <div class="p-2 bd-highlight">
-                <!-- Categorias -->
-                <a type="button" class="boton" href="{% url 'administrador-categoria' %}">
-                    <input class="btn btn-success btn-block m-2" type="submit" Value="Categorias"></a>
             </div>
             <div class="ms-auto p-2 bd-highlight">
                 <!-- modal inactivos -->
