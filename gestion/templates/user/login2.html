@@ -1,0 +1,29 @@
+{% extends 'partials/body-login.html ' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block contenido %}
+<div class="cuerpo-user">
+    <div class="centrado">
+        <div id="contenidoinicio">
+            <div class="p-3">
+                <img class="imgLogo rounded-circle" src="{% static 'img/Logooo.png' %}">
+                <h5 class="text-primary">Ingrese La contraseña y el usuario para poder Eliminar la Factura! </h5>
+                <form class="p-3" method="POST">
+                    {% csrf_token %}
+
+                    {{ form|crispy }}
+                    <div>
+                        <h6 class="text-primary">Los productos del stock se devolveran ya que no cerro la factura! </h6>
+                        <a class="text-decoration-none" href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'factura-tfactura' %}" class="btn btn-secondary m-4"> Cancelar </a>
+                        <a href="{% url 'factura-eliminar'%}">
+                        <input type="submit" class="btn btn-success m-4" value="Verificar"></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock contenido %}

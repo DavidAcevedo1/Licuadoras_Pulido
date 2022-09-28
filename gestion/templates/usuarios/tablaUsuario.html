@@ -21,10 +21,9 @@
             <th scope="col">Rol</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
+            <th scope="col">T.D</th>
             <th scope="col">Documento</th>
             <th scope="col">Celular</th>
-            <th scope="col">Tipo documento</th>
-            <th scope="col">Estado</th>
             <th scope="col">Opciones</th>
           </tr>
         </thead>
@@ -32,18 +31,18 @@
           {% for tusuario in tusuarios %}
           {% if tusuario.estado == "Activo" %}
           <tr>
-            <td>{{tusuario.Uid}}</td>
+            <td><svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" class="bi bi-circle-fill activo" viewBox="0 0 16 16">
+              <circle cx="8" cy="8" r="8"/></svg> ‍‍‍‍‍ㅤ{{tusuario.Uid}}</td>
             <td>{{tusuario.rol}}</td>
             <td>{{tusuario.Unombre}}</td>
             <td>{{tusuario.apellido}}</td>
+            <td>{{tusuario.tipo_documento}}</td>
             <td>{{tusuario.documento}}</td>
             <td>{{tusuario.celular}}</td>
-            <td>{{tusuario.tipo_documento}}</td>
-            <td><p class="bg-success rounded text-white text-center">{{tusuario.estado}}</p></td>
             <td>
               <!-- Boton modal usuario ver -->
-              <a class="btn btn-primary btn-sm" href="{% url 'usuario-verusuario' tusuario.Uid %}"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill"
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'usuario-verusuario' tusuario.Uid %}"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill"
                   viewBox="0 0 16 16">
                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                   <path
@@ -101,23 +100,22 @@
                         <th scope="col">Documento</th>
                         <th scope="col">Celular</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Activar</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for tusuario in tusuarios %}
                       {% if tusuario.estado == "Inactivo" %}
                       <tr>
-                        <td>{{tusuario.Uid}}</td>
+                        <td><svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" class="bi bi-circle-fill text-danger" viewBox="0 0 16 16">
+                          <circle cx="8" cy="8" r="8"/></svg> ‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍ ‍‍‍{{tusuario.Uid}}</td>
                         <td>{{tusuario.rol}}</td>
                         <td>{{tusuario.Unombre}}</td>
                         <td>{{tusuario.apellido}}</td>
                         <td>{{tusuario.documento}}</td>
                         <td>{{tusuario.celular}}</td>
-                        <td><p class="bg-danger rounded text-white text-center" stye="width:50%;">{{tusuario.estado}}</p></td>
                         <td>
                           <!-- Boton modal usuario activar -->
-                          <a class="btn btn-success btn-sm" href="{% url 'usuario-activar' tusuario.Uid %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                          <a class="btn btn-success btn-sm" href="{% url 'usuario-activar' tusuario.Uid %}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                             <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
                           </svg></a>
                           {% endif %}

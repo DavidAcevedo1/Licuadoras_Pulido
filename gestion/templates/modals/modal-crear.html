@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo {{titulo_pagina}}</h5>
                 <a class="btn-close"
-                    data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close">
+                    data-bs-dismiss="modal" href="{{url_crear}}" aria-label="Close">
                 </a>
             </div>
             <div class="modal-body">
@@ -16,21 +16,9 @@
                     {{ form|crispy }}
             </div>
             <div class="modal-footer">
-                {% if titulo_pagina != 'Usuarios' %}
-                    {% if titulo_pagina != 'Electrodomesticos' %}
-                        <a class="btn btn-secondary"
-                            data-bs-dismiss="modal" href="{% url 'administrador-elemento' %}">Cancelar</a>
-                        <input type="submit" class="btn btn-success" value="Agregar"></button>
-                    {% else %}
-                        <a class="btn btn-secondary"
-                            data-bs-dismiss="modal" href="{% url 'administrador-servicio' %}">Cancelar</a>
-                        <input type="submit" class="btn btn-success" value="Agregar"></button>   
-                    {% endif %}    
-                {% else %} 
-                    <a class="btn btn-secondary"
-                        data-bs-dismiss="modal" href="{% url 'usuario-tablaUsuario' %}">Cancelar</a>
+                <a class="btn btn-secondary"
+                data-bs-dismiss="modal" href="{{url_crear}}">Cancelar</a>
                     <input type="submit" class="btn btn-success" value="Agregar"></button> 
-                {% endif %}    
                 </form>
             </div>
         </div>
