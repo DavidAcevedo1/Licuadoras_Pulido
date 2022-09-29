@@ -16,7 +16,7 @@ urlpatterns = [
     path('tablausuario/', login_required (tusuario), name='usuario-tablaUsuario'),
     path('verusuario/<int:pk>', login_required (vusuario), name='usuario-verusuario'),
     path('editarusuario/<int:pk>', login_required (Editarusuario), name='usuario-editarusuario'),
-    path('tablausuario/eliminar/<int:pk>/', login_required (usuario_eliminar), name='usuario-usuario-eliminar'),
+    path('tablausuario/d/<int:pk>/', login_required (usuario_eliminar), name='usuario-usuario-eliminar'),
     path('tablausuario/activar/<int:pk>/', login_required (usuario_activar), name='usuario-activar'),
 
     #carrito

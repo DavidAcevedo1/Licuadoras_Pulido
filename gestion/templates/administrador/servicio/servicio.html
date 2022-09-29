@@ -67,32 +67,34 @@
                 </tbody>
             </table>
         </form>
-        <div class="anuncio">
-            <!-- Boton modal servicio -->
-            <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <input class="btn btn-success btn-block" type="submit" Value="Crear Servicio">
-            </a>
-            <!-- Boton modal crear electrodomestico -->
-            <a href="{% url 'administrador-electrodomestico-crear' %}" class=" btn btn-success btn-block my-2">Crear Electrodomestico</a>
-            <!-- Modal servicio -->
-            {% load crispy_forms_tags %}
-            <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Servicio</h5>
-                            <a class="btn-close" data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
-                            <input type="submit" class="btn btn-success" value="Agregar Servicio"></button>
-                            </form>
+        <div class="d-flex justify-content-between">
+            <div>
+                <!-- Boton modal servicio -->
+                <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <input class="btn btn-success btn-block" type="submit" Value="Crear Servicio">
+                </a>
+                <!-- Boton modal crear electrodomestico -->
+                <a href="{% url 'administrador-electrodomestico-crear' %}" class=" btn btn-success btn-block my-2">Crear Electrodomestico</a>
+                <!-- Modal servicio -->
+                {% load crispy_forms_tags %}
+                <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Servicio</h5>
+                                <a class="btn-close" data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
+                                <input type="submit" class="btn btn-success" value="Agregar Servicio"></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +108,7 @@
                   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg d-flex justify-content-center">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="modalInactivosLabel">Servicios Inactivos</h5>
+                        <h5 class="modal-title" id="modalInactivosLabel">Servicios Anulados</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">

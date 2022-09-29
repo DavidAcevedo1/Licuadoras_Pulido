@@ -90,20 +90,29 @@ def vusuario (request,pk):
     return render(request,"usuarios/verusuario.html", context)
 
 def Editarusuario(request,pk):
-    titulo_pagina="Usuarios"
-    tusuarios= Usuario.objects.get(Uid=pk)
+    titulo_pagina='Usuario'
+    usuarios= Usuario.objects.all()
+    usuario= Usuario.objects.get(Uid=pk)
+    documento=f"{usuario.Unombre} con el ID {pk}"
+    url_editar="/tablausuario"
     if request.method == 'POST':
-        form= UsuarioForm(request.POST, instance=tusuarios)
+        form= UsuarioForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-        return redirect('usuario-tablaUsuario')
+            usuario_nombre= form.cleaned_data.get('Unombre')
+            messages.success(request,f'El usuario {usuario_nombre} se editó correctamente!')
+            return redirect('usuario-tablaUsuario')
+        else:
+            usuario_nombre= form.cleaned_data.get('Unombre')
+            messages.error(request,f'Error al modificar el usuario {usuario_nombre}')
     else:
-        form= UsuarioForm(instance=tusuarios)
-        
-        context={
-        "tusuarios": tusuarios,
-        "titulo_pagina": titulo_pagina,
-        "form":form
+        form= UsuarioForm(instance=usuario)
+    context={
+            "titulo_pagina": titulo_pagina,
+            "usuarios":usuarios,
+            "form": form,
+            "documento":documento,
+            "url_editar":url_editar,
     }
     return render(request, "usuarios/usuario-editar.html", context)
 
