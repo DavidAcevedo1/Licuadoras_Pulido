@@ -13,6 +13,17 @@ def carrito(request):
     }
     return render(request, "usuarios/carrito.html", context)
 
+def detalle(request, pk, url_back):
+    titulo_pagina='Detalles'
+    db_elemento = Elemento.objects.get(id = pk)
+    _url_back = f"/{url_back}"
+    contex = {
+        "titulo_pagina": titulo_pagina,
+        'elemento': db_elemento,
+        'url_back': _url_back,
+    }
+    return render(request, 'usuarios/detalles.html', contex)
+
 def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
@@ -38,9 +49,11 @@ def restar_elemento(request, elemento_id):
 
 def cusuario(request):
     titulo_pagina="Usuarios"
+    url_crear= '/tablausuario/'
     usuario_db = Usuario.objects.all()
     if request.method == 'POST':
-        form = UsuarioForm(request.POST)
+        form = UsuarioForm(request.POST) 
+        
         if form.is_valid():
             form.save()
             usuario_nombre= form.cleaned_data.get('Unombre')
@@ -52,7 +65,8 @@ def cusuario(request):
     context={
         "titulo_pagina": titulo_pagina,
         "usuario_db": usuario_db,
-        "form":form
+        "form":form,
+        "url_crear":url_crear,
     }
     return render(request,'usuarios/usuario-crear.html', context)
 
@@ -169,13 +183,3 @@ def politicasprivacidad(request):
     }
     return render(request, "usuarios/politicasprivacidad.html", context) 
 
-def detalle(request, pk, url_back):
-    titulo_pagina='Detalles'
-    db_elemento = Elemento.objects.get(id = pk)
-    _url_back = f"/{url_back}"
-    contex = {
-        "titulo_pagina": titulo_pagina,
-        'elemento': db_elemento,
-        'url_back': _url_back,
-    }
-    return render(request, 'usuarios/detalles.html', contex)

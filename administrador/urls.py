@@ -15,8 +15,9 @@ urlpatterns = [
     path('marca/d/<int:pk>/',login_required(marca_eliminar), name='administrador-marca-eliminar'),
     
     path('elemento/', login_required(elemento), name='administrador-elemento'),
-    path('elemento/u/<int:pk>/',login_required (elemento_editar), name='administrador-elemento-editar'),
+    path('elemento/p/<int:pk>/',login_required (elemento_editar), name='administrador-elemento-editar'),
     path('elemento/d/<int:pk>/',login_required (elemento_eliminar), name='administrador-elemento-eliminar'),
+    path('elemento/activar/<int:pk>/', login_required (elemento_activar), name='elemento-activar'),
     
     path('electrodomestico/', electrodomestico, name='administrador-electrodomestico'),
     path('electrodomestico/u/<int:pk>/',login_required (electrodomestico_editar), name='administrador-electrodomestico-editar'),

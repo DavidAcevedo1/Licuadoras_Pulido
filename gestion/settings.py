@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'gestion.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE':'django.db.backends.mysql',
         'NAME': 'db_licuadoraspulido',
         'USER': 'root',
         'PASSWORD': 'xiomy18',
@@ -145,6 +145,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'inicio'
 LOGIN_REDIRECT_URL = 'inicioadmin'
 LOGIN_URL="usuario-login"
+ 
+# verificacion de facturas eliminar
+LOGOUT_REDIRECT_URL = 'inicio2'
+LOGIN_REDIRECT_URL = 'factura-tfactura'
+LOGIN_URL="usuario-login2" 
  
 # para lo del email documentacion django
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
