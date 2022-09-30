@@ -21,7 +21,7 @@
                         <th scope="col">Descripción</th>
                         <th scope="col">Observaciones</th>
                         <th scope="col">Fecha Entrada</th>
-                        <th scope="col"></th>
+                        <th scope="col">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,7 +122,7 @@
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Observaciones</th>
                                         <th scope="col">Fecha Entrada</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -135,6 +135,7 @@
                                         <td>{{servicio.diagnostico}}</td>
                                         <td>{{servicio.observacion}}</td>
                                         <td>{{servicio.fecha_entrada}}</td>
+                                        <td><p class="bg-danger rounded text-white text-center" >{{servicio.estado}}</p></td>
                                     {% endif %}
                                     </tr>
                                     {% endfor %}

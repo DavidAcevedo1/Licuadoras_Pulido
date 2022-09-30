@@ -30,7 +30,7 @@
                                 src="{% static 'img/icons/zoom-out.svg' %}" width="30" alt="" srcset="">Reducir
                         </button></li>
                     <li><button title="Restaurar" class="dropdown-item" id="restaurar" href=""><img
-                                src="{% static 'img/icons/eye-fill.svg' %}" width="30" alt="" srcset="">
+                                src="{% static 'img/icons/arrow-clockwise.svg' %}" width="30" alt="" srcset="">
                             Restaurar</button></li>
                 </ul>
                 <div class="dropdown salir">
@@ -42,6 +42,7 @@
                         <li><a class="dropdown-item" href="{% url 'inicio' %}">Página Inicio</a>
                             <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item" href="{% url 'administrador-manualayuda' %}">Ayuda</a> 
                         <li><a class="dropdown-item" href="{% url 'usuario-logout' %}">Cerrar Sesión</a></li>
                         {% endif %}
                     </ul>

@@ -35,8 +35,7 @@ def manual_ayuda(request):
     }
     return render(request, "administrador/manualayuda.html", context)
 
-    
-    
+
 
 def inicioadmin2(request,pk):
     titulo_pagina='inicio Administrador'

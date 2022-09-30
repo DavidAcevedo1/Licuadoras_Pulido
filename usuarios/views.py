@@ -82,11 +82,10 @@ def tusuario(request):
 
 def vusuario (request,pk):
     titulo_pagina="Usuarios"
-    usuario= Usuario.objects.get(Uid=pk) 
+    usuario= Usuario.objects.get(Uid=pk)
     factura= Factura.objects.get(id=pk)
-    tfacturas= Factura.objects.filter() 
+    tfacturas= Factura.objects.filter(usuario_id=usuario)
     detalles= Detalle.objects.filter(factura_id=pk)
-    print(usuario)
     context={
         "usuario": usuario,
         "factura": factura,
