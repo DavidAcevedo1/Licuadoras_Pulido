@@ -38,7 +38,7 @@
                         {% else %}
                             <div id="div_id_usuario" class="mb-3">
                                 <label for="id_usuario" class="form-label requiredField">
-                                *- Compras <span class="asteriskField">-*</span>
+                                *- Compras <span class="asteriskField"></span>
                                 </label>
                                 <select name="usuario" class="select form-select select2" id="id_usuario">
                                     <option selected>
@@ -111,7 +111,7 @@
                                     <td class="dt-body-right dtr-hidden">{{ detalle.cantidad }}</td>
                                     <td class="dt-body-right dtr-hidden">{{ detalle.estado }}</td>
                                     <td class="dt-body-right dtr-hidden">${{ detalle.elemento.precio }}</td>
-                                    <td class="dt-body-right dtr-hidden">${{ detalle.total }}</td>
+                                    <td class="dt-body-right dtr-hidden"id="totaldetalle">{{ detalle.total }}</td>
                                     <td>
                                         <a class="btn btn-danger btn-sm col-3"
                                             href="{% url 'detalle-estado-eliminar' detalle.id %}">
@@ -126,14 +126,16 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <strong id="total-calculado" class=" text-success"></strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endif %}
     </div>
 </div>
 {% endblock contenido %}
-<script>
-    let total = detalle.total
-    console.log('El total es de '+total)
-    export{total}
-</script>

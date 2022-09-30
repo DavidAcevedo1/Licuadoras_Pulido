@@ -1,8 +1,11 @@
-// import total from './templates/factura/detalle-factura.html'
+let numbers = [];
 
-// const inicio = 0;
-// function pago (total){
-//     return total + inicio
-// }
+document.querySelectorAll('#totaldetalle').forEach(item=>{
+    numbers.push(parseInt( item.textContent))
+})
+let total = numbers.reduce((a, b) => a + b, 0);
+console.log(total)
+document.getElementById('total-calculado');
+let resultado = document.getElementById('total-calculado');
 
-// console.log('El total a pagar es de '+pago)
+resultado.textContent = total

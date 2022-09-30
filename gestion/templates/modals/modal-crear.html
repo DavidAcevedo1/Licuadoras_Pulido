@@ -7,7 +7,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo {{titulo_pagina}}</h5>
                 <a class="btn-close"
-                    data-bs-dismiss="modal" href="{{url_crear}}" aria-label="Close">
+                    data-bs-dismiss="modal" onclick="history.back()" aria-label="Close">
                 </a>
             </div>
             <div class="modal-body">
@@ -17,7 +17,7 @@
             </div>
             <div class="modal-footer">
                 <a class="btn btn-secondary"
-                data-bs-dismiss="modal" href="{{url_crear}}">Cancelar</a>
+                data-bs-dismiss="modal" onclick="history.back()">Cancelar</a>
                     <input type="submit" class="btn btn-success" value="Agregar"></button> 
                 </form>
             </div>
