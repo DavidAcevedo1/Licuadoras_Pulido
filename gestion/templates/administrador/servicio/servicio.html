@@ -12,7 +12,7 @@
         </div>
         <form id="form1">
             <table class="table table-bordered results" id="proyectos">
-                <thead class="bg-info">
+                <thead class="color-tabla">
                     <tr class="text-white">
                         <th scope="col">Tipo Servicio</th>
                         <th scope="col">Usuario</th>
@@ -59,7 +59,8 @@
                                             0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 
                                             1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 
                                             1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                </svg></a>
+                                </svg>
+                            </a>
                             {% endif %}
                         </td>
                     </tr>
@@ -99,7 +100,9 @@
             </div>
             <div class="m-2">
                 <!-- modal inactivos -->
-                <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos"><img src="../../static/img/folder.png" style="width: 40px;" alt=""></a>
+                <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos">
+                    <img src="../../static/img/folder.png" style="width: 40px;" alt="">
+                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="modalInactivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                   aria-labelledby="modalInactivosLabel" aria-hidden="true">
@@ -143,7 +146,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
     <div class="toast-container position-fixed  end-0  p-3 "
