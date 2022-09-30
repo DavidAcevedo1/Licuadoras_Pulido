@@ -4,13 +4,16 @@
 {% block contenido %}
 <div class="cuerpo-admin">
     <div class="contenido-cuerpo borde">
+        <br> <br>
         <h1 class="text-center">{{titulo_pagina}}</h1>
+        <br> <br>
         <div>
             <ol class="breadcrumb d-flex justify-content-end">
             <li class="breadcrumb-item"><a class="indice text-decoration-none" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
             <li class="breadcrumb-item"><a class="indice text-decoration-none">Copia de Seguridad</a></li>
             </ol>
         </div>
+        <br> <br>
         <div class="row">
             <div class="col">
                 <h2>Exportar Base de datos</h2>
@@ -52,7 +55,7 @@
             <div class="col">
                 <h2>Historial de Importes</h2>
                 <table class="table-responsive bg-white table-bordered results  w-100"  id="tabla">
-                    <thead class="bg-info">
+                    <thead class="color-tabla">
                         <tr class="text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">Archivo</th>
@@ -71,6 +74,7 @@
                 </table>
             </div>
         </div>
+        <br> <br> <br> <br>
     </div>
 </div>
 {% endblock contenido %}

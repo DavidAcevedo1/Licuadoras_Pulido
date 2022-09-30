@@ -15,7 +15,7 @@
     </div>
     <form id="form1">
       <table class="table table-bordered results display responsive nowrap" width="100%" id="proyectos">
-        <thead class="bg-info">
+        <thead class="color-tabla">
           <tr class="text-white">
             <th scope="col">ID</th>
             <th scope="col">Rol</th>
@@ -32,7 +32,7 @@
           {% if tusuario.estado == "Activo" %}
           <tr>
             <td><svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" class="bi bi-circle-fill activo" viewBox="0 0 16 16">
-              <circle cx="8" cy="8" r="8"/></svg> ‍‍‍‍‍ㅤ{{tusuario.Uid}}</td>
+              <circle cx="8" cy="8" r="8"/></svg>{{tusuario.Uid}}</td>
             <td>{{tusuario.rol}}</td>
             <td>{{tusuario.Unombre}}</td>
             <td>{{tusuario.apellido}}</td>
