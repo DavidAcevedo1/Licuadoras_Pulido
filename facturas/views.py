@@ -167,7 +167,7 @@ def detalle(request,pk):
                             )
                         precio = Elemento.objects.get(id =  elementosCapturados ).precio
                         id = Detalle.objects.values_list('id', flat=True)
-                        Detalle.objects.filter(id = len(id) ).update(
+                        Detalle.objects.filter(id = len(id)-1 ).update(
                             total = precio * cantidad_stock
                         )
                     return redirect('factura-detalle', pk=pk)  
