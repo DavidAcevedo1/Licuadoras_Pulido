@@ -73,7 +73,6 @@ def tipoelemento(request):
 
 def ctipoelemento(request):
     titulo_pagina='Categorias'
-    url_crear= '/categoria/'
     categorias= Tipos_Elemento.objects.all()
     if request.method == 'POST':
         form=TipoElementoForm(request.POST, request.FILES)
@@ -81,7 +80,7 @@ def ctipoelemento(request):
             form.save()
             categoria_nombre= form.cleaned_data.get('subcategoria')
             messages.success(request,f'La subcategoria {categoria_nombre} se agregó correctamente!')
-            return redirect('administrador-categoria')
+            return redirect('administrador-elemento')
         else:
             categoria_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'La subcategoria ya se encuentra agregada!')    
@@ -91,7 +90,6 @@ def ctipoelemento(request):
             "titulo_pagina": titulo_pagina,
             "categorias": categorias,
             "form": form,
-            "url_crear":url_crear
         }
     return render(request, "administrador/categoria/categoria-crear.html", context)
 
@@ -172,6 +170,7 @@ def tipoelementos_activar(request,pk):
 
 def elemento(request):
     titulo_pagina='Elemento'
+    elemento = Elemento.objects.filter(estado = "Activo")
     elementos= Elemento.objects.all()
     if request.method == 'POST':
         form= ElementoForm(request.POST, request.FILES)
@@ -189,6 +188,7 @@ def elemento(request):
             "titulo_pagina": titulo_pagina,
             "elementos": elementos,
             "form": form,
+            "elemento": elemento
         }
     return render(request, "administrador/elemento/elemento.html", context)
 
@@ -291,7 +291,6 @@ def marca(request):
 
 def marca_crear(request):
     titulo_pagina='Marcas'
-    url_crear= '/marca/'
     marcas= Marca.objects.all()
     if request.method == 'POST':
         form= MarcaForm(request.POST)
@@ -302,14 +301,13 @@ def marca_crear(request):
         else:
             marca_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'La marca ya se encuentra agregado!')    
-        return redirect('administrador-marca')
+        return redirect('administrador-elemento')
     else:
         form= MarcaForm()
         context={
             "titulo_pagina": titulo_pagina,
             "marcas": marcas,
             "form": form,
-            "url_crear":url_crear
         }
     return render(request,"administrador/marca/marca-crear.html", context)
 
@@ -376,7 +374,6 @@ def electrodomestico(request):
 
 def electrodomestico_crear(request):
     titulo_pagina='Electrodomesticos'
-    url_crear= '/electrodomestico/'
     electrodomesticos= Electrodomestico.objects.all()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
@@ -395,14 +392,13 @@ def electrodomestico_crear(request):
         else:
             electrodomestico_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
-        return redirect('administrador-electrodomestico')
+        return redirect('administrador-servicio')
     else:
         form= ElectrodomesticoForm()  
         context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
             "form": form,
-            "url_crear": url_crear
         }
     return render(request, "administrador/electrodomestico/electrodomestico-crear.html", context)
 
@@ -459,6 +455,7 @@ def electrodomestico_eliminar(request,pk):
     return render(request, "administrador/electrodomestico/electrodomestico-eliminar.html", context)
 
 def servicio(request):
+    electrodomestico = Electrodomestico.objects.filter(estado="Activo")
     titulo_pagina="Servicios"
     # usuarios = Usuario.objects.filter(usuario=Cliente)
     usuarios = Usuario.objects.filter(estado="Activo")
@@ -487,7 +484,8 @@ def servicio(request):
             "servicios":servicios,
             "form": form ,
             "usuario": usuarios,
-            "item": items
+            "item": items,
+            "electrodomestico": electrodomestico,
     }
     return render(request, "administrador/servicio/servicio.html",context)
 
@@ -543,22 +541,36 @@ def servicio_eliminar(request,pk):
     }
     return render(request, "administrador/servicio/servicio-eliminar.html", context)
 
-def exportar_datos():
-    fecha=date.today()
-    os.system(f"mysqldump --add-drop-table --column-statistics=0 -u root db_licuadoraspulido> gestion/static/copiaseguridad/BKP_{fecha}.sql")
-   
-def importar_datos(archivo):
+
+def exportar_datos(request):
+    date_now = date.today()
+    tabla = request.POST['opcion']
+    os.system(f"mysqldump --add-drop-table --column-statistics=0 --password=admin -u root db_licuadoraspulido --tables {tabla}> gestion/static/tablas/BKP_{tabla}_{date_now}.sql")
+    print('imprimio la tabla ', tabla )
+    print('-------------------------------------------------------Hecho')
+     
+    
+def importar_datos(archivo, request):
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LISTO PA´ IMPRIMIR')
     try:
-        os.system(f"mysql -u root db_licuadoraspulido < {archivo[1:]}")#--password=admin
-    except:
-        print("Problemas al importar")
+        print('------------------------IMPORTAR')
+        os.system(f"mysql --password=admin -u root db_licuadoraspulido < {archivo[1:]} ")
+        messages.success(request,'su backup fue realizado correctamente')
+        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><Salio')
+    except Exception as err:
+        messages.warning(request,f'error {err} ')
+        print('error ', err)
 
 def copiaseguridad(request,tipo):
     titulo_pagina='Copia Seguridad'
     carrito = Carrito(request) 
-    ejemplo_dir = 'gestion/static/copiaseguridad/'
+    ejemplo_dir = 'gestion/static/tablas/'
     with os.scandir(ejemplo_dir) as ficheros:
         ficheros = [fichero.name for fichero in ficheros if fichero.is_file()]
+        
+    ruta = 'gestion/static/backup'
+    with os.scandir(ruta) as bases:
+       bases = [base.name for base in bases if base.is_file()]
     print(ficheros)
     filtrado=[]
     copiaseguridad = Copiaseguridad.objects.all()
@@ -570,19 +582,20 @@ def copiaseguridad(request,tipo):
             archivo = request.FILES['archivo']
             insert = Copiaseguridad(nombre=nombre, archivo=archivo)
             insert.save() 
-            importar_datos(insert.archivo.url)  
+            importar_datos(insert.archivo.url, request)  
             insert = Copiaseguridad(nombre=nombre, archivo=archivo)
             insert.save()     
             return redirect('administrador-copiaseguridad','A')
         else:
             print( "Error al procesar el formulario")    
     elif request.method == 'POST' and tipo== "D":
-        exportar_datos()
+        exportar_datos(request)
         return redirect('administrador-copiaseguridad','A')
     else:
         form = CopiaseguridadForm()
     context ={
         "ficheros":ficheros,
+        'bases':bases,
         "titulo_pagina":titulo_pagina,
         "form":form,
         "copiaseguridad":copiaseguridad

@@ -12,7 +12,7 @@
         </div>
         <form id="form1">
             <table class="table table-bordered results" id="proyectos">
-                <thead class="bg-info">
+                <thead class="color-tabla">
                     <tr class="text-white">
                         <th scope="col">Tipo Servicio</th>
                         <th scope="col">Usuario</th>
@@ -59,7 +59,8 @@
                                             0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 
                                             1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 
                                             1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                </svg></a>
+                                </svg>
+                            </a>
                             {% endif %}
                         </td>
                     </tr>
@@ -67,41 +68,71 @@
                 </tbody>
             </table>
         </form>
-        <div class="d-flex justify-content-between">
-            <div>
-                <!-- Boton modal servicio -->
-                <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <input class="btn btn-success btn-block" type="submit" Value="Crear Servicio">
-                </a>
-                <!-- Boton modal crear electrodomestico -->
-                <a href="{% url 'administrador-electrodomestico-crear' %}" class=" btn btn-success btn-block my-2">Crear Electrodomestico</a>
-                <!-- Modal servicio -->
-                {% load crispy_forms_tags %}
-                <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Servicio</h5>
-                                <a class="btn-close" data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="POST">
-                                    {% csrf_token %}
-                                    {{ form|crispy }}
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
-                                <input type="submit" class="btn btn-success" value="Agregar Servicio"></button>
-                                </form>
-                            </div>
+        <div class="anuncio">
+            <!-- Boton modal servicio -->
+            <a type="button" class="boton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <input class="btn btn-success btn-block" type="submit" Value="Crear Servicio">
+            </a>
+            <!-- Boton modal crear electrodomestico -->
+            <a href="{% url 'administrador-electrodomestico-crear' %}" class=" btn btn-success btn-block my-2">Crear Electrodomestico</a>
+            <!-- Modal servicio -->
+            {% load crispy_forms_tags %}
+            <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Servicio</h5>
+                            <a class="btn-close" data-bs-dismiss="modal" href="{{url_back}}" aria-label="Close"></a>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div id="div_id_usuario" class="mb-3">
+                                    <label for="id_usuario" class="form-label requiredField">
+                                    Usuario<span class="asteriskField"></span>
+                                    </label>
+                                    <select name="usuario" class="select form-select select2" id="id_usuario">
+                                        <option selected>
+                                            --- Seleccione un usuario ---
+                                        </option>
+                                        {% for items in usuario %}
+                                            <option value="{{ items.Uid }}">
+                                                {{ items.Unombre }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div id="div_id_electrodomestico" class="mb-3">
+                                    <label for="id_electrodomestico" class="form-label requiredField">
+                                    Articulo<span class="asteriskField"></span>
+                                    </label>
+                                    <select name="electrodomestico" class="select form-select select2" id="id_electrodomestico">
+                                        <option selected>
+                                            --- Seleccione un articulo ---
+                                        </option>
+                                        {% for elec in electrodomestico %}
+                                            <option value="{{ elec.id }}">
+                                                {{ elec.nombre }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                {{ form|crispy }}
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-secondary" data-bs-dismiss="modal" href="{{url_back}}">Cancelar</a>
+                            <input type="submit" class="btn btn-success" value="Agregar Servicio"></button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="m-2">
                 <!-- modal inactivos -->
-                <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos"><img src="../../static/img/folder.png" style="width: 40px;" alt=""></a>
+                <a type="button" class="" data-bs-toggle="modal" data-bs-target="#modalInactivos">
+                    <img src="../../static/img/folder.png" style="width: 40px;" alt="">
+                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="modalInactivos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                   aria-labelledby="modalInactivosLabel" aria-hidden="true">
@@ -146,7 +177,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
     <div class="toast-container position-fixed  end-0  p-3 "

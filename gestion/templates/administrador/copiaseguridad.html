@@ -4,30 +4,51 @@
 {% block contenido %}
 <div class="cuerpo-admin">
     <div class="contenido-cuerpo borde">
+        <br> <br>
         <h1 class="text-center">{{titulo_pagina}}</h1>
+        <br> <br>
         <div>
             <ol class="breadcrumb d-flex justify-content-end">
             <li class="breadcrumb-item"><a class="indice text-decoration-none" href="{% url 'administrador-inicioadmin' %}">Inicio</a></li>
             <li class="breadcrumb-item"><a class="indice text-decoration-none">Copia de Seguridad</a></li>
             </ol>
         </div>
+        <br> <br>
         <div class="row">
             <div class="col">
-                <h2>Exportar</h2>
+                <h2>Exportar Base de datos</h2>
+                <div class="mb-3">
+                    {% for modelo in bases %}
+                    <div class="mb-3 ">
+                        <a href="{% static 'backup' %}/{{modelo}}">{{modelo}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col">
+                <h2>Exportar Tablas</h2>
                 <form action="{% url 'administrador-copiaseguridad' tipo='D' %}" method="POST">
                     {% csrf_token %}
+                    <div class="my-3" >
+                        <select class="form-select" aria-label="Default select example" name="opcion" >
+                            <option value="facturas_factura" selected >Usuario</option>
+                            <option value="administrador_elemento" selected >Elemento</option>
+                            <option value="administrador_marca" selected >Marca</option>
+                            <option value="administrador_tipos_elemento" selected >Tipo elemento</option>
+                            <option value="administrador_servicio" selected >Servicio</option>
+                            <option value="administrador_electrodomestico" selected >Electrodomesticos</option>
+                            <option value="facturas_factura" selected >Factura</option>
+                            <option value="facturas_detalle" selected >Detalle factura</option>
+                        </select>
+                      </div>
                     <div class="mb-3">
-                        <!-- <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="modelos_lista" value="Todo" id="">
-                            <label class="form-check-label" for="modelos_lista">Todo</label>
-                        </div> -->
                         {% for modelo in ficheros %}
-                        <div class="mb-3 "> 
-                            <a href="{% static 'copiaseguridad' %}/{{modelo}}">{{modelo}}</a>
+                        <div class="mb-3 ">
+                            <a href="{% static 'tablas' %}/{{modelo}}">{{modelo}}</a>
                         </div>
                         {% endfor %}
                     </div>
-                    <input type="submit" value="Generar Copia">
+                    <input type="submit" class="btn_agregar d-block text-center text-decoration-none py-1 rounded border border-none" style="width: 120px;" value="Generar Copia">
                 </form>
             </div>
             <div class="col">
@@ -40,7 +61,7 @@
             <div class="col">
                 <h2>Historial de Importes</h2>
                 <table class="table-responsive bg-white table-bordered results  w-100"  id="tabla">
-                    <thead class="bg-info">
+                    <thead class="color-tabla">
                         <tr class="text-white">
                             <th scope="col">Nombre</th>
                             <th scope="col">Archivo</th>
@@ -59,6 +80,7 @@
                 </table>
             </div>
         </div>
+        <br> <br> <br> <br>
     </div>
 </div>
 {% endblock contenido %}

@@ -1,6 +1,8 @@
 from dataclasses import field
+from xml.dom.minidom import Attr
 from django.forms import ModelForm, Textarea
 from administrador.models import *
+from django import forms
 from usuarios.models import Usuario
 # from usuarios.models import Usuario
 
@@ -58,9 +60,10 @@ class ElectrodomesticoEditarForm(ModelForm):
 class ServicioForm(ModelForm):
     class Meta:
         model= Servicio
-        fields=['usuario','tiposervicio','electrodomestico','observacion', 'fallas_basicas', 'diagnostico']
+        fields=['tiposervicio','observacion', 'fallas_basicas', 'diagnostico']
         widgets = {
             'observacion': Textarea(attrs={'cols': 50, 'rows': 5}),
+            'tiposervicio': forms.Select(attrs={'class':'form-control select2 '}),
         }
 
 class ServicioEditarForm(ModelForm):
