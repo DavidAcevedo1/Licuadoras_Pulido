@@ -1,0 +1,13 @@
+{% extends 'partials/admin-body.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block contenido %}
+<div class="cuerpo-admin">
+  <div class="contenido-cuerpo borde">
+    <h1> Manual de Ayuda</h1>
+    <div>
+        <embed src="{% static 'documentos/Manual_de_usuario.pdf' %}" type="application/pdf"  width="400px;" height="630px;"/>
+    </div>
+  </div>
+</div>
+{% endblock contenido %}   

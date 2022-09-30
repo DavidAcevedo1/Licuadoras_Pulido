@@ -2,6 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from administrador.forms import UsuarioForm
+from facturas.models import Detalle, Factura
 from usuarios.models import Usuario
 from .Carrito import Carrito
 from administrador.models import Elemento, Tipos_Elemento
@@ -82,9 +83,15 @@ def tusuario(request):
 def vusuario (request,pk):
     titulo_pagina="Usuarios"
     usuario= Usuario.objects.get(Uid=pk) 
+    factura= Factura.objects.get(id=pk)
+    tfacturas= Factura.objects.filter() 
+    detalles= Detalle.objects.filter(factura_id=pk)
     print(usuario)
     context={
         "usuario": usuario,
+        "factura": factura,
+        "tfacturas": tfacturas,
+        "detalles": detalles,
         "titulo_pagina":titulo_pagina
     }
     return render(request,"usuarios/verusuario.html", context)

@@ -32,4 +32,5 @@ urlpatterns = [
     path('servicio/d/<int:pk>/',login_required (servicio_eliminar), name='administrador-servicio-eliminar'),
     
     path('copiaseguridad/<str:tipo>/',login_required  (copiaseguridad), name='administrador-copiaseguridad'),
+    path('manualayuda/',login_required  (manual_ayuda), name='administrador-manualayuda'),
 ]

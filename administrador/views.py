@@ -26,6 +26,18 @@ def inicioadmin(request):
     }
     return render(request, "administrador/inicioadmin.html", context)
 
+def manual_ayuda(request):
+    titulo_pagina='IManual de Ayuda'
+    #carrito = Carrito(request) 
+    context={
+        #"carrito": carrito,
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "administrador/manualayuda.html", context)
+
+    
+    
+
 def inicioadmin2(request,pk):
     titulo_pagina='inicio Administrador'
     tfacturas= Factura.objects.all()
