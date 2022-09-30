@@ -24,7 +24,7 @@ class Usuario(models.Model):
     rol= models.CharField(max_length=13, choices=Rol.choices, verbose_name="rol",blank=True)  
     Unombre=models.CharField(max_length=50, verbose_name="Nombre")
     apellido=models.CharField(max_length=50, verbose_name="Apellido")
-    celular=models.CharField(unique=True,max_length=10)
+    celular=models.CharField(max_length=10)
     class Estado(models.TextChoices):
         ACTIVO='Activo', _('Activo')
         INACTIVO='Inactivo', _('Inactivo')

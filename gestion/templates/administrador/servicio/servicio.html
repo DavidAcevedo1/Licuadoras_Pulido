@@ -87,6 +87,36 @@
                         <div class="modal-body">
                             <form action="" method="POST">
                                 {% csrf_token %}
+                                <div id="div_id_usuario" class="mb-3">
+                                    <label for="id_usuario" class="form-label requiredField">
+                                    Usuario<span class="asteriskField"></span>
+                                    </label>
+                                    <select name="usuario" class="select form-select select2" id="id_usuario">
+                                        <option selected>
+                                            --- Seleccione un usuario ---
+                                        </option>
+                                        {% for items in usuario %}
+                                            <option value="{{ items.Uid }}">
+                                                {{ items.Unombre }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div id="div_id_electrodomestico" class="mb-3">
+                                    <label for="id_electrodomestico" class="form-label requiredField">
+                                    Articulo<span class="asteriskField"></span>
+                                    </label>
+                                    <select name="electrodomestico" class="select form-select select2" id="id_electrodomestico">
+                                        <option selected>
+                                            --- Seleccione un articulo ---
+                                        </option>
+                                        {% for elec in electrodomestico %}
+                                            <option value="{{ elec.id }}">
+                                                {{ elec.nombre }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                                 {{ form|crispy }}
                         </div>
                         <div class="modal-footer">

@@ -28,6 +28,12 @@
                     {% csrf_token %}
                     <div class="my-3" >
                         <select class="form-select" aria-label="Default select example" name="opcion" >
+                            <option value="facturas_factura" selected >Usuario</option>
+                            <option value="administrador_elemento" selected >Elemento</option>
+                            <option value="administrador_marca" selected >Marca</option>
+                            <option value="administrador_tipos_elemento" selected >Tipo elemento</option>
+                            <option value="administrador_servicio" selected >Servicio</option>
+                            <option value="administrador_electrodomestico" selected >Electrodomesticos</option>
                             <option value="facturas_factura" selected >Factura</option>
                             <option value="facturas_detalle" selected >Detalle factura</option>
                         </select>

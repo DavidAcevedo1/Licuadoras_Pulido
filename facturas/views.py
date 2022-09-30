@@ -86,6 +86,7 @@ def factura_eliminar(request,pk):
 
 def detalle(request,pk):
     titulo_pagina="Detalle facturas"
+    elementoe = Elemento.objects.filter(estado = "Activo")
     detalles= Detalle.objects.filter(factura_id=pk)
     cantidad2 = Elemento.objects.filter(id=pk)
     factura_u= Factura.objects.get(id=pk)
@@ -130,6 +131,7 @@ def detalle(request,pk):
                                 cantidad = elemento 
                                 )
                             cantidad_resta = Detalle.objects.get(id = elementosCapturados ).cantidad
+                            id = Detalle.objects.values_list('id', flat=True)
                             Elemento.objects.filter(id = elementosCapturados ).update(
                                 stock_elemento = elemento - cantidad_resta
                                 )
@@ -148,11 +150,17 @@ def detalle(request,pk):
                             Detalle.objects.filter(id = len(id) ).update(
                                 total = precio * cantidad_stock
                                 )
+                            Primera = Detalle.objects.get(id=len(id)).total
+                            print ('35435151513543513541354135416351351352',Primera)
+                            
                             factura_id = Detalle.objects.get(id=len(id)).factura_id
                             items = Detalle.objects.get(id=len(id)).total
 
                             # total = precio * cantidad_stock
                     elif  factura_u.tipofactura == "Compra":
+                        elementosCapturados = request.POST["elemento"]
+                        cantidad_stock = int(request.POST["cantidad"])
+                        elemento = Elemento.objects.get(id=elementosCapturados).stock_elemento
                         id = Detalle.objects.values_list('id', flat=True)
                         Elemento.objects.filter(id=elementosCapturados).update(
                             stock_elemento = elemento   +  cantidad_stock
@@ -162,8 +170,6 @@ def detalle(request,pk):
                         Detalle.objects.filter(id = len(id) ).update(
                             total = precio * cantidad_stock
                         )
-                        total = id['total']
-                        print ('ñññññññññññññññññññññññññññññññññññññññññññññññññ',total)
                     return redirect('factura-detalle', pk=pk)  
         else:
             form= DetalleForm()
@@ -217,6 +223,7 @@ def detalle(request,pk):
         "detalles": detalles,
         "form":form,
         "factura":factura_u,
+        "elementoe":elementoe
     }
     return render(request, "factura/detalle-factura.html", context)
 

@@ -62,7 +62,6 @@ def tipoelemento(request):
 
 def ctipoelemento(request):
     titulo_pagina='Categorias'
-    url_crear= '/categoria/'
     categorias= Tipos_Elemento.objects.all()
     if request.method == 'POST':
         form=TipoElementoForm(request.POST, request.FILES)
@@ -70,7 +69,7 @@ def ctipoelemento(request):
             form.save()
             categoria_nombre= form.cleaned_data.get('subcategoria')
             messages.success(request,f'La subcategoria {categoria_nombre} se agregó correctamente!')
-            return redirect('administrador-categoria')
+            return redirect('administrador-elemento')
         else:
             categoria_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'La subcategoria ya se encuentra agregada!')    
@@ -80,7 +79,6 @@ def ctipoelemento(request):
             "titulo_pagina": titulo_pagina,
             "categorias": categorias,
             "form": form,
-            "url_crear":url_crear
         }
     return render(request, "administrador/categoria/categoria-crear.html", context)
 
@@ -135,6 +133,7 @@ def tipoelemento_eliminar(request,pk):
 
 def elemento(request):
     titulo_pagina='Elemento'
+    elemento = Elemento.objects.filter(estado = "Activo")
     elementos= Elemento.objects.all()
     if request.method == 'POST':
         form= ElementoForm(request.POST, request.FILES)
@@ -152,6 +151,7 @@ def elemento(request):
             "titulo_pagina": titulo_pagina,
             "elementos": elementos,
             "form": form,
+            "elemento": elemento
         }
     return render(request, "administrador/elemento/elemento.html", context)
 
@@ -254,7 +254,6 @@ def marca(request):
 
 def marca_crear(request):
     titulo_pagina='Marcas'
-    url_crear= '/marca/'
     marcas= Marca.objects.all()
     if request.method == 'POST':
         form= MarcaForm(request.POST)
@@ -265,14 +264,13 @@ def marca_crear(request):
         else:
             marca_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'La marca ya se encuentra agregado!')    
-        return redirect('administrador-marca')
+        return redirect('administrador-elemento')
     else:
         form= MarcaForm()
         context={
             "titulo_pagina": titulo_pagina,
             "marcas": marcas,
             "form": form,
-            "url_crear":url_crear
         }
     return render(request,"administrador/marca/marca-crear.html", context)
 
@@ -339,7 +337,6 @@ def electrodomestico(request):
 
 def electrodomestico_crear(request):
     titulo_pagina='Electrodomesticos'
-    url_crear= '/electrodomestico/'
     electrodomesticos= Electrodomestico.objects.all()
     if request.method == 'POST':
         form= ElectrodomesticoForm(request.POST)
@@ -358,14 +355,13 @@ def electrodomestico_crear(request):
         else:
             electrodomestico_nombre= form.cleaned_data.get('nombre')
             messages.error(request,f'Error al registrar el electrodomestico ¡Por favor verificar los datos!  ')    
-        return redirect('administrador-electrodomestico')
+        return redirect('administrador-servicio')
     else:
         form= ElectrodomesticoForm()  
         context={
             "titulo_pagina": titulo_pagina,
             "electrodomesticos": electrodomesticos,
             "form": form,
-            "url_crear": url_crear
         }
     return render(request, "administrador/electrodomestico/electrodomestico-crear.html", context)
 
@@ -422,6 +418,7 @@ def electrodomestico_eliminar(request,pk):
     return render(request, "administrador/electrodomestico/electrodomestico-eliminar.html", context)
 
 def servicio(request):
+    electrodomestico = Electrodomestico.objects.filter(estado="Activo")
     titulo_pagina="Servicios"
     # usuarios = Usuario.objects.filter(usuario=Cliente)
     usuarios = Usuario.objects.filter(estado="Activo")
@@ -450,7 +447,8 @@ def servicio(request):
             "servicios":servicios,
             "form": form ,
             "usuario": usuarios,
-            "item": items
+            "item": items,
+            "electrodomestico": electrodomestico,
     }
     return render(request, "administrador/servicio/servicio.html",context)
 
