@@ -2,6 +2,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from administrador.forms import UsuarioForm
+from facturas.models import Detalle, Factura
 from usuarios.models import Usuario
 from .Carrito import Carrito
 from administrador.models import Elemento, Tipos_Elemento
@@ -81,29 +82,43 @@ def tusuario(request):
 
 def vusuario (request,pk):
     titulo_pagina="Usuarios"
-    usuario= Usuario.objects.get(Uid=pk) 
-    print(usuario)
+    usuario= Usuario.objects.get(Uid=pk)
+    factura= Factura.objects.get(id=pk)
+    tfacturas= Factura.objects.filter(usuario_id=usuario)
+    detalles= Detalle.objects.filter(factura_id=pk)
     context={
         "usuario": usuario,
+        "factura": factura,
+        "tfacturas": tfacturas,
+        "detalles": detalles,
         "titulo_pagina":titulo_pagina
     }
     return render(request,"usuarios/verusuario.html", context)
 
 def Editarusuario(request,pk):
-    titulo_pagina="Usuarios"
-    tusuarios= Usuario.objects.get(Uid=pk)
+    titulo_pagina='Usuario'
+    usuarios= Usuario.objects.all()
+    usuario= Usuario.objects.get(Uid=pk)
+    documento=f"{usuario.Unombre} con el ID {pk}"
+    url_editar="/tablausuario"
     if request.method == 'POST':
-        form= UsuarioForm(request.POST, instance=tusuarios)
+        form= UsuarioForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-        return redirect('usuario-tablaUsuario')
+            usuario_nombre= form.cleaned_data.get('Unombre')
+            messages.success(request,f'El usuario {usuario_nombre} se editó correctamente!')
+            return redirect('usuario-tablaUsuario')
+        else:
+            usuario_nombre= form.cleaned_data.get('Unombre')
+            messages.error(request,f'Error al modificar el usuario {usuario_nombre}')
     else:
-        form= UsuarioForm(instance=tusuarios)
-        
-        context={
-        "tusuarios": tusuarios,
-        "titulo_pagina": titulo_pagina,
-        "form":form
+        form= UsuarioForm(instance=usuario)
+    context={
+            "titulo_pagina": titulo_pagina,
+            "usuarios":usuarios,
+            "form": form,
+            "documento":documento,
+            "url_editar":url_editar,
     }
     return render(request, "usuarios/usuario-editar.html", context)
 

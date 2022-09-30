@@ -21,7 +21,7 @@
                         <th scope="col">Descripción</th>
                         <th scope="col">Observaciones</th>
                         <th scope="col">Fecha Entrada</th>
-                        <th scope="col"></th>
+                        <th scope="col">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -139,7 +139,7 @@
                   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg d-flex justify-content-center">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="modalInactivosLabel">Servicios Inactivos</h5>
+                        <h5 class="modal-title" id="modalInactivosLabel">Servicios Anulados</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
@@ -153,7 +153,7 @@
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Observaciones</th>
                                         <th scope="col">Fecha Entrada</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -166,6 +166,7 @@
                                         <td>{{servicio.diagnostico}}</td>
                                         <td>{{servicio.observacion}}</td>
                                         <td>{{servicio.fecha_entrada}}</td>
+                                        <td><p class="bg-danger rounded text-white text-center" >{{servicio.estado}}</p></td>
                                     {% endif %}
                                     </tr>
                                     {% endfor %}

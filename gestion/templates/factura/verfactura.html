@@ -31,20 +31,20 @@
         <table class="table bg-white table-bordered results dataTable no-footer dtr-inline" id="botonestabla">
           <thead class="bg-info">
             <tr class="text-white">
+              <th scope="col">Foto</th>
               <th scope="col">Producto</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Descripción</th>
-              <th scope="col">Foto</th>
               <th scope="col">Precio</th>
             </tr>
           </thead>
           <tbody>
             {% for detalle in detalles %}
             <tr>
+              <td><img class="producto-img" width="100px" src="{{detalle.elemento.foto.url}}" alt=""></td>
               <td class="dtr-control sorting_1">{{ detalle.elemento.nombre }}</td>
               <td class="dt-body-right dtr-hidden">{{ detalle.cantidad }}</td>
               <td class="dtr-control sorting_1">{{ detalle.elemento.descripcion }}</td>
-              <td><img class="producto-img" width="100px" src="{{detalle.elemento.foto.url}}" alt=""></td>
               <td class="dt-body-right dtr-hidden">${{ detalle.elemento.precio }}</td>
             </tr>
             {% endfor %}
@@ -54,7 +54,7 @@
            <h3>Total: </h3>
         </div>
       </div>
-  {% endif %}
+    {% endif %}
   </div>
 </div>
 {% endblock contenido %}

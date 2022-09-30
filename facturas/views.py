@@ -60,6 +60,7 @@ def vfactura (request,pk):
         "detalles":detalles
     }
     return render(request,"factura/verfactura.html", context)
+
 def factura_eliminar(request,pk):
     titulo_pagina='Factura'
     tfacturas= Factura.objects.all()

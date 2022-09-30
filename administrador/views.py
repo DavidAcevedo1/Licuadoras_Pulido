@@ -26,6 +26,17 @@ def inicioadmin(request):
     }
     return render(request, "administrador/inicioadmin.html", context)
 
+def manual_ayuda(request):
+    titulo_pagina='IManual de Ayuda'
+    #carrito = Carrito(request) 
+    context={
+        #"carrito": carrito,
+        "titulo_pagina": titulo_pagina,
+    }
+    return render(request, "administrador/manualayuda.html", context)
+
+
+
 def inicioadmin2(request,pk):
     titulo_pagina='inicio Administrador'
     tfacturas= Factura.objects.all()
@@ -110,26 +121,52 @@ def tipoelemento_editar(request,pk):
     return render(request, "administrador/categoria/categoria-editar.html", context)
 
 def tipoelemento_eliminar(request,pk):
-    titulo_pagina='Categorias'
+    titulo_pagina='TipoElemento'
     url_eliminar= '/categoria/'
     categorias= Tipos_Elemento.objects.all()
     categoria= Tipos_Elemento.objects.get(id=pk)
-    accion_txt= f"La categoria {categoria.id}, una vez eliminado no hay marcha atras!"
+    accion_txt= f"categoria {categoria.id}, una vez eliminado no hay marcha atras!"
     if request.method == 'POST':
-        form= TipoElementoForm(request.POST)
-        categoria_nombre= categoria.nombre
-        messages.success(request,f'La categoria {categoria_nombre} se eliminó correctamente!')
+        form = TipoElementoForm(request.POST)
+        Tipos_Elemento.objects.filter(id=pk).update(
+                    estado='Inactivo'
+                )
+        Tipos_Elemento_nombre=  categoria.subcategoria
+        messages.success(request,f'El elemento {Tipos_Elemento_nombre} se eliminó correctamente!')
         return redirect('administrador-categoria')
     else:
-        form= TipoElementoForm()
+        form:TipoElementoForm()
     context={
             "titulo_pagina": titulo_pagina,
             "accion_txt":accion_txt,
-            "categorias":categorias,
-            "form": form,
-            "url_eliminar":url_eliminar
+            "categorias": categorias,  
+            "url_eliminar":url_eliminar 
     }
     return render(request, "administrador/categoria/categoria-eliminar.html", context)
+
+def tipoelementos_activar(request,pk):
+    titulo_pagina='Elemento'
+    url_eliminar= '/elemento/'
+    elementos= Elemento.objects.all()
+    elemento= Elemento.objects.get(id=pk)
+    accion_txt= f"elemento {elemento.id}, una vez activado no hay marcha atras!"
+    if request.method == 'POST':
+        form = ElementoForm(request.POST)
+        Elemento.objects.filter(id=pk).update(
+                    estado='Activo'
+                )
+        elemento_nombre=  elemento.nombre
+        messages.success(request,f'El elemento {elemento_nombre} se activó correctamente!')
+        return redirect('usuario-tablaUsuario')                           
+    else:
+        form:UsuarioForm()
+    context={
+            "titulo_pagina": titulo_pagina,
+            "accion_txt":accion_txt,
+            "tusuarios": tusuarios,  
+            "url_eliminar":url_eliminar 
+    }
+    return render(request, "usuarios/usuario-activar.html", context)
 
 def elemento(request):
     titulo_pagina='Elemento'

@@ -316,8 +316,8 @@ footer{
     position: absolute;
     border-radius: 50%;
     padding: 5px;
-    top: -30px;
-    left: 47%;
+    top: -39px;
+    left: 48%;
 }
 @media (max-width:420px) {
     .sublogo{
@@ -325,7 +325,7 @@ footer{
     }
 }
 .sublogo img{
-    width: 80px;
+    width: 60px;
 }
 .datos{
     color: #fff;
